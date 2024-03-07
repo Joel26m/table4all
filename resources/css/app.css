@@ -1,0 +1,100 @@
+.navcont{
+    color: rgb(255, 255, 255);
+    height: 34px;
+    z-index: 11111;
+    font-size: 22px;
+}
+.navbar{
+  z-index: 111;
+  height: 80px;
+}
+
+.offcanvas-body{
+  background-color: #FF691F;
+  color: rgb(255, 255, 255);
+  z-index: 1111111;
+}
+          
+.custom-toggler.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0);
+  float: right;
+}
+/* Setting the stroke to green using rgb values (0, 128, 0) */
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("user.svg");
+  width: 60px;
+  height: 60px;
+}
+
+.custom-toggler.navbar-toggler:focus,
+.custom-toggler.navbar-toggler:active,
+.custom-toggler.navbar-toggler:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.desplegable{
+    color: rgb(255, 255, 255);
+    background-color: #FF691F;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    border-color: rgb(255, 255, 255);
+}
+
+.logo {
+  width: 60px;
+  height: 52px;
+  background-image: url("logo.png");
+  background-size: cover;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .logo {
+    width: 53px;
+    height: 50px;
+    /* Ajusta el tamaño del logo para dispositivos móviles */
+  }
+}
+
+
+.custom-white {
+  color: white; /* Cambia "white" al color deseado */
+}
+
+
+#map { 
+  z-index: 11;
+    margin-top: 3.5%;
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    width: 100%; 
+  }
+
+
+  .proveedor-marker {
+    width: 61px;
+    height: 83px;
+    background-image: url("provider.svg"); 
+    background-size: cover;
+    cursor: pointer;
+  }
+  
+  .beneciciary-marker {
+    width: 61px;
+    height: 83px;
+    background-image: url("beneficiary.svg"); 
+    background-size: cover;
+    cursor: pointer;
+  }
+
+  
+
+ 
+  
