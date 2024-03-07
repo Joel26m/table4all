@@ -79,16 +79,16 @@
 
 
   .proveedor-marker {
-    width: 61px;
-    height: 83px;
+    width: 40px;
+    height: 55px;
     background-image: url("provider.svg"); 
     background-size: cover;
     cursor: pointer;
   }
   
   .beneciciary-marker {
-    width: 61px;
-    height: 83px;
+    width: 40px;
+    height: 55px;
     background-image: url("beneficiary.svg"); 
     background-size: cover;
     cursor: pointer;

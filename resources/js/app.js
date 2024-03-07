@@ -9,13 +9,24 @@ const map = new mapboxgl.Map({
   zoom: 10.7
 });
 map.on('click', (event) => {
-  const popup = new mapboxgl.Popup({ offset: [0, -15] })
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML(
-      `<h3>${feature.properties.nombre}</h3><p>Dirección: ${feature.properties.direccion}</p>`
-    )
-    .addTo(map);
+    const features = map.queryRenderedFeatures(event.point);
+    if (!features.length) { // Verificar si no hay características en la ubicación del clic
+        const lngLat = event.lngLat;
+        const popup = new mapboxgl.Popup({ offset: [0, -15] })
+          .setLngLat(lngLat)
+          .setHTML('<h3><div class="container">' +
+            '<h1>¿Deseas añadir un Beneficiario?</h1>' +
+            '<form id="ubicacionForm">' +
+            '<div class="mb-3">' +
+            '<button type="submit" class="btn btn-primary">Aceptar</button>' +
+            '<button type="button" class="btn btn-secondary" id="cancelarBtn">Cancelar</button>' +
+            '</form>' +
+            '</div></h3>')
+          .addTo(map);
+    }
 });
+
+  
 
 const proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
@@ -23,7 +34,6 @@ const proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .addTo(map);
 
 const markerElement = proveedorMarker.getElement();
-
 markerElement.classList.add('proveedor-marker');
 
 function createCustomMarker() {
@@ -32,20 +42,12 @@ function createCustomMarker() {
   return el;
 }
 
-
-
-
-
-
 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb() })
   .setLngLat([2.0330500, 41.4922600])
   .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
   .addTo(map);
 
-// Obtener el elemento DOM asociado al marcador
 const markerElementb = beneficiaryMarker.getElement();
-
-// Agregar la clase "proveedor-marker" al elemento DOM del marcador
 markerElementb.classList.add('beneciciary-marker');
 
 function createCustomMarkerb() {
