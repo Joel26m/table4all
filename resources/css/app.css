@@ -67,16 +67,31 @@
   color: white; /* Cambia "white" al color deseado */
 }
 
-
 #map { 
-  z-index: 11;
-    margin-top: 3.5%;
-    position: absolute; 
-    top: 0; 
-    bottom: 0; 
-    width: 100%; 
-  }
+  z-index: -1;
+  margin-top: 3.5%;
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+  width: 100%; 
+}
 
+.submenu {
+  z-index: 111111;
+  padding: 10px;
+}
+
+.subop {
+  border-radius: 55px;
+  padding: 20px;
+  margin: 20px;
+}
+
+
+
+.text-center {
+  text-align: center; /* Aplica centrado de texto */
+}
 
   .proveedor-marker {
     width: 40px;
@@ -94,7 +109,62 @@
     cursor: pointer;
   }
 
-  
+  .logobene {
+    width: 50px;
+    height: 50px;
+    background-image: url("heart.png");
+    background-size: cover;
+    margin-right: 10px; /* Ajusta el espaciado entre la imagen y el texto */
+}
+
+.logoprov{
+  width: 50px;
+  height: 50px;
+  background-image: url("food.png");
+  background-size: cover;
+  margin-right: 10px; /* Ajusta el espaciado entre la imagen y el texto */
+}
+
+.subop {
+  border: none;
+  outline: none;
+    display: flex; /* Utiliza flexbox para alinear elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade sombra para resaltar */
+}
+
+.subtext {
+    margin-bottom: 0; /* Ajusta el espacio inferior del texto */
+    font-size: 30px;
+    color: #001D38;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+    .logobene {
+        width: 30px;
+        height: 30px;
+    }
+
+    .logoprov{
+      width: 30px;
+      height: 30px;
+    }
+    
+    .subtext {
+        font-size: 20px;
+    }
+
+}
+
+
+
+
 
  
   
