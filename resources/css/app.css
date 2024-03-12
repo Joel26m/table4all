@@ -87,7 +87,23 @@
   margin: 20px;
 }
 
+#prov {
+  border:3.5px solid transparent; /* Inicialmente, el borde es transparente */
+  transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+}
 
+#prov.active {
+  border-color: #3D89E2; /* Cuando el botón está activo, el borde se vuelve azul */
+}
+
+#bene {
+  border: 3.5px solid transparent; /* Inicialmente, el borde es transparente */
+  transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+}
+
+#bene.active {
+  border-color: #3D89E2; /* Cuando el botón está activo, el borde se vuelve azul */
+}
 
 .text-center {
   text-align: center; /* Aplica centrado de texto */

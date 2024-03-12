@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite(['resources/css/app.css', 'resources/css/app.scss', 'resources/js/app.js'])
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-
-  </head>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
 <body>
-
 
 <nav class="navbar navbar-expand-lg bg-primary">
   <div class="container-fluid">
@@ -19,7 +22,6 @@
     <!-- Contenido de la barra de navegación -->
     <div class="desplegable collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
-
     </div>
     <button class="custom-toggler bg-primary navbar-toggler d-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="bg-primary navbar-toggler-icon custom-white"></span>
@@ -63,13 +65,13 @@
 
 <div class="submenu container fixed-bottom mb-3">
     <div class="row justify-content-center">
-        <button class="subop col bg-white p-3" onclick="toggleProveedores()">
+        <button id="prov" class=" subop col bg-white p-3" ">
             <div class="logoprov"></div> <!-- Div que contiene la imagen de los proveedores -->
             <div class="text-center">
                 <p class="subtext">Proveedores</p>
             </div>
         </button>
-        <button class="subop col bg-white p-3" onclick="toggleBeneficiarios()">
+        <button id="bene" class="subop col bg-white p-3" >
             <div class="logobene"></div> <!-- Div que contiene la imagen de los beneficiarios -->
             <div class="text-center">
                 <p class="subtext">Beneficiarios</p>
@@ -78,23 +80,12 @@
     </div>
 </div>
 
-
-<script src="../js/mapbox.js"></script>
-
 <!-- Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- Mapbox JS -->
 
 </body>
 </html>
-
-<!-- <script>
-  function toggleBeneficiarios() {
-  let proveedores = document.querySelectorAll('.proveedor-marker');
-  proveedores.forEach(function(proveedor) {
-    proveedor.style.display = 'none';
-  });
-}
-</script> -->
