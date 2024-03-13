@@ -129,7 +129,7 @@ markerElementb.classList.add('beneciciary-marker', 'animate__animated', 'animate
 
 function createCustomMarkerb() {
   const el = document.createElement('div');
-  el.className = 'beneciciary-marker animate__animated animate__bounceIn ';
+  el.className = 'beneciciary-marker animate__animated animate__bounceIn';
   return el;
 }
 
