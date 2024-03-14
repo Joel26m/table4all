@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-primary">
+<nav class="animate__animated animate__fadeInDown navbar navbar-expand-lg bg-primary">
   <div class="container-fluid">
     <a class="logo navbar-brand" href="#"></a>
     <!-- Botón para abrir el offcanvas -->
@@ -63,7 +63,7 @@
 </div>
 <div id='map'></div>
 
-<div class="submenu container fixed-bottom mb-3">
+<div class="animate__animated animate__bounceInUp submenu container fixed-bottom mb-3">
     <div class="row justify-content-center">
         <button id="prov" class=" subop col bg-white p-3" ">
             <div class="logoprov"></div> <!-- Div que contiene la imagen de los proveedores -->

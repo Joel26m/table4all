@@ -7,6 +7,8 @@
 .navbar{
   z-index: 111;
   height: 80px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .offcanvas-body{
@@ -69,11 +71,11 @@
 
 #map { 
   z-index: -1;
-  margin-top: 3.5%;
   position: absolute; 
   top: 0; 
   bottom: 0; 
   width: 100%; 
+  height: 100%;
 }
 
 .submenu {
@@ -90,19 +92,33 @@
 #prov {
   border:3.5px solid transparent; /* Inicialmente, el borde es transparente */
   transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
 }
 
 #prov.active {
   border-color: #3D89E2; /* Cuando el botón está activo, el borde se vuelve azul */
+
 }
 
 #bene {
   border: 3.5px solid transparent; /* Inicialmente, el borde es transparente */
   transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+
 }
 
 #bene.active {
-  border-color: #3D89E2; /* Cuando el botón está activo, el borde se vuelve azul */
+  border-color: #FF691F; /* Cuando el botón está activo, el borde se vuelve azul */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+}
+#bene:hover {
+  border-color: #FF691F; /* Cuando se hace hover sobre el botón, el borde se vuelve azul */
+  transform: scale(1.1); /* Al hacer hover, el botón se agranda un 10% */
+}
+
+#prov:hover {
+  border-color: #3D89E2; /* Cuando se hace hover sobre el botón, el borde se vuelve azul */
+  transform: scale(1.1); /* Al hacer hover, el botón se agranda un 10% */
 }
 
 .text-center {

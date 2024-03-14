@@ -85,27 +85,55 @@ const map = new mapboxgl.Map({
   center: [2.172850, 41.389280],
   zoom: 10.7
 });
+
 map.on('click', (event) => {
+    const lngLat = event.lngLat;
+
+    if (!lngLat) {
+        console.log("Event object does not have latlng properties.");
+        return;
+    }
+
+    const latitude = lngLat.lat;
+    const longitude = lngLat.lng;
+    console.log(latitude + " - " + longitude);
+
     const features = map.queryRenderedFeatures(event.point);
-    if (!features.length) { // Verificar si no hay características en la ubicación del clic
-        const lngLat = event.lngLat;
+    if (!features.length) {
         const popup = new mapboxgl.Popup({ offset: [0, -15] })
-          .setLngLat(lngLat)
-          .setHTML('<h3><div class="container">' +
-            '<h1>¿Deseas añadir un Beneficiario?</h1>' +
-            '<form id="ubicacionForm">' +
-            '<div class="mb-3">' +
-            '<button type="submit" class="btn btn-primary">Aceptar</button>' +
-            '<button type="button" class="btn btn-secondary" id="cancelarBtn">Cancelar</button>' +
-            '</form>' +
-            '</div></h3>')
-          .addTo(map);
+            .setLngLat(lngLat)
+            .setHTML('<h3><div class="container">' +
+                '<h1>¿Deseas añadir un Beneficiario?</h1>' +
+                '<form id="ubicacionForm" action="#">' +
+                '<div class="mb-3">' +
+                '<button type="submit" class="btn btn-primary" id="aceptarBtn">Aceptar</button>' +
+                '<button type="button" class="btn btn-secondary" id="cancelarBtn">Cancelar</button>' +
+                '</form>' +
+                '</div></h3>')
+            .addTo(map);
+
+        document.getElementById('aceptarBtn').addEventListener('click', function(event) {
+            event.preventDefault();
+
+             beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
+                .setLngLat([longitude, latitude])
+                .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
+                .addTo(map);
+
+            popup.remove();
+        });
     }
 });
 
+
+
+
+
+
+
   
 
-const proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
+let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
   .setPopup(new mapboxgl.Popup().setHTML("<h3>Proveedor</h3>"))
   .addTo(map);
@@ -119,17 +147,17 @@ function createCustomMarker() {
   return el;
 }
 
-const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb() })
+let beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb() })
   .setLngLat([2.0330500, 41.4922600])
   .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
   .addTo(map);
 
 const markerElementb = beneficiaryMarker.getElement();
-markerElementb.classList.add('beneciciary-marker', 'animate__animated', 'animate__bounceIn');
+markerElementb.classList.add('beneciciary-marker');
 
 function createCustomMarkerb() {
   const el = document.createElement('div');
-  el.className = 'beneciciary-marker animate__animated animate__bounceIn';
+  el.className = 'beneciciary-marker';
   return el;
 }
 
