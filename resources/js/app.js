@@ -86,6 +86,10 @@ const map = new mapboxgl.Map({
   zoom: 10.7
 });
 
+
+
+
+
 map.on('click', (event) => {
     const lngLat = event.lngLat;
 
@@ -96,7 +100,6 @@ map.on('click', (event) => {
 
     const latitude = lngLat.lat;
     const longitude = lngLat.lng;
-    console.log(latitude + " - " + longitude);
 
     const features = map.queryRenderedFeatures(event.point);
     if (!features.length) {
@@ -115,15 +118,28 @@ map.on('click', (event) => {
         document.getElementById('aceptarBtn').addEventListener('click', function(event) {
             event.preventDefault();
 
-             beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
-                .setLngLat([longitude, latitude])
-                .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
-                .addTo(map);
+            document.getElementById('aceptarBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+            
+                const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
+                    .setLngLat([longitude, latitude])
+                    .setPopup(new mapboxgl.Popup().setHTML(`
+                        <h3>Beneficiario</h3>
+                        <div id="beneficiary-state">No se ha añadido ningún estado</div>
+                        <button type="button" class="btn btn-primary" id="modifyButton">Modificar</button>
+                        <button type="button" class="btn btn-secondary" onclick="closePopup()">Salir</button>
+                    `))
+                    .addTo(map);
+            
 
-            popup.remove();
+            
+                popup.remove();
+            });
+            
         });
     }
 });
+
 
 
 
