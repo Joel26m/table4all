@@ -139,7 +139,19 @@
     background-image: url("beneficiary.svg"); 
     background-size: cover;
     cursor: pointer;
-  }
+    opacity: 0; /* Configura la opacidad inicialmente en 0 para que el marcador esté oculto */
+    animation: fadeInMarker 0.5s ease-in forwards; /* Aplica la animación fadeInMarker */
+}
+
+@keyframes fadeInMarker {
+    from {
+        opacity: 0; /* Empieza con opacidad 0 */
+    }
+    to {
+        opacity: 1; /* Termina con opacidad 1 */
+    }
+}
+
 
   .logobene {
     width: 50px;

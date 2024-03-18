@@ -108,15 +108,11 @@ map.on('click', (event) => {
             .setHTML('<h3><div class="container">' +
                 '<h1>¿Deseas añadir un Beneficiario?</h1>' +
                 '<form id="ubicacionForm" action="#">' +
-                '<div class="mb-3">' +
                 '<button type="submit" class="btn btn-primary" id="aceptarBtn">Aceptar</button>' +
                 '<button type="button" class="btn btn-secondary" id="cancelarBtn">Cancelar</button>' +
                 '</form>' +
-                '</div></h3>')
+                '</h3>')
             .addTo(map);
-
-        document.getElementById('aceptarBtn').addEventListener('click', function(event) {
-            event.preventDefault();
 
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
@@ -124,21 +120,34 @@ map.on('click', (event) => {
                 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
                     .setPopup(new mapboxgl.Popup().setHTML(`
-                        <h3>Beneficiario</h3>
+                        <h2>Beneficiario</h2>
+                        <h6>Información/Estado:</h6>
                         <div id="beneficiary-state">No se ha añadido ningún estado</div>
-                        <button type="button" class="btn btn-primary" id="modifyButton">Modificar</button>
+                        <br />
+                        <button type="button" class="btn btn-primary" id="modifyButton" data-toggle="modal" data-target="#exampleModal">Modificar</button>
                         <button type="button" class="btn btn-secondary" onclick="closePopup()">Salir</button>
                     `))
                     .addTo(map);
-            
-
+                
+                // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
+                document.getElementById('guardarEstado').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const nuevoEstado = document.getElementById('nuevoEstado').value;
+                    // Modificar el estado del beneficiario
+                    document.getElementById('beneficiary-state').innerText = nuevoEstado;
+                    // Cerrar modal
+                    $('#exampleModal').modal('hide');
+                });
             
                 popup.remove();
             });
             
-        });
+
+            
+        
     }
 });
+
 
 
 
