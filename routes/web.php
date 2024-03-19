@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
 
@@ -15,9 +14,27 @@ use App\Http\Controllers\UsersController;
 |
 */
 
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RidersController;
+use App\Http\Controllers\ProviderController;
+
+
+Route::get('/plantilla', function () {
+    
+    return view('contenido');
+});
 Route::get('/', function () {
+    
     return view('welcome');
 });
+
+Route::resource('rider', RidersController::class);
+
+Route::resource('provider', ProviderController::class);
+
+Route::get('provider/{provider}', [ProviderController::class, 'show']);
+
 
 //------------------------- Logica login ---------------------------------
 Route::get('/login',[UsersController::class, 'showLogin'])->name('login');

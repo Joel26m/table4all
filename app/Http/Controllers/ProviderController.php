@@ -49,7 +49,7 @@ class ProviderController extends Controller
     public function show(Provider $provider)
     {
         //
-        $provider = Provider::where('IDuser', '=', 2)->first();
+        $provider = Provider::where('IDuser', '=', 4)->first();
 
         return view('providers.provider', compact('provider'));
     }
