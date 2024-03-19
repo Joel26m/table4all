@@ -31,5 +31,10 @@ class Provider extends Model
     {
         return $this->hasMany(Collection::class, 'rider');
     }
+
+    public function users() {
+        return $this->belongsTo(Users::class, 'IDuser');
+    }
 }
+
 

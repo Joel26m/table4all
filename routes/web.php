@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//------------------------- Logica login ---------------------------------
+Route::get('/login',[UsersController::class, 'showLogin'])->name('login');
+Route::post('/login',[UsersController::class, 'login']);
+Route::get('/logout',[UsersController::class, 'logout']);
+
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/home', function (){
+        $user = Auth::user();
+
+        return view('home', compact('user'));
+    });
+});
+// -----------------------------------------------------------------------
