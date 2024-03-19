@@ -1,0 +1,216 @@
+.navcont{
+    color: rgb(255, 255, 255);
+    height: 34px;
+    z-index: 11111;
+    font-size: 22px;
+}
+.navbar{
+  z-index: 111;
+  height: 80px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.offcanvas-body{
+  background-color: #FF691F;
+  color: rgb(255, 255, 255);
+  z-index: 1111111;
+}
+          
+.custom-toggler.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0);
+  float: right;
+}
+/* Setting the stroke to green using rgb values (0, 128, 0) */
+
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("user.svg");
+  width: 60px;
+  height: 60px;
+}
+
+.custom-toggler.navbar-toggler:focus,
+.custom-toggler.navbar-toggler:active,
+.custom-toggler.navbar-toggler:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.desplegable{
+    color: rgb(255, 255, 255);
+    background-color: #FF691F;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    border-color: rgb(255, 255, 255);
+}
+
+.logo {
+  width: 60px;
+  height: 52px;
+  background-image: url("logo.png");
+  background-size: cover;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .logo {
+    width: 53px;
+    height: 50px;
+    /* Ajusta el tamaño del logo para dispositivos móviles */
+  }
+}
+
+
+.custom-white {
+  color: white; /* Cambia "white" al color deseado */
+}
+
+#map { 
+  z-index: -1;
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+  width: 100%; 
+  height: 100%;
+}
+
+.submenu {
+  z-index: 111111;
+  padding: 10px;
+}
+
+.subop {
+  border-radius: 55px;
+  padding: 20px;
+  margin: 20px;
+}
+
+#prov {
+  border:3.5px solid transparent; /* Inicialmente, el borde es transparente */
+  transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+}
+
+#prov.active {
+  border-color: #3D89E2; /* Cuando el botón está activo, el borde se vuelve azul */
+
+}
+
+#bene {
+  border: 3.5px solid transparent; /* Inicialmente, el borde es transparente */
+  transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+
+}
+
+#bene.active {
+  border-color: #FF691F; /* Cuando el botón está activo, el borde se vuelve azul */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+}
+#bene:hover {
+  border-color: #FF691F; /* Cuando se hace hover sobre el botón, el borde se vuelve azul */
+  transform: scale(1.1); /* Al hacer hover, el botón se agranda un 10% */
+}
+
+#prov:hover {
+  border-color: #3D89E2; /* Cuando se hace hover sobre el botón, el borde se vuelve azul */
+  transform: scale(1.1); /* Al hacer hover, el botón se agranda un 10% */
+}
+
+.text-center {
+  text-align: center; /* Aplica centrado de texto */
+}
+
+  .proveedor-marker {
+    width: 40px;
+    height: 55px;
+    background-image: url("provider.svg"); 
+    background-size: cover;
+    cursor: pointer;
+  }
+  
+  .beneciciary-marker {
+    width: 40px;
+    height: 55px;
+    background-image: url("beneficiary.svg"); 
+    background-size: cover;
+    cursor: pointer;
+    opacity: 0; /* Configura la opacidad inicialmente en 0 para que el marcador esté oculto */
+    animation: fadeInMarker 0.5s ease-in forwards; /* Aplica la animación fadeInMarker */
+}
+
+@keyframes fadeInMarker {
+    from {
+        opacity: 0; /* Empieza con opacidad 0 */
+    }
+    to {
+        opacity: 1; /* Termina con opacidad 1 */
+    }
+}
+
+
+  .logobene {
+    width: 50px;
+    height: 50px;
+    background-image: url("heart.png");
+    background-size: cover;
+    margin-right: 10px; /* Ajusta el espaciado entre la imagen y el texto */
+}
+
+.logoprov{
+  width: 50px;
+  height: 50px;
+  background-image: url("food.png");
+  background-size: cover;
+  margin-right: 10px; /* Ajusta el espaciado entre la imagen y el texto */
+}
+
+
+
+.subop {
+  border: none;
+  outline: none;
+    display: flex; /* Utiliza flexbox para alinear elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade sombra para resaltar */
+}
+
+.subtext {
+    margin-bottom: 0; /* Ajusta el espacio inferior del texto */
+    font-size: 30px;
+    color: #001D38;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+    .logobene {
+        width: 30px;
+        height: 30px;
+    }
+
+    .logoprov{
+      width: 30px;
+      height: 30px;
+    }
+    
+    .subtext {
+        font-size: 20px;
+    }
+
+}
+
+
+
+
+
+ 
+  

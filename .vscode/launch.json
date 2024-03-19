@@ -8,7 +8,7 @@
                     "name": "Launch Chrome",
                     "request": "launch",
                     "type": "chrome",
-                    "url": "http://localhost:8080/table4all/public",
+                    "url": "http://localhost/table4all/public",
                     "webRoot": "${workspaceFolder}"
                 },
         {
