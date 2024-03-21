@@ -213,4 +213,28 @@
 
 
  
-  
+.btn-with-image {
+  float: right;
+  background-image: url(llevar.svg);
+  background-size: cover; /* Para asegurar que la imagen cubra todo el botón */
+  background-repeat: no-repeat; /* Para evitar la repetición de la imagen */
+  text-align: center; /* Para centrar el texto horizontalmente */
+  padding: 10px; /* Espacio alrededor del texto */
+  border: none; /* Eliminar el borde del botón */
+  color: white; /* Color del texto */
+  font-weight: bold; /* Estilo del texto */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  height: 40px;
+  width: 40px;
+  color: #FF691F;
+}
+
+.text-go{
+  width: 100px;
+  margin-top: 10px;
+}
+
+/* Estilos adicionales para el efecto hover */
+.btn-with-image:hover {
+  opacity: 0.8; /* Reducir la opacidad al pasar el ratón sobre el botón */
+}

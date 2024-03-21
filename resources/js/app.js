@@ -125,7 +125,12 @@ map.on('click', (event) => {
                         <div id="beneficiary-state">No se ha añadido ningún estado</div>
                         <br />
                         <button type="button" class="btn btn-primary" id="modifyButton" data-toggle="modal" data-target="#exampleModal">Modificar</button>
-                        <button type="button" class="btn btn-secondary" onclick="closePopup()">Salir</button>
+                        <div class="btn-with-image">
+                        <div class="image"></div>
+                        <br>
+                        <div class="text-go">Llevar comida</div>
+                      </div>
+                      
                     `))
                     .addTo(map);
                 
