@@ -103,8 +103,8 @@ map.on('click', (event) => {
 
     const features = map.queryRenderedFeatures(event.point);
     if (!features.length) {
-        const popup = new mapboxgl.Popup({ offset: [0, -15] })
-            .setLngLat(lngLat)
+        const popup = new mapboxgl.Popup({ offset: [0, -15], className: 'popup-custom' })
+        .setLngLat(lngLat)
             .setHTML('<h3><div class="container">' +
                 '<h1>¿Deseas añadir un Beneficiario?</h1>' +
                 '<form id="ubicacionForm" action="#">' +
@@ -120,16 +120,19 @@ map.on('click', (event) => {
                 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
                     .setPopup(new mapboxgl.Popup().setHTML(`
-                        <h2>Beneficiario</h2>
-                        <h6>Información/Estado:</h6>
-                        <div id="beneficiary-state">No se ha añadido ningún estado</div>
-                        <br />
-                        <button type="button" class="btn btn-primary" id="modifyButton" data-toggle="modal" data-target="#exampleModal">Modificar</button>
-                        <div class="btn-with-image">
+                    <h2>Beneficiario</h2>
+                    <h6>Información/Estado:</h6>
+                    <div id="beneficiary-state">No se ha añadido ningún estado</div>
+                    <br>
+                    <div class="button-container">
+                      <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
+                      <div class="image"></div>
+                      </button>
+                      <button type="button" class="btn-with-image" id="takeFoodButton">
                         <div class="image"></div>
-                        <br>
-                        <div class="text-go">Llevar comida</div>
-                      </div>
+                      </button>
+                      </button>
+                    </div>                    
                       
                     `))
                     .addTo(map);
