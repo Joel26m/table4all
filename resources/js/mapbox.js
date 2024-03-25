@@ -10,3 +10,9 @@ document.getElementById('modifyButton').addEventListener('click', function(event
     // También podrías abrir un formulario o realizar otras acciones según sea necesario.
 
 })
+
+document.getElementById('takeFoodButton').addEventListener('click', function(event) {
+    event.preventDefault();
+    console.log("Botón takeFoodButton clickeado");
+    document.querySelector(".content-wrapper").style.display = "block";
+});

@@ -29,6 +29,15 @@
   </div>
   
 </nav>
+<div class="animate__animated animate__fadeInDown content-wrapper" id="content-wrapper">
+
+<div class="sticky-div">
+
+            <!-- Contenido de tu div pegado al top -->
+            <button id="complete" class="full-width-button">COMPLETAR</button>
+        </div>
+    </div>
+
 
 <!-- Offcanvas -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -81,7 +90,7 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal animate__animated animate__fadeInTopLeft" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -105,6 +114,28 @@
             </div>
         </div>
     </div>
+
+<!-- Modal para confirmar si se desea iniciar la ruta -->
+<div class="modal animate__animated animate__fadeInTopLeft" id="confirmarModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">¿Deseas iniciar la ruta?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>Al iniciar la ruta se aplicarán los estilos necesarios.</p>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="iniciarRutaBtn">Aceptar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Bootstrap JS -->

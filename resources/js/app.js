@@ -89,6 +89,7 @@ const map = new mapboxgl.Map({
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
 
 map.on('click', (event) => {
     const lngLat = event.lngLat;
@@ -105,15 +106,16 @@ map.on('click', (event) => {
     if (!features.length) {
         const popup = new mapboxgl.Popup({ offset: [0, -15], className: 'popup-custom' })
         .setLngLat(lngLat)
-            .setHTML('<h3><div class="container">' +
+            .setHTML('<h3><div class="add-container">' +
                 '<h1>¿Deseas añadir un Beneficiario?</h1>' +
                 '<form id="ubicacionForm" action="#">' +
-                '<button type="submit" class="btn btn-primary" id="aceptarBtn">Aceptar</button>' +
-                '<button type="button" class="btn btn-secondary" id="cancelarBtn">Cancelar</button>' +
+                '<button type="submit" class="btn btn-primary add" id="aceptarBtn">Aceptar</button>' +
+                '<button type="button" class="btn btn-secondary add" id="cancelarBtn">Salir</button>' +
                 '</form>' +
                 '</h3>')
             .addTo(map);
 
+            
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
             
@@ -128,7 +130,7 @@ map.on('click', (event) => {
                       <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
                       <div class="image"></div>
                       </button>
-                      <button type="button" class="btn-with-image" id="takeFoodButton">
+                      <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
                         <div class="image"></div>
                       </button>
                       </button>
@@ -136,7 +138,21 @@ map.on('click', (event) => {
                       
                     `))
                     .addTo(map);
-                
+           
+                event.preventDefault();
+           
+
+          
+
+            // Agregar evento de clic al botón "Aceptar" del modal
+            document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.querySelector(".content-wrapper").style.display = "block";                console.log("Iniciando ruta...");
+                // Ocultar modal
+                $('#confirmarModal').modal('hide');
+            });
+
+
                 // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
                 document.getElementById('guardarEstado').addEventListener('click', function(event) {
                     event.preventDefault();
@@ -152,13 +168,22 @@ map.on('click', (event) => {
             
 
             
-        
+            document.getElementById('complete').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.querySelector(".content-wrapper").style.display = "none";                console.log("Iniciando ruta...");
+                // Ocultar modal
+                $('#confirmarModal').modal('hide');
+            });
+
     }
 });
 
 
 
 
+
+    
+});
 
 
 
