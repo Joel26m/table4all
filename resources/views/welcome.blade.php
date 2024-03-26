@@ -32,7 +32,7 @@
 <div class="animate__animated animate__fadeInDown content-wrapper" id="content-wrapper">
 
 <div class="sticky-div">
-
+            <p id="direcciongo"></p>
             <!-- Contenido de tu div pegado al top -->
             <button id="complete" class="full-width-button">COMPLETAR</button>
         </div>
@@ -136,6 +136,32 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reservar Menú</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Local: <span id="localNameModal"></span></p>
+        <p>Cantidad de menús disponibles: <span id="cantidadMenusModal"></span></p>
+        <div class="form-group">
+          <label for="cantidadReserva">Cantidad a reservar:</label>
+          <input type="number" class="form-control" id="cantidadReserva" min="1">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="salirreservar" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="reservarButton">Reservar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <!-- Bootstrap JS -->

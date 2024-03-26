@@ -310,3 +310,19 @@ color: rgb(255, 255, 255);
   border-color: #fff;
   border: solid;
 }
+
+
+.user-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FF691F;
+  border: 2px solid white;
+  box-shadow: 0 0 5px #ff6a1fab,
+              0 0 10px #ff6a1fab,
+              0 0 15px #ff6a1fab,
+              0 0 20px #ff6a1fab,
+              0 0 25px #ff6a1fab;
+}
+
+
