@@ -1,5 +1,9 @@
 import './bootstrap';
 import * as bootstrap from 'bootstrap';
+//import {createApp} from 'vue'
+//import mapa from './components/mapa.vue'
+
+//createApp(mapa).mount('#mapa')
 
 let primerClicBene = true;
 let primerClicProv = true;
