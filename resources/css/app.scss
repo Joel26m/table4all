@@ -2,6 +2,7 @@ $primary: #ff691f;
 
 // Estilos para todos los botones primarios
 .btn.btn-primary {
+  border-radius: 30px;
   background-color: $primary; // Fondo con color primario
   color: white; // Texto en color blanco
   // Otros estilos aquí
@@ -10,6 +11,11 @@ $primary: #ff691f;
     color: white; // Texto en color blanco durante el hover
     // Otros estilos de hover aquí
   }
+}
+
+.btn.btn-secondary{
+  border-radius: 30px;
+
 }
 
 @import 'bootstrap/scss/bootstrap'

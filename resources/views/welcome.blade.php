@@ -33,7 +33,6 @@
 
 <div class="sticky-div">
             <p id="direcciongo"></p>
-            <!-- Contenido de tu div pegado al top -->
             <button id="complete" class="full-width-button">COMPLETAR</button>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <template>
-    components mapa
+   <h1>  components mapa</h1>
 </template>
 
 <script>
