@@ -285,6 +285,7 @@ color: rgb(255, 255, 255);
   top: 0;
   position: absolute; 
   width: 100%;
+  
 }
 
 .sticky-div {
@@ -325,15 +326,21 @@ color: rgb(255, 255, 255);
               0 0 25px #ff6a1fab;
 }
 
-.proveedor-title {
-  background-color: #3D89E2; /* Color de fondo azul */
-  color: white; /* Color de texto blanco */
+/* .proveedor-title {
+  background-color: #3D89E2;  Color de fondo azul 
+  color: white;  Color de texto blanco 
   border-radius: 4px 4px 20px 20px;
   padding: 10px;
   width: 100%;
-  position: relative; /* Agregamos posicionamiento relativo */
-  z-index: 2; /* Asegura que el título esté por encima del contenido */
+  position: relative;  Agregamos posicionamiento relativo 
+  z-index: 2;  Asegura que el título esté por encima del contenido 
 
+} */
+
+
+
+#ubicacionForm{
+  margin-top: 20px;
 }
 
 .sticky-div-prov {
@@ -357,19 +364,18 @@ z-index: 1; /* Asegura que el título esté por encima del contenido */
   position: fixed;
   top: 0;
   left: 0;
-  height: 140px;
-width: 100%;
+width: 100%;}
+
+
+
+.mapboxgl-popup-content-wrapper {
+  border-radius: 10px; /* Bordes redondeados */
+  
 }
 
 .mapboxgl-popup-content {
   width: auto !important;
   max-width: none !important;
-  padding: 0 !important;
+  padding: 15 !important;
 }
-
-.mapboxgl-popup-content-wrapper {
-  border-radius: 10px; /* Bordes redondeados */
-}
-
-
 

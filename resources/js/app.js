@@ -5,6 +5,15 @@ import * as bootstrap from 'bootstrap';
 
 //createApp(mapa).mount('#mapa')
 
+
+
+
+
+
+
+
+
+
 let primerClicBene = true;
 let primerClicProv = true;
 obtenerUbicacion();
@@ -124,7 +133,7 @@ map.on('click', (event) => {
             .setHTML('<h3><div class="add-container">' +
                 '<h1>¿Deseas añadir un Beneficiario?</h1>' +
                 '<form id="ubicacionForm" action="#">' +
-                '<button type="submit" class="btn btn-primary add" id="aceptarBtn">Aceptar</button>' +
+                '<button type="submit" class="btn btn-primary add" id="aceptarBtn">Añadir</button>' +
                 '<button type="button" class="btn btn-secondary add" id="cancelarBtn">Salir</button>' +
                 '</form>' +
                 '</h3>')
@@ -236,15 +245,13 @@ map.on('click', (event) => {
 let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
   .setPopup(new mapboxgl.Popup().setHTML(`
-  <div class="proveedor-title" id="proveedor-popup"> <!-- Agregamos un ID único -->
+  <div class="<!-- proveedor-title -->" id="proveedor-popup"> <!-- Agregamos un ID único -->
     <h3>Proveedor</h3>
   </div>    
-  <div class="sticky-div-prov">
+  <div class="<!--sticky-div-prov -->">
     <p id="localName">Nombre del Local</p>
   </div>
-  <div class="sticky-div-prov-desc">
-  <p id="localdesc">Nombre del Local</p>
-</div>
+ 
   <button class="btn btn-primary d-block mx-auto mb-2" id="verButton">Ver</button>
 `))
 
