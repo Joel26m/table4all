@@ -75,9 +75,6 @@ let botonprov = document.getElementById('prov');
 botonprov.addEventListener("click", toggleProveedores);
 
 
-
-  
-
 mapboxgl.accessToken = 'pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -85,9 +82,6 @@ const map = new mapboxgl.Map({
   center: [2.172850, 41.389280],
   zoom: 10.7
 });
-
-
-
 
 
 map.on('click', (event) => {
@@ -141,22 +135,8 @@ map.on('click', (event) => {
             
                 popup.remove();
             });
-            
-
-            
-        
     }
 });
-
-
-
-
-
-
-
-
-
-  
 
 let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
