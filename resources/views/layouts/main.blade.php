@@ -8,6 +8,7 @@
     </title>
 </head>
 <body>
+    
 @yield('contenido');
 
 </body>

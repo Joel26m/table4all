@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('mapa', function () {
-    return view('mapa.index');
+    return view('pepe');
 });

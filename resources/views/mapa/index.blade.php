@@ -1,15 +1,18 @@
-@extends('layouts.main');
+@extends('welcome');
+@vite(['resources/css/app.css', 'resources/css/app.scss', 'resources/js/app.js'])
 
 @section('titol')
 
-MAPAS
+Bitiby
 
 @endsection
 
 
-@section('contenido')
 
-<div id="mapa">
-</div>
+
+@section('mapa')
+
+
+
 
 @endsection
