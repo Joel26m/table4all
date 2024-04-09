@@ -51,7 +51,7 @@
         </div>
        
         <div class="enlace_registro">
-          <p>¿Ya tienes cuenta? <a href="{{action([App\Http\Controllers\UsersController::class, 'login']) }}" target="_blank" rel="noopener noreferrer">Incia sessión </a></p>
+          <p>¿Ya tienes cuenta? <a href="{{action([App\Http\Controllers\UsersController::class, 'login']) }}" rel="noopener noreferrer">Incia sessión </a></p>
         </div>
       
       </form>
