@@ -30,11 +30,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/M12/Proyecto2/table4all/public/rider">Riders</a>
                         <a class="dropdown-item" href="/M12/Proyecto2/table4all/public/collection">Cursos</a>
-<<<<<<< HEAD
-                        <a class="dropdown-item" href="/M12/Proyecto2/table4all/public/provider/2">Providers</a>
-=======
                         <a class="dropdown-item" href="/M12/Proyecto2/table4all/public/provider/4">Providers</a>
->>>>>>> rama-raul
 
                     </div>
                 </li>

@@ -23,6 +23,7 @@ class UsersController extends Controller
     }
 
     public function login(Request $request) {
+        
         $userName = $request->input('userName');
         $password = $request->input('password');
 
@@ -43,6 +44,27 @@ class UsersController extends Controller
         Auth::logout();
         return redirect('/login');
     }
+    
+
+    public function showRegister(){
+        return view('auth.register');
+    }
+
+    
+    public function register(Request $request)
+    {
+
+        $user = new Users();
+        $user->userName = $request->input('userName');
+        $user->password = Hash::make($request->input('password'));
+        $user->rol = $request->input('rol'); // Emmagatzema el rol seleccionat
+        $user->save();
+    
+        return redirect()->route('login')->with('success', 'Your account has been registered. Please log in.');
+
+    }
+
+
     
     public function index()
     {
