@@ -19,103 +19,87 @@ export default {
 
     };
   },
-   methods: {
-      obtenerUbicacion() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.mostrarUbicacion, this.errorUbicacion);
-      } else {
-        console.error("La geolocalización no está soportada por este navegador.");
-      }
-    },
-    mostrarUbicacion(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
+  methods: {
+  obtenerUbicacion() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.mostrarUbicacion, this.errorUbicacion);
+    } else {
+      console.error("La geolocalización no está soportada por este navegador.");
+    }
+  },
+  mostrarUbicacion(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
 
-      this.usuarioCoordinates = [longitude, latitude];
+    this.usuarioCoordinates = [longitude, latitude];
 
-      const userMarker = new mapboxgl.Marker({
-        element: this.createCustomUserMarker(),
-        anchor: 'bottom'
-      })
-      .setLngLat(this.usuarioCoordinates)
-      .addTo(this.map);
+    const userMarker = new mapboxgl.Marker({
+      element: this.createCustomUserMarker(),
+      anchor: 'bottom'
+    })
+    .setLngLat(this.usuarioCoordinates)
+    .addTo(this.map);
 
-      this.map.flyTo({
-        center: this.usuarioCoordinates,
-        zoom: 15
+    this.map.flyTo({
+      center: this.usuarioCoordinates,
+      zoom: 15
+    });
+  },
+  errorUbicacion(error) {
+    console.error('Error al obtener la ubicación del usuario:', error);
+  },
+  createCustomUserMarker() {
+    const el = document.createElement('div');
+    el.className = 'user-marker';
+    return el;
+  },
+  toggleBeneficiarios() {
+    let proveedores = document.querySelectorAll('.proveedor-marker');
+    let beneficiarios = document.querySelectorAll('.beneficiary-marker');
+
+    if (this.primerClicBene) {
+      proveedores.forEach(proveedor => {
+        proveedor.style.display = 'none';
       });
-    },
-    errorUbicacion(error) {
-      console.error('Error al obtener la ubicación del usuario:', error);
-    },
-    createCustomUserMarker() {
-      const el = document.createElement('div');
-      el.className = 'user-marker';
-      return el;
-    },
- 
-     toggleBeneficiarios() {
-         primerClicProv = true;
 
-         let proveedores = document.querySelectorAll('.proveedor-marker');
-         let beneficiarios = document.querySelectorAll('.beneciciary-marker');
+      beneficiarios.forEach(beneficiario => {
+        beneficiario.style.display = 'block';
+      });
 
-         if (primerClicBene) {
-            proveedores.forEach(function (proveedor) {
-               proveedor.style.display = 'none';
-               botonprov.classList.remove('active');
+      this.primerClicBene = false;
+    } else {
+      let marcadores = document.querySelectorAll('.proveedor-marker, .beneficiary-marker');
+      marcadores.forEach(marcador => {
+        marcador.style.display = 'block';
+      });
 
-            });
+      this.primerClicBene = true;
+    }
+  },
+  toggleProveedores() {
+    let beneficiarios = document.querySelectorAll('.beneficiary-marker');
+    let proveedores = document.querySelectorAll('.proveedor-marker');
 
-            beneficiarios.forEach(function (beneficiario) {
-               beneficiario.style.display = 'block';
-               botonbene.classList.toggle('active');
-               botonprov.classList.remove('active');
+    if (this.primerClicProv) {
+      proveedores.forEach(proveedor => {
+        proveedor.style.display = 'block';
+      });
 
-            });
+      beneficiarios.forEach(beneficiario => {
+        beneficiario.style.display = 'none';
+      });
 
-            primerClicBene = false;
-         } else {
-            let marcadores = document.querySelectorAll('.proveedor-marker, .beneciciary-marker');
-            marcadores.forEach(function (marcador) {
-               marcador.style.display = 'block';
-               botonbene.classList.remove('active');
-            });
+      this.primerClicProv = false;
+    } else {
+      let marcadores = document.querySelectorAll('.proveedor-marker, .beneficiary-marker');
+      marcadores.forEach(marcador => {
+        marcador.style.display = 'block';
+      });
 
-            primerClicBene = true;
-         }
-      },
-      toggleProveedores() {
-         let beneficiarios = document.querySelectorAll('.beneciciary-marker');
-         let proveedores = document.querySelectorAll('.proveedor-marker');
-         primerClicBene = true;
-
-         if (primerClicProv) {
-            proveedores.forEach(function (proveedor) {
-               proveedor.style.display = 'block';
-               botonprov.classList.toggle('active');
-               botonbene.classList.remove('active');
-
-            });
-
-            beneficiarios.forEach(function (beneficiario) {
-               beneficiario.style.display = 'none';
-
-            });
-
-            primerClicProv = false;
-         } else {
-            let marcadores = document.querySelectorAll('.proveedor-marker, .beneciciary-marker');
-            marcadores.forEach(function (marcador) {
-               marcador.style.display = 'block';
-               botonprov.classList.remove('active');
-
-            });
-
-            primerClicProv = true;
-         }
-      },
-handleMapClick(event) {
+      this.primerClicProv = true;
+    }
+  },
+  handleMapClick(event) {
     const lngLat = event.lngLat;
     this.destinationCoordinates = [lngLat.lng, lngLat.lat];
 
@@ -129,7 +113,6 @@ handleMapClick(event) {
 
     const features = this.map.queryRenderedFeatures(event.point);
     if (!features.length) {
-      // Lógica para mostrar el popup y manejar la interacción con el formulario
       this.showPopup(lngLat);
     }
   },
@@ -149,21 +132,10 @@ handleMapClick(event) {
         '</h3>')
       .addTo(this.map);
 
-    document.getElementById('aceptarBtn').addEventListener('click', (event) => {
+    document.getElementById('aceptarBtn').addEventListener('click', event => {
       event.preventDefault();
-      // Lógica para manejar la acción de añadir un beneficiario
       this.addBeneficiaryMarker(lngLat);
-      // Ocultar el popup
       popup.remove();
-    });
-
-    document.getElementById('complete').addEventListener('click', (event) => {
-      event.preventDefault();
-      // Lógica para ocultar el modal y eliminar la capa de la ruta
-      document.querySelector(".content-wrapper").style.display = "none";
-      console.log("Iniciando ruta...");
-      this.map.removeLayer('ruta');
-      $('#confirmarModal').modal('hide');
     });
 
     this.currentPopup = popup;
@@ -190,21 +162,16 @@ handleMapClick(event) {
       `))
       .addTo(this.map);
 
-    // Agregar evento de clic al botón "Aceptar" del modal
-    document.getElementById('iniciarRutaBtn').addEventListener('click', (event) => {
+    document.getElementById('iniciarRutaBtn').addEventListener('click', event => {
       event.preventDefault();
-      document.querySelector(".content-wrapper").style.display = "block";
-      console.log("Iniciando ruta...");
       this.crearRuta(this.usuarioCoordinates, this.destinationCoordinates);
-      // Obtener la dirección del lugar al que se va
       this.obtenerDireccion(this.destinationCoordinates);
-      // Ocultar el modal de confirmación
       $('#confirmarModal').modal('hide');
     });
   },
   createCustomMarkerb() {
     const el = document.createElement('div');
-    el.className = 'beneciciary-marker';
+    el.className = 'beneficiary-marker';
     return el;
   },
   obtenerDireccion(coordinates) {
@@ -264,218 +231,14 @@ handleMapClick(event) {
           .addTo(this.map);
       });
   }
-  },
+},
    mounted() {
       let primerClicBene = true;
       let primerClicProv = true;
       this.obtenerUbicacion();
 
 
-
-      
-
-
-
-
-
-
-
-      mapboxgl.accessToken = 'pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw';
-      const map = new mapboxgl.Map({
-         container: 'map',
-         style: 'mapbox://styles/ventu00/clsw58v7j007301qjfa3of8ut',
-         center: [2.172850, 41.389280],
-         zoom: 10.7
-      });
-
-
-
-
-
-      let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
-         .setLngLat([2.1734, 41.3851])
-         .setPopup(new mapboxgl.Popup().setHTML(`
-  <div class="<!-- proveedor-title -->" id="proveedor-popup"> <!-- Agregamos un ID único -->
-    <h3>Proveedor</h3>
-  </div>    
-  <div class="<!--sticky-div-prov -->">
-    <p id="localName">Nombre del Local</p>
-  </div>
- 
-  <button class="btn btn-primary d-block mx-auto mb-2" id="verButton">Ver</button>
-`))
-
-
-
-
-
-         .addTo(map);
-
-
-      const markerElement = proveedorMarker.getElement();
-      markerElement.classList.add('proveedor-marker');
-
-      function createCustomMarker() {
-         const el = document.createElement('div');
-         el.className = 'proveedor-marker';
-         return el;
-      }
-
-
-
-      // Adjuntar el evento de clic utilizando delegación de eventos
-      $(document).on('click', '#verButton', function(event) {
-          event.preventDefault();
-
-          // Obtener el nombre del local y la cantidad de menús disponibles (simulados)
-          const localName = "Nombre del local";
-          const cantidadMenus = 5; // Simulación de la cantidad de menús disponibles
-
-          // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
-          $('#localNameModal').text(localName);
-          $('#cantidadMenusModal').text(cantidadMenus);
-
-          // Mostrar el modal
-          $('#exampleModal2').modal('show');
-      });
-
-      // Manejar el evento de clic en el botón "Reservar" dentro del modal
-      $('#reservarButton').on('click', function() {
-          // Realizar la lógica de reserva aquí
-
-          // Cerrar el modal después de realizar la reserva
-          $('#exampleModal2').modal('hide');
-      });
-      $('#salirreservar').on('click', function() {
-          // Realizar la lógica de reserva aquí
-
-          // Cerrar el modal después de realizar la reserva
-          $('#exampleModal2').modal('hide');
-      });
-
-
-
-
-
-
-
-      let beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb() })
-         .setLngLat([2.0330500, 41.4922600])
-         .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
-         .addTo(map);
-
-      const markerElementb = beneficiaryMarker.getElement();
-      markerElementb.classList.add('beneciciary-marker');
-
-      function createCustomMarkerb() {
-         const el = document.createElement('div');
-         el.className = 'beneciciary-marker';
-         return el;
-      }
-
-
-
-      
-
-      let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
-
-      function mostrarUbicacion(position) {
-         const latitude = position.coords.latitude;
-         const longitude = position.coords.longitude;
-
-         // Asignar las coordenadas del usuario a la variable global
-         usuarioCoordinates = [longitude, latitude];
-
-         // Crear un marcador circular en la ubicación actual del usuario
-         const userMarker = new mapboxgl.Marker({
-            element: createCustomUserMarker(),
-            anchor: 'bottom'
-         })
-            .setLngLat(usuarioCoordinates)
-            .addTo(map);
-
-         // Centrar el mapa en la ubicación del usuario
-         map.flyTo({
-            center: usuarioCoordinates,
-            zoom: 15
-         });
-      }
-
-
-      function createCustomUserMarker() {
-         const el = document.createElement('div');
-         el.className = 'user-marker';
-         return el;
-      }
-
-
-      function errorUbicacion(error) {
-         console.error('Error al obtener la ubicación del usuario:', error);
-      }
-
-
-      document.getElementById('aceptarBtn').addEventListener('click', function(event) {
-          event.preventDefault();
-
-          // Crear la ruta desde la posición del usuario hasta el destino
-          crearRuta(usuarioCoordinates, destinationCoordinates);
-
-          // Ocultar el modal
-          $('#confirmarModal').modal('hide');
-      });
-
-      function crearRuta(origen, destino) {
-         // Llamar al servicio de enrutamiento de Mapbox
-         const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${origen[0]},${origen[1]};${destino[0]},${destino[1]}?geometries=geojson&steps=true&access_token=${mapboxgl.accessToken}`;
-
-         fetch(url)
-            .then(response => response.json())
-            .then(data => {
-               const route = data.routes[0];
-               const geometry = route.geometry;
-               const duration = route.duration; // Duración estimada del viaje en segundos
-
-               // Convertir la duración a minutos
-               const durationMinutes = Math.round(duration / 60);
-
-               // Mostrar la ruta en el mapa
-               map.addLayer({
-                  'id': 'ruta',
-                  'type': 'line',
-                  'source': {
-                     'type': 'geojson',
-                     'data': {
-                        'type': 'Feature',
-                        'properties': {},
-                        'geometry': geometry
-                     }
-                  },
-                  'layout': {
-                     'line-join': 'round',
-                     'line-cap': 'round'
-                  },
-                  'paint': {
-                     'line-color': '#FF691F', // Cambia el color de la línea a naranja
-                     'line-width': 10, // Ajusta el ancho de la línea según sea necesario
-                     'line-opacity': 1, // Ajusta la opacidad de la línea si es necesario
-                     'line-blur': 10, // Agrega un efecto de desenfoque para simular una sombra
-                     'line-offset': 2 // Agrega un desplazamiento para simular una sombra
-                  }
-               });
-
-               // Crear el contenido del pop-up con la duración estimada del viaje
-               const popupContent = `<h3>Tiempo estimado de llegada</h3><p>${durationMinutes} minutos</p>`;
-
-               // Mostrar el pop-up en las coordenadas de destino
-               new mapboxgl.Popup()
-                  .setLngLat(destino)
-                  .setHTML(popupContent)
-                  .addTo(map);
-            });
-      }
-
-   }
-}
+   }}
 </script>
 <style>
 #map { 
