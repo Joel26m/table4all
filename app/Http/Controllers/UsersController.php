@@ -53,20 +53,18 @@ class UsersController extends Controller
     
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-            'rol' => 'required|in:provider,rider', // Validació del rol
-        ]);
-    
+
         $user = new Users();
-        $user->name = $request->name;
-        $user->password = Hash::make($request->password);
-        $user->rol = $request->rol; // Emmagatzema el rol seleccionat
+        $user->userName = $request->input('userName');
+        $user->password = Hash::make($request->input('password'));
+        $user->rol = $request->input('rol'); // Emmagatzema el rol seleccionat
         $user->save();
     
         return redirect()->route('login')->with('success', 'Your account has been registered. Please log in.');
+
     }
+
+
     
     public function index()
     {

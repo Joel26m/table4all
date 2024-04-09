@@ -8,7 +8,7 @@
     <h3>REGISTARSE</h3>
 </div>
 <div class="form-login">
-  <form class="login_formulario" action="{{ route('register') }}" method="POST">
+  <form class="login_formulario" action="{{ action([App\Http\Controllers\UsersController::class, 'register']) }}" method="POST">
 @csrf
   <div class="d-grid gap-2" id="redes-login">
     <div class="b-redes d-flex justify-content-center"> 
@@ -39,8 +39,8 @@
         @endif
 
         <div class="mb-3">
-          <label for="role" class="form-label">Tipus d'Usuari</label>
-          <select class="form-select" id="role" name="role">
+          <label for="rol" class="form-label">Tipus d'Usuari</label>
+          <select class="form-select" id="rol" name="rol">
               <option value="provider">Provider</option>
               <option value="rider">Rider</option>
           </select>

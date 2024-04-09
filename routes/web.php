@@ -52,7 +52,9 @@ Route::middleware(['auth'])->group(function(){
 // -----------------------------------------------------------------------
 
 
+//------------------------- Logica registro ---------------------------------
 
 Route::get('/register', [UsersController::class, 'showRegister'])->name('register');
 Route::post('/register',[UsersController::class, 'register']);
 
+// -----------------------------------------------------------------------
