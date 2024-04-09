@@ -73,7 +73,7 @@
 </div>
 
 
-@yield('mapa')
+<div id='map'></div>
 
 <div class="animate__animated animate__bounceInUp submenu container fixed-bottom mb-3">
     <div class="row justify-content-center">
