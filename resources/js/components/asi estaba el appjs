@@ -1,9 +1,9 @@
 import './bootstrap';
 import * as bootstrap from 'bootstrap';
-import {createApp} from 'vue'
-import mapa from './components/mapa.vue'
+//import {createApp} from 'vue'
+//import mapa from './components/mapa.vue'
 
-createApp(mapa).mount('#mapa')
+//createApp(mapa).mount('#mapa')
 
 
 
