@@ -64,8 +64,9 @@ class ProviderController extends Controller
      */
     public function show(Provider $provider)
     {
-        //
+        return new ProviderResource($provider);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -74,10 +75,37 @@ class ProviderController extends Controller
      * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $provider)
+    public function update(Request $request, Provider $Provider)
     {
-        //
+
+        $Provider->ID = $request->input('ID');
+        $Provider->UserName = $request->input('userName');
+        $Provider->Password = $request->input('password');
+        $Provider->rol = $request->input('rol');
+
+        try 
+        {
+            $Provider->save();
+            $response = (new ProviderResource($Provider))
+                        ->response()
+                        ->setStatusCode(201);
+        } 
+        catch (QueryException $ex) 
+        {
+            $menasje = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Provider  $Provider
+     * @return \Illuminate\Http\Response
+     */
+    
 
     /**
      * Remove the specified resource from storage.
@@ -85,8 +113,20 @@ class ProviderController extends Controller
      * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Provider $provider)
+    public function destroy(Provider $Provider)
     {
-        //
+        try 
+        {
+            $Provider->delete();
+            $response = \response()
+                        ->json(['mensaje' => 'Registro borrado correctamente'], 200);
+        } 
+        catch (QueryException $ex) 
+        {
+            $menasje = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
 }
