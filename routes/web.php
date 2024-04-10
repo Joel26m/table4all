@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('mapa', function () {
-    return view('pepe');
+Route::get('nav', function () {
+    return view('nav/index');
 });

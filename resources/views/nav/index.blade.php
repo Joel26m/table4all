@@ -10,9 +10,10 @@ Bitiby
 
 
 
-@section('mapa')
 
 
-
+@section('content')
+<div id="nav"></div>
 
 @endsection
+

@@ -1,9 +1,9 @@
 import './bootstrap';
 import * as bootstrap from 'bootstrap';
-//import {createApp} from 'vue'
-//import mapa from './components/mapa.vue'
+import {createApp} from 'vue'
+import nav from './components/nav.vue'
 
-//createApp(mapa).mount('#mapa')
+createApp(nav).mount('#nav')
 
 
 
@@ -364,15 +364,15 @@ function errorUbicacion(error) {
 }
 
 
-document.getElementById('aceptarBtn').addEventListener('click', function(event) {
-    event.preventDefault();
+// document.getElementById('aceptarBtn').addEventListener('click', function(event) {
+//     event.preventDefault();
 
-    // Crear la ruta desde la posición del usuario hasta el destino
-    crearRuta(usuarioCoordinates, destinationCoordinates);
+//     // Crear la ruta desde la posición del usuario hasta el destino
+//     crearRuta(usuarioCoordinates, destinationCoordinates);
 
-    // Ocultar el modal
-    $('#confirmarModal').modal('hide');
-});
+//     // Ocultar el modal
+//     $('#confirmarModal').modal('hide');
+// });
 
 function crearRuta(origen, destino) {
     // Llamar al servicio de enrutamiento de Mapbox
