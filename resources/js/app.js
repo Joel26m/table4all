@@ -5,6 +5,15 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
+axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
+  .then(function (response) {
+    // Manejo de la respuesta exitosa
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    // Manejo de errores
+    console.log(error);
+  });
 
 
 
