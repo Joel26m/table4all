@@ -5,7 +5,7 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
-axios.get('localhost/M12/Proyecto2/table4all/public/api/user')
+axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
   .then(function (response) {
     // Manejo de la respuesta exitosa
     console.log(response.data);

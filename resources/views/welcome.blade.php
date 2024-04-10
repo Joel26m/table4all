@@ -17,10 +17,10 @@
 </head>
 <body>
 
-<div class="ncv">
+{{-- <div class="ncv">
 @yield('content')
 
-</div>
+</div> --}}
 
 
 <div id='map'></div>
