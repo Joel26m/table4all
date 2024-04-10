@@ -1,42 +1,4 @@
-.navcont{
-    color: rgb(255, 255, 255);
-    height: 34px;
-    z-index: 11111;
-    font-size: 22px;
-}
-.navbar{
-  top: 0;
-  z-index: 111;
-  height: 80px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
 
-.offcanvas-body{
-  background-color: #FF691F;
-  color: rgb(255, 255, 255);
-  z-index: 1111111;
-}
-          
-.custom-toggler.navbar-toggler {
-  border-color: rgba(255, 255, 255, 0);
-  float: right;
-}
-/* Setting the stroke to green using rgb values (0, 128, 0) */
-
-.custom-toggler .navbar-toggler-icon {
-  background-image: url("user.svg");
-  width: 60px;
-  height: 60px;
-}
-
-.custom-toggler.navbar-toggler:focus,
-.custom-toggler.navbar-toggler:active,
-.custom-toggler.navbar-toggler:focus-visible {
-  outline: none;
-  box-shadow: none;
-  border-color: transparent;
-}
 
 .desplegable{
     color: rgb(255, 255, 255);
