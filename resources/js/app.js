@@ -5,16 +5,26 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
-axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
+//Manejar datos proveedores
+
+
+  let proveedores = []; // Array para almacenar los datos de los proveedores
+
+  axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
   .then(function (response) {
-    // Manejo de la respuesta exitosa
-    console.log(response.data);
+    proveedores = response.data; // Guarda los proveedores en el array
+    console.log(proveedores);
   })
   .catch(function (error) {
-    // Manejo de errores
-    console.log(error);
+    console.error('Error al obtener los proveedores:', error);
   });
 
+
+  function obtenerProveedorPorId(id) {
+    const proveedor = proveedores.find(prov => prov.id === id);
+    return proveedor;
+  }
+    
 
 
 let primerClicBene = true;
