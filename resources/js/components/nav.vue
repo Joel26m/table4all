@@ -102,6 +102,8 @@ export default {
 .custom-toggler.navbar-toggler {
   border-color: rgba(255, 255, 255, 0);
   float: right;
+  z-index: 1111;
+
 }
 /* Setting the stroke to green using rgb values (0, 128, 0) */
 
@@ -109,6 +111,7 @@ export default {
   background-image: url("user.svg");
   width: 60px;
   height: 60px;
+  z-index: 11111;
 }
 
 .custom-toggler.navbar-toggler:focus,
@@ -126,6 +129,7 @@ export default {
     border-radius: 20px;
     width: 100%;
     border-color: rgb(255, 255, 255);
+    z-index: 1111;
 }
 
 .btn{
@@ -140,6 +144,7 @@ color: rgb(255, 255, 255);
   background-size: cover;
   cursor: pointer;
   margin-left: 10px;
+  z-index: 1111;
 }
 
 /* Media query para dispositivos móviles */
