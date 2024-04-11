@@ -25,7 +25,8 @@ createApp(nav).mount('#nav')
     return proveedor;
   }
     
-
+  let proveedor = obtenerProveedorPorId(1);
+  console.log(proveedor);
 
 let primerClicBene = true;
 let primerClicProv = true;
@@ -262,7 +263,7 @@ let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
     <h3>Proveedor</h3>
   </div>    
   <div class="<!--sticky-div-prov -->">
-    <p id="localName">Nombre del Local</p>
+    <p id="localName"> nombre </p>
   </div>
  
   <button class="btn btn-primary d-block mx-auto mb-2" id="verButton">Ver</button>
