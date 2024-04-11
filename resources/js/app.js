@@ -20,22 +20,7 @@ createApp(nav).mount('#nav')
   });
 
 
-  function obtenerProveedorPorId(id) {
-    const proveedor = proveedores.find(prov => prov.ID === id);
-    return proveedor;
-  }
-  function mostrarDatosProveedorHtml(id) {
-    let proveedor = obtenerProveedorPorId(id);
-    
-    if (proveedor) {
-      document.getElementById('localName').textContent = proveedor.ID; // Asumiendo que 'nombre' es una propiedad de tus objetos proveedor
 
-      // Actualiza más campos según necesites
-    } else {
-      console.log('Proveedor no encontrado');
-    }
-  }
-  
 
 
 let primerClicBene = true;
@@ -262,7 +247,23 @@ map.on('click', (event) => {
 });
 
 
+function obtenerProveedorPorId(id) {
+    const proveedor = proveedores.find(prov => prov.ID === id);
+    return proveedor;
+  }
 
+  function mostrarDatosProveedorHtml(id) {
+    let proveedor = obtenerProveedorPorId(id);
+    
+    if (proveedor) {
+      document.getElementById('localName').textContent = proveedor.ID; // Asumiendo que 'nombre' es una propiedad de tus objetos proveedor
+
+      // Actualiza más campos según necesites
+    } else {
+      console.log('Proveedor no encontrado');
+    }
+  }
+  
 
 
   
@@ -294,9 +295,10 @@ proveedorMarker.getPopup().on('open', () => {
 
 
 // Adjuntar el evento de clic utilizando delegación de eventos
-$(document).on('click', '#verButton', function(event) {
-    event.preventDefault();
+$(document).ready(function() {
+    $(document).on('click', '#verButton', function(event) {
 
+    event.preventDefault();
     // Obtener el nombre del local y la cantidad de menús disponibles (simulados)
     const localName = "Nombre del local";
     const cantidadMenus = 5; // Simulación de la cantidad de menús disponibles
@@ -307,7 +309,9 @@ $(document).on('click', '#verButton', function(event) {
   
     // Mostrar el modal
     $('#exampleModal2').modal('show');
+    });
 });
+
 
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {

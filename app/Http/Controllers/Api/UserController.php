@@ -50,7 +50,7 @@ class UserController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasje = Utilitat::errorMessage($ex);
+            $mensaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
@@ -92,7 +92,7 @@ class UserController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasje = Utilitat::errorMessage($ex);
+            $mensaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
@@ -115,7 +115,7 @@ class UserController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasje = Utilitat::errorMessage($ex);
+            $mensaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
