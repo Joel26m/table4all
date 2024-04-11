@@ -297,6 +297,7 @@ proveedorMarker.getPopup().on('open', () => {
 // Adjuntar el evento de clic utilizando delegación de eventos
 $(document).ready(function() {
     $(document).on('click', '#verButton', function(event) {
+        console.log('var button clicado');
 
     event.preventDefault();
     // Obtener el nombre del local y la cantidad de menús disponibles (simulados)
