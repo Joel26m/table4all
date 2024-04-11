@@ -8,7 +8,11 @@
                     "name": "Launch Chrome",
                     "request": "launch",
                     "type": "chrome",
+<<<<<<< HEAD
                     "url": "http://localhost/M12/Proyecto2/table4all/public/",
+=======
+                    "url": "http://localhost/table4all/public/",
+>>>>>>> main
                     "webRoot": "${workspaceFolder}"
                 },
         {
