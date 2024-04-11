@@ -21,12 +21,22 @@ createApp(nav).mount('#nav')
 
 
   function obtenerProveedorPorId(id) {
-    const proveedor = proveedores.find(prov => prov.id === id);
+    const proveedor = proveedores.find(prov => prov.ID === id);
     return proveedor;
   }
+  function mostrarDatosProveedorHtml(id) {
+    let proveedor = obtenerProveedorPorId(id);
     
-  let proveedor = obtenerProveedorPorId(1);
-  console.log(proveedor);
+    if (proveedor) {
+      document.getElementById('localName').textContent = proveedor.ID; // Asumiendo que 'nombre' es una propiedad de tus objetos proveedor
+
+      // Actualiza más campos según necesites
+    } else {
+      console.log('Proveedor no encontrado');
+    }
+  }
+  
+
 
 let primerClicBene = true;
 let primerClicProv = true;
@@ -259,20 +269,14 @@ map.on('click', (event) => {
 let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
   .setPopup(new mapboxgl.Popup().setHTML(`
-  <div class="<!-- proveedor-title -->" id="proveedor-popup"> <!-- Agregamos un ID único -->
-    <h3>Proveedor</h3>
-  </div>    
-  <div class="<!--sticky-div-prov -->">
-    <p id="localName"> nombre </p>
-  </div>
- 
-  <button class="btn btn-primary d-block mx-auto mb-2" id="verButton">Ver</button>
-`))
-
-
-
-
-  
+    <div class="proveedor-popup">
+      <h3>Proveedor</h3>
+      <div class="">
+        <p id="localName">Cargando...</p>
+      </div>
+      <button class="btn btn-primary d-block mx-auto mb-2 verButton">Ver</button>
+    </div>
+  `))
   .addTo(map);
 
   
@@ -284,7 +288,9 @@ function createCustomMarker() {
   el.className = 'proveedor-marker';
   return el;
 }
-
+proveedorMarker.getPopup().on('open', () => {
+    mostrarDatosProveedorHtml(1); // Llama a tu función para actualizar los datos
+  });
 
 
 // Adjuntar el evento de clic utilizando delegación de eventos
