@@ -105,9 +105,6 @@ let botonprov = document.getElementById('prov');
 botonprov.addEventListener("click", toggleProveedores);
 
 
-
-  
-
 mapboxgl.accessToken = 'pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -117,6 +114,7 @@ const map = new mapboxgl.Map({
 });
 
 
+<<<<<<< HEAD
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -125,6 +123,8 @@ let destinationCoordinates; // Variable para almacenar las coordenadas del desti
 
 let currentPopup = null; // Variable para almacenar el popup actualmente abierto
 
+=======
+>>>>>>> main
 map.on('click', (event) => {
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
@@ -228,6 +228,7 @@ map.on('click', (event) => {
             
                 popup.remove();
             });
+<<<<<<< HEAD
             
 
             
@@ -256,6 +257,11 @@ map.on('click', (event) => {
 
 
   
+=======
+    }
+});
+
+>>>>>>> main
 let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
   .setPopup(new mapboxgl.Popup().setHTML(`

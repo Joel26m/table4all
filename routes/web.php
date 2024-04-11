@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Route;
+>>>>>>> main
 use App\Http\Controllers\RidersController;
 use App\Http\Controllers\ProviderController;
 
@@ -55,6 +60,7 @@ Route::middleware(['auth'])->group(function(){
 Route::get('/register', [UsersController::class, 'showRegister'])->name('register');
 Route::post('/register',[UsersController::class, 'register']);
 
+<<<<<<< HEAD
 // -----------------------------------------------------------------------
 Route::get('nav', function () {
     return view('nav/index');
@@ -65,3 +71,6 @@ Route::resource('rider', RidersController::class);
 Route::resource('provider', ProviderController::class);
 
 //Route::get('provider/{provider}', [ProviderController::class, 'show']);
+=======
+// -----------------------------------------------------------------------
+>>>>>>> main

@@ -24,6 +24,10 @@ class UsersController extends Controller
 
     public function login(Request $request) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        
+>>>>>>> main
 =======
         
 >>>>>>> main
@@ -49,7 +53,10 @@ class UsersController extends Controller
     }
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
 
     public function showRegister(){
         return view('auth.register');
@@ -71,6 +78,9 @@ class UsersController extends Controller
 
 
     
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
     public function index()
     {

@@ -2,8 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\Api\ProviderController;
 use App\Http\Controllers\Api\UserController;
+=======
+use App\Http\Controllers\Api\CollectionController;
+>>>>>>> main
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+<<<<<<< HEAD
 Route::apiResource('provider', ProviderController::class);
 Route::apiResource('user', UserController::class);
 
+=======
+>>>>>>> main
 Route::apiResource('collection', CollectionController::class);
