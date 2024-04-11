@@ -1,0 +1,343 @@
+
+
+.desplegable{
+    color: rgb(255, 255, 255);
+    background-color: #FF691F;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    border-color: rgb(255, 255, 255);
+}
+
+.btn{
+color: rgb(255, 255, 255);
+}
+
+
+.logo {
+  width: 60px;
+  height: 52px;
+  background-image: url("logo.png");
+  background-size: cover;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .logo {
+    width: 53px;
+    height: 50px;
+    /* Ajusta el tamaño del logo para dispositivos móviles */
+  }
+}
+
+
+.custom-white {
+  color: white; /* Cambia "white" al color deseado */
+}
+
+#map { 
+  z-index: -1;
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+  width: 100%; 
+  height: 100%;
+}
+
+.submenu {
+  z-index: 111111;
+  padding: 10px;
+}
+
+.subop {
+  border-radius: 55px;
+  padding: 20px;
+  margin: 20px;
+}
+
+#prov {
+  border:3.5px solid transparent; /* Inicialmente, el borde es transparente */
+  transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+}
+
+#prov.active {
+  border-color: #3D89E2; /* Cuando el botón está activo, el borde se vuelve azul */
+
+}
+
+#bene {
+  border: 3.5px solid transparent; /* Inicialmente, el borde es transparente */
+  transition: border-color 0.3s ease; /* Agregamos una transición al cambio de color del borde */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+
+}
+
+#bene.active {
+  border-color: #FF691F; /* Cuando el botón está activo, el borde se vuelve azul */
+  transition: border-color 0.3s ease, transform 0.3s ease-in-out;
+}
+#bene:hover {
+  border-color: #FF691F; /* Cuando se hace hover sobre el botón, el borde se vuelve azul */
+  transform: scale(1.1); /* Al hacer hover, el botón se agranda un 10% */
+}
+
+#prov:hover {
+  border-color: #3D89E2; /* Cuando se hace hover sobre el botón, el borde se vuelve azul */
+  transform: scale(1.1); /* Al hacer hover, el botón se agranda un 10% */
+}
+
+.text-center {
+  text-align: center; /* Aplica centrado de texto */
+}
+
+
+.popup-custom {
+
+}
+
+  .proveedor-marker {
+    width: 40px;
+    height: 55px;
+    background-image: url("provider.svg"); 
+    background-size: cover;
+    cursor: pointer;
+  }
+  
+  .beneciciary-marker {
+    width: 40px;
+    height: 55px;
+    background-image: url("beneficiary.svg"); 
+    background-size: cover;
+    cursor: pointer;
+    opacity: 0; /* Configura la opacidad inicialmente en 0 para que el marcador esté oculto */
+    animation: fadeInMarker 0.5s ease-in forwards; /* Aplica la animación fadeInMarker */
+}
+
+
+@keyframes fadeInMarker {
+    from {
+        opacity: 0; /* Empieza con opacidad 0 */
+    }
+    to {
+        opacity: 1; /* Termina con opacidad 1 */
+    }
+}
+
+
+  .logobene {
+    width: 50px;
+    height: 50px;
+    background-image: url("heart.png");
+    background-size: cover;
+    margin-right: 10px; /* Ajusta el espaciado entre la imagen y el texto */
+}
+
+.logoprov{
+  width: 50px;
+  height: 50px;
+  background-image: url("food.png");
+  background-size: cover;
+  margin-right: 10px; /* Ajusta el espaciado entre la imagen y el texto */
+}
+
+
+
+.subop {
+  border: none;
+  outline: none;
+    display: flex; /* Utiliza flexbox para alinear elementos */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    padding: 20px;
+    margin: 20px;
+    border-radius: 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade sombra para resaltar */
+}
+
+.subtext {
+    margin-bottom: 0; /* Ajusta el espacio inferior del texto */
+    font-size: 30px;
+    color: #001D38;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+    .logobene {
+        width: 30px;
+        height: 30px;
+    }
+
+    .logoprov{
+      width: 30px;
+      height: 30px;
+    }
+    
+    .subtext {
+        font-size: 20px;
+    }
+
+}
+
+.add-container{
+  text-align: center;
+  margin: 6px;
+  width: 200px;
+}
+
+.add{
+  margin-left: 10px;
+}
+
+.button-container{
+  align-items: center;
+  text-align: center;
+}
+
+.btn-primary-modifyButton {
+  margin-right: 10px;
+  background-image: url(writing\ 1.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  height: 48px;
+  width: 48px;
+  color: #FF691F;
+  background-color: transparent; /* Establecer el fondo transparente */
+  transition: transform 0.3s ease; /* Transición suave del cambio de tamaño */
+}
+
+.btn-with-image {
+  background-image: url(go.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  height: 49.5px;
+  width: 46.5px;
+  color: #FF691F;
+  background-color: transparent; /* Establecer el fondo transparente */
+  transition: transform 0.3s ease; /* Transición suave del cambio de tamaño */
+}
+
+.text-go {
+  width: 100px;
+}
+
+/* Estilos adicionales para el efecto hover */
+.btn-with-image:hover, .btn-primary-modifyButton:hover {
+  opacity: 0.8; /* Reducir la opacidad al pasar el ratón sobre el botón */
+  transform: scale(1.1); /* Aumentar ligeramente el tamaño al pasar el ratón sobre el botón */
+}
+
+.content-wrapper {
+  display: none;
+  top: 0;
+  position: absolute; 
+  width: 100%;
+  
+}
+
+.sticky-div {
+  
+  height: 170px;
+  position: sticky;
+  top: 0;
+  background-color: #001d38;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.full-width-button {
+  
+  margin-top: 90px;
+  float: right;
+  padding: 10px;
+  background-color: #3d89e2;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  border-color: #fff;
+  border: solid;
+}
+
+
+.user-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FF691F;
+  border: 2px solid white;
+  box-shadow: 0 0 5px #ff6a1fab,
+              0 0 10px #ff6a1fab,
+              0 0 15px #ff6a1fab,
+              0 0 20px #ff6a1fab,
+              0 0 25px #ff6a1fab;
+}
+
+/* .proveedor-title {
+  background-color: #3D89E2;  Color de fondo azul 
+  color: white;  Color de texto blanco 
+  border-radius: 4px 4px 20px 20px;
+  padding: 10px;
+  width: 100%;
+  position: relative;  Agregamos posicionamiento relativo 
+  z-index: 2;  Asegura que el título esté por encima del contenido 
+
+} */
+
+
+
+#ubicacionForm{
+  margin-top: 20px;
+}
+
+.sticky-div-prov {
+  background-color: #8d8d8d;
+  border-radius: 4px 4px 20px 20px;
+  padding: 10px;
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 84px;
+width: 100%;
+z-index: 1; /* Asegura que el título esté por encima del contenido */
+
+}
+.sticky-div-prov-desc{
+  background-color: #e9e9e9;
+  border-radius: 4px 4px 20px 20px;
+  padding: 10px;
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+width: 100%;}
+
+
+
+.mapboxgl-popup-content-wrapper {
+  border-radius: 10px; /* Bordes redondeados */
+  
+}
+
+.mapboxgl-popup-content {
+  width: auto !important;
+  max-width: none !important;
+  padding: 15 !important;
+}
+
