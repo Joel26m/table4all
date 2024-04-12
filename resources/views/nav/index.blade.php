@@ -15,13 +15,12 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
-  
+
 </head>
 <body>
 
+<div id="nav"></div> <!-- es un compoenente -->
 
-
-<div id="nav"></div>
 <div id='map'></div>
 
 
