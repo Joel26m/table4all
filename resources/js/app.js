@@ -5,22 +5,19 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
-//Manejar datos proveedores
+// Manejar datos proveedores
 
 
-  let proveedores = []; // Array para almacenar los datos de los proveedores
+//   let proveedores = []; // Array para almacenar los datos de los proveedores
 
-  axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
-  .then(function (response) {
-    proveedores = response.data; // Guarda los proveedores en el array
-    console.log(proveedores);
-  })
-  .catch(function (error) {
-    console.error('Error al obtener los proveedores:', error);
-  });
-
-
-
+//   axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
+//   .then(function (response) {
+//     proveedores = response.data; // Guarda los proveedores en el array
+//     console.log(proveedores);
+//   })
+//   .catch(function (error) {
+//     console.error('Error al obtener los proveedores:', error);
+//   });
 
 
 let primerClicBene = true;
@@ -246,9 +243,15 @@ map.on('click', (event) => {
     
 });
 
+let proveedores = [
+    { id: 1, nombre: "Proveedor 1", latitud: 41.3851, longitud: 2.1734 },
+    { id: 2, nombre: "Proveedor 2", latitud: 41.3818, longitud: 2.1685 },
+    // ... más proveedores
+  ];
+
 
 function obtenerProveedorPorId(id) {
-    const proveedor = proveedores.find(prov => prov.ID === id);
+    const proveedor = proveedores.find(prov => prov.id === id);
     return proveedor;
   }
 
@@ -256,42 +259,53 @@ function obtenerProveedorPorId(id) {
     let proveedor = obtenerProveedorPorId(id);
     
     if (proveedor) {
-      document.getElementById('localName').textContent = proveedor.ID; // Asumiendo que 'nombre' es una propiedad de tus objetos proveedor
-
-      // Actualiza más campos según necesites
+      // Obtener todos los elementos con la clase 'localName'
+      let localNames = document.querySelectorAll('.localName');
+  
+      // Actualizar cada elemento con el nombre del proveedor
+      localNames.forEach(element => {
+        element.textContent = proveedor.nombre; // Actualizando el texto de cada elemento
+      });
+  
+      // Aquí puedes actualizar más campos si tienes otros elementos de clase
     } else {
       console.log('Proveedor no encontrado');
     }
   }
   
+  function createCustomMarker() {
+    const el = document.createElement('div');
+    el.className = 'proveedor-marker';
+    return el;
+  }
 
+  function crearMarcadoresDeProveedores(proveedores, map) {
+    for (let i = 0; i < proveedores.length; i++) {
+        let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
 
-  
-let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
-  .setLngLat([2.1734, 41.3851])
-  .setPopup(new mapboxgl.Popup().setHTML(`
-    <div class="proveedor-popup">
-      <h3>Proveedor</h3>
-      <div class="">
-        <p id="localName">Cargando...</p>
-      </div>
-      <button class="btn btn-primary d-block mx-auto mb-2 verButton">Ver</button>
-    </div>
-  `))
-  .addTo(map);
+        let el = createCustomMarker();   // Crear el elemento de marcador personalizado
 
-  
-const markerElement = proveedorMarker.getElement();
-markerElement.classList.add('proveedor-marker');
+        let proveedorMarker = new mapboxgl.Marker({ element: el })
+            .setLngLat([proveedor.longitud, proveedor.latitud])
+            .setPopup(new mapboxgl.Popup().setHTML(`
+                <div class="proveedor-popup">
+                    <h3>Cargando...</h3>  
+                    <div class="">
+                        <p class="localName">Cargando...</p>  
+                    </div>
+                    <button class="btn btn-primary d-block mx-auto mb-2 verButton">Ver</button>
+                </div>
+            `))
+            .addTo(map);
 
-function createCustomMarker() {
-  const el = document.createElement('div');
-  el.className = 'proveedor-marker';
-  return el;
+        proveedorMarker.getPopup().on('open', () => {
+            mostrarDatosProveedorHtml(proveedor.id);  // Asumiendo que 'id' es una propiedad del proveedor
+        });
+    }
 }
-proveedorMarker.getPopup().on('open', () => {
-    mostrarDatosProveedorHtml(1); // Llama a tu función para actualizar los datos
-  });
+
+crearMarcadoresDeProveedores(proveedores, map);
+
 
 
 // Adjuntar el evento de clic utilizando delegación de eventos
