@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,8 +16,6 @@ use App\Http\Controllers\UsersController;
 */
 
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RidersController;
 use App\Http\Controllers\ProviderController;
 
 
@@ -25,6 +24,7 @@ Route::get('/plantilla', function () {
     return view('contenido');
 });
 Route::get('/', function () {
+    
     
     return view('welcome');
 });
@@ -58,3 +58,12 @@ Route::get('/register', [UsersController::class, 'showRegister'])->name('registe
 Route::post('/register',[UsersController::class, 'register']);
 
 // -----------------------------------------------------------------------
+Route::get('nav', function () {
+    return view('nav/index');
+});
+
+Route::resource('rider', RidersController::class);
+
+Route::resource('provider', ProviderController::class);
+
+//Route::get('provider/{provider}', [ProviderController::class, 'show']);
