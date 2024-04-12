@@ -344,16 +344,14 @@ function obtenerUbicacion() {
     }
 }
 
-let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
-
+let usuarioCoordinates; 
 function mostrarUbicacion(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    // Asignar las coordenadas del usuario a la variable global
     usuarioCoordinates = [longitude, latitude];
 
-    // Crear un marcador circular en la ubicación actual del usuario
+    // marcador circular 
     const userMarker = new mapboxgl.Marker({
         element: createCustomUserMarker(),
         anchor: 'bottom'
@@ -366,6 +364,7 @@ function mostrarUbicacion(position) {
         center: usuarioCoordinates,
         zoom: 15
     });
+
 }
 
 
@@ -422,11 +421,11 @@ function crearRuta(origen, destino) {
                     'line-cap': 'round'
                 },
                 'paint': {
-                    'line-color': '#FF691F', // Cambia el color de la línea a naranja
-                    'line-width': 10, // Ajusta el ancho de la línea según sea necesario
-                    'line-opacity': 1, // Ajusta la opacidad de la línea si es necesario
-                    'line-blur': 10, // Agrega un efecto de desenfoque para simular una sombra
-                    'line-offset': 2 // Agrega un desplazamiento para simular una sombra
+                    'line-color': '#FF691F', 
+                    'line-width': 10, 
+                    'line-opacity': 1, 
+                    'line-blur': 10, 
+                    'line-offset': 2 
                 }
             });
 
