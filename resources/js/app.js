@@ -114,7 +114,6 @@ const map = new mapboxgl.Map({
 });
 
 
-<<<<<<< HEAD
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -123,8 +122,6 @@ let destinationCoordinates; // Variable para almacenar las coordenadas del desti
 
 let currentPopup = null; // Variable para almacenar el popup actualmente abierto
 
-=======
->>>>>>> main
 map.on('click', (event) => {
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
@@ -228,7 +225,6 @@ map.on('click', (event) => {
             
                 popup.remove();
             });
-<<<<<<< HEAD
             
 
             
@@ -257,11 +253,6 @@ map.on('click', (event) => {
 
 
   
-=======
-    }
-});
-
->>>>>>> main
 let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
   .setLngLat([2.1734, 41.3851])
   .setPopup(new mapboxgl.Popup().setHTML(`
