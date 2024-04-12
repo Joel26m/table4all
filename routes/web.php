@@ -26,7 +26,7 @@ Route::get('/plantilla', function () {
 Route::get('/', function () {
     
     
-    return view('welcome');
+    return view('nav/index');
 });
 
 Route::resource('rider', RidersController::class);
