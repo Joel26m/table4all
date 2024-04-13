@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RidersController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\UsersController;
 
 
 Route::get('/plantilla', function () {
