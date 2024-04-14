@@ -8,21 +8,21 @@ createApp(nav).mount('#nav')
 //Manejar datos proveedores
 
 
-  let proveedores = []; // Array para almacenar los datos de los proveedores
+//   let proveedores = []; 
 
-  axios.get('http://localhost:8080/M12/table4all/public/api/provider')
-  .then(response => {
-    const proveedores = response.data.map(proveedor => ({
-        ...proveedor,
-        latitude: parseFloat(proveedor.latitude),
-        longitude: parseFloat(proveedor.longitude)
-    }));
+//   axios.get('http://localhost:8080/M12/table4all/public/api/provider')
+//   .then(response => {
+//     const proveedores = response.data.map(proveedor => ({
+//         ...proveedor,
+//         lat: parseFloat(proveedor.latitude),
+//         lon: parseFloat(proveedor.longitude)
+//     }));
 
-    console.log(proveedores); 
-})
-.catch(error => {
-    console.error('Error al obtener los datos de los proveedores:', error);
-});
+//     console.log(proveedores); 
+// })
+// .catch(error => {
+//     console.error('Error al obtener los datos de los proveedores:', error);
+// });
 
 
 
@@ -247,13 +247,13 @@ map.on('click', (event) => {
 });
 
 
-// const proveedores = [
-//     { IDuser: 4, latitude: 41.3851, longitude: 2.1734, quantityMenus: 50, localName: 'Restaurante Sol' },
-//     { IDuser: 5, latitude: 41.3858, longitude: 2.1735, quantityMenus: 60, localName: 'Restaurante Mar' },
-//     { IDuser: 6, latitude: 41.3863, longitude: 2.1736, quantityMenus: 70, localName: 'Bistro Luna' },
-//     { IDuser: 15, latitude: 41.3875, longitude: 2.1737, quantityMenus: 80, localName: 'Café Estrella' },
-//     { IDuser: 16, latitude: 41.3883, longitude: 2.1738, quantityMenus: 90, localName: 'Taverna Oceano' }
-// ];
+const proveedores = [
+    { IDuser: 4, lat: 41.3851, lon: 2.1734, quantityMenus: 50, localName: 'Restaurante Sol' },
+    { IDuser: 5, lat: 41.3858, lon: 2.1735, quantityMenus: 60, localName: 'Restaurante Mar' },
+    { IDuser: 6, lat: 41.3863, lon: 2.1736, quantityMenus: 70, localName: 'Bistro Luna' },
+    { IDuser: 15, lat: 41.3875, lon: 2.1737, quantityMenus: 80, localName: 'Café Estrella' },
+    { IDuser: 16, lat: 41.3883, lon: 2.1738, quantityMenus: 90, localName: 'Taverna Oceano' }
+];
   function crearMarcadoresDeProveedores(proveedores, map) {
     for (let i = 0; i < proveedores.length; i++) {
         let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
@@ -261,21 +261,22 @@ map.on('click', (event) => {
         let el = createCustomMarker();   // Crear el elemento de marcador personalizado
 
         let proveedorMarker = new mapboxgl.Marker({ element: el })
-            .setLngLat([proveedor.longitude, proveedor.latitude])
+            .setLngLat([proveedor.lon, proveedor.lat])
             .setPopup(new mapboxgl.Popup().setHTML(`
                 <div class="proveedor-popup">
                     <h3>${proveedor.localName}</h3> 
                     <div class="">
-                        <p class="localName">${proveedor.IDuser}</p>  
+                        <p class="localName">Proveedor Nº ${proveedor.IDuser}</p>  
                     </div>
-                    <button class="btn btn-primary d-block mx-auto mb-2 verButton" data-id="${proveedor.IDuser}">Ver</button>
+                    <button class="btn btn-primary d-block mx-auto mb-2 verButton"
+                            data-id="${proveedor.IDuser}"
+                            data-name="${proveedor.localName}"
+                            data-menus="${proveedor.quantityMenus}">Ver</button>
                 </div>
             `))
             .addTo(map);
 
-        proveedorMarker.getPopup().on('open', () => {
-          // Asumiendo que 'id' es una propiedad del proveedor
-        });
+
     }
 }
 
@@ -295,37 +296,40 @@ $(document).ready(function() {
         event.preventDefault();
         console.log('Ver button clicado');
 
-        // Obtener el ID del proveedor desde el atributo data-id del botón
-        const proveedorId = $(this).data('id');
-
-        // Obtener datos del proveedor (simulado aquí; podría ser una llamada AJAX)
-        // Simulación: supongamos que tienes una función que devuelve datos basada en el ID
-        const proveedor = obtenerDatosProveedor(proveedorId);
+        // Recuperar información del proveedor desde los atributos data del botón
+        const localName = $(this).data('name');
+        const cantidadMenus = $(this).data('menus');
 
         // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
-        $('#localNameModal').text(proveedor.nombre);
-        $('#cantidadMenusModal').text(proveedor.cantidadMenus);
+        $('#localNameModal').text(localName);
+        $('#cantidadMenusModal').text(cantidadMenus);
 
         // Mostrar el modal
         $('#exampleModal2').modal('show');
     });
 });
 
-// Simulación de obtenerDatosProveedor
-function obtenerDatosProveedor(id) {
-    // Aquí iría una búsqueda en tus datos; ejemplo simulado:
-    return {
-        nombre: "Nombre del Proveedor " + id,
-        cantidadMenus: 5 + id  // Simulación
-    };
-}
+
 
 
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {
-    // Realizar la lógica de reserva aquí
-    
-    // Cerrar el modal después de realizar la reserva
+    const proveedorId = $('#proveedorId').val(); // ID del proveedor
+    const quantityMenus = $('#quantityMenus').val(); // Cantidad de menús seleccionados por el usuario
+
+    axios.post('http://localhost:8080/M12/table4all/public/api/collection', {
+        proveedorId: proveedorId,
+        quantityMenus: parseInt(quantityMenus) // Convertir a número si es necesario
+    })
+    .then(function(response) {
+        console.log('Reserva realizada con éxito:', response.data);
+        // Cerrar el modal o limpiar el formulario después de realizar la reserva
+        $('#exampleModal2').modal('hide');
+        $('#quantityMenus').val(''); // Limpiar el campo de cantidad
+    })
+    .catch(function(error) {
+        console.error('Error al realizar la reserva:', error);
+    });
     $('#exampleModal2').modal('hide');
 });
 $('#salirreservar').on('click', function() {
