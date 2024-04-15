@@ -255,23 +255,7 @@ function obtenerProveedorPorId(id) {
     return proveedor;
   }
 
-  function mostrarDatosProveedorHtml(id) {
-    let proveedor = obtenerProveedorPorId(id);
-    
-    if (proveedor) {
-      // Obtener todos los elementos con la clase 'localName'
-      let localNames = document.querySelectorAll('.localName');
-  
-      // Actualizar cada elemento con el nombre del proveedor
-      localNames.forEach(element => {
-        element.textContent = proveedor.nombre; // Actualizando el texto de cada elemento
-      });
-  
-      // Aquí puedes actualizar más campos si tienes otros elementos de clase
-    } else {
-      console.log('Proveedor no encontrado');
-    }
-  }
+
   
   function createCustomMarker() {
     const el = document.createElement('div');
@@ -289,17 +273,17 @@ function obtenerProveedorPorId(id) {
             .setLngLat([proveedor.longitud, proveedor.latitud])
             .setPopup(new mapboxgl.Popup().setHTML(`
                 <div class="proveedor-popup">
-                    <h3>Cargando...</h3>  
-                    <div class="">
-                        <p class="localName">Cargando...</p>  
-                    </div>
-                    <button class="btn btn-primary d-block mx-auto mb-2 verButton">Ver</button>
+                <h3>${proveedor.nombre}</h3>
+                <div class="">
+                    <p class="localName">${proveedor.id}</p>
                 </div>
+                <button class="btn btn-primary d-block mx-auto mb-2 verButton" data-id="${proveedor.id}">Ver</button>
+            </div>
             `))
             .addTo(map);
 
         proveedorMarker.getPopup().on('open', () => {
-            mostrarDatosProveedorHtml(proveedor.id);  // Asumiendo que 'id' es una propiedad del proveedor
+            //mostrarDatosProveedorHtml(proveedor.id); 
         });
     }
 }
@@ -310,22 +294,35 @@ crearMarcadoresDeProveedores(proveedores, map);
 
 // Adjuntar el evento de clic utilizando delegación de eventos
 $(document).ready(function() {
-    $(document).on('click', '#verButton', function(event) {
-        console.log('var button clicado');
+    $(document).on('click', '.verButton', function(event) {
+        event.preventDefault();
+        console.log('Ver button clicado');
 
-    event.preventDefault();
-    // Obtener el nombre del local y la cantidad de menús disponibles (simulados)
-    const localName = "Nombre del local";
-    const cantidadMenus = 5; // Simulación de la cantidad de menús disponibles
-  
-    // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
-    $('#localNameModal').text(localName);
-    $('#cantidadMenusModal').text(cantidadMenus);
-  
-    // Mostrar el modal
-    $('#exampleModal2').modal('show');
+        // Obtener el ID del proveedor desde el atributo data-id del botón
+        const proveedorId = $(this).data('id');
+
+        // Obtener datos del proveedor (simulado aquí; podría ser una llamada AJAX)
+        // Simulación: supongamos que tienes una función que devuelve datos basada en el ID
+        const proveedor = obtenerDatosProveedor(proveedorId);
+
+        // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
+        $('#localNameModal').text(proveedor.nombre);
+        $('#cantidadMenusModal').text(proveedor.cantidadMenus);
+
+        // Mostrar el modal
+        $('#exampleModal2').modal('show');
     });
 });
+
+// Simulación de obtenerDatosProveedor
+function obtenerDatosProveedor(id) {
+    // Aquí iría una búsqueda en tus datos; ejemplo simulado:
+    return {
+        nombre: "Nombre del Proveedor " + id,
+        cantidadMenus: 5 + id  // Simulación
+    };
+}
+
 
 
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
