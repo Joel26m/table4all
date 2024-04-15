@@ -172,4 +172,29 @@ color: rgb(255, 255, 255);
 .custom-white {
   color: white; /* Cambia "white" al color deseado */
 }
+
+
+.sticky-div {
+  
+  height: 170px;
+  position: sticky;
+  top: 0;
+  background-color: #001d38;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.full-width-button {
+  
+  margin-top: 50px;
+  float: right;
+  padding: 10px;
+  background-color: #3d89e2;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  border-color: #fff;
+  border: solid;
+}
 </style> 
