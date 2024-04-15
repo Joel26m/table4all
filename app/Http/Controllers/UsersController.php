@@ -23,10 +23,6 @@ class UsersController extends Controller
     }
 
     public function login(Request $request) {
-<<<<<<< HEAD
-=======
-        
->>>>>>> main
         $userName = $request->input('userName');
         $password = $request->input('password');
 
@@ -48,8 +44,6 @@ class UsersController extends Controller
         return redirect('/login');
     }
     
-<<<<<<< HEAD
-=======
 
     public function showRegister(){
         return view('auth.register');
@@ -71,7 +65,6 @@ class UsersController extends Controller
 
 
     
->>>>>>> main
     public function index()
     {
         //

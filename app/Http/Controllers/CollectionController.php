@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Collection;
 use Illuminate\Http\Request;
 
-class ColectionController extends Controller
+class CollectionController extends Controller
 {
     /**
      * Display a listing of the resource.
