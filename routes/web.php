@@ -43,12 +43,22 @@ Route::get('/logout',[UsersController::class, 'logout']);
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/home', function (){
+    Route::get('/home_provider', function (){
         $user = Auth::user();
 
-        return view('home', compact('user'));
+        return view('home_provider', compact('user'));
     });
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('welcome', function (){
+        $user = Auth::user();
+
+        return view('welcome', compact('user'));
+    });
+});
+
+
 // -----------------------------------------------------------------------
 
 
@@ -58,3 +68,7 @@ Route::get('/register', [UsersController::class, 'showRegister'])->name('registe
 Route::post('/register',[UsersController::class, 'register']);
 
 // -----------------------------------------------------------------------
+
+Route::get('/loader', function () {
+    return view('loader/loader');
+});
