@@ -15,10 +15,11 @@
 </nav>
 <div class="animate__animated animate__fadeInDown content-wrapper" id="content-wrapper">
 
-<div class="sticky-div">
-            <p id="direcciongo"></p>
-            <button id="complete" class="full-width-button">COMPLETAR</button>
-        </div>
+  <div class="sticky-div" v-if="ruta">
+    <p id="direcciongo">{{ direccion }}</p>
+    <button id="complete" class="full-width-button" @click="completar">COMPLETAR</button>
+</div>
+
     </div>
 
 
@@ -63,14 +64,25 @@
 export default {
   data() {
    return {
- 
+    ruta: true, 
+    direccion: 'Nombre de la dirección' 
    
 
     };
   },
   methods: {
- 
-  },
+  completar() {
+    const completeBtn = document.getElementById('complete');
+    if (completeBtn.innerText === 'Añadir estado') {
+      $('#exampleModal').modal('show');
+    } else {
+      if (confirm('¿Estás seguro de completar?')) {
+        completeBtn.innerText = 'Añadir estado';
+      }
+    }
+  }
+}
+,
  
    mounted() {
 

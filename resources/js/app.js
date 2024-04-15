@@ -5,6 +5,10 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
+
+
+
+
 //Manejar datos proveedores
 
 
@@ -230,7 +234,6 @@ map.on('click', (event) => {
             
             document.getElementById('complete').addEventListener('click', function(event) {
                 event.preventDefault();
-                document.querySelector(".content-wrapper").style.display = "none";     
                            console.log("Iniciando ruta...");
                            map.removeLayer('ruta');
 
