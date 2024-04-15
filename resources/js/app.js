@@ -254,6 +254,9 @@ const proveedores = [
     { IDuser: 15, lat: 41.3875, lon: 2.1737, quantityMenus: 80, localName: 'Café Estrella' },
     { IDuser: 16, lat: 41.3883, lon: 2.1738, quantityMenus: 90, localName: 'Taverna Oceano' }
 ];
+
+
+
   function crearMarcadoresDeProveedores(proveedores, map) {
     for (let i = 0; i < proveedores.length; i++) {
         let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
@@ -296,16 +299,19 @@ $(document).ready(function() {
         event.preventDefault();
         console.log('Ver button clicado');
 
-        // Recuperar información del proveedor desde los atributos data del botón
-        const localName = $(this).data('name');
-        const cantidadMenus = $(this).data('menus');
+       // Recuperar la información desde los atributos data del botón que fue clicado
+    const proveedorId = $(this).data('id');
+    const localName = $(this).data('name');
+    const cantidadMenus = $(this).data('menus');
 
-        // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
-        $('#localNameModal').text(localName);
-        $('#cantidadMenusModal').text(cantidadMenus);
+    // Asignar la información a los elementos del modal
+    $('#exampleModal2').find('#proveedorId').val(proveedorId); 
+    console.log('#exampleModal2')
+    $('#exampleModal2').find('#localNameModal').text(localName);
+    $('#exampleModal2').find('#quantityMenus').val(cantidadMenus);
 
-        // Mostrar el modal
-        $('#exampleModal2').modal('show');
+    // Mostrar el modal
+    $('#exampleModal2').modal('show');
     });
 });
 
@@ -314,18 +320,18 @@ $(document).ready(function() {
 
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {
-    const proveedorId = $('#proveedorId').val(); // ID del proveedor
-    const quantityMenus = $('#quantityMenus').val(); // Cantidad de menús seleccionados por el usuario
+    const proveedorId = $('#exampleModal2').find('#proveedorId').val();
+    const quantityMenus = $('#exampleModal2').find('#quantityMenus').val();
 
-    axios.post('http://localhost:8080/M12/table4all/public/api/collection', {
-        proveedorId: proveedorId,
-        quantityMenus: parseInt(quantityMenus) // Convertir a número si es necesario
+    // Llamar a la API para hacer la reserva
+    axios.post('http://localhost/M12/Proyecto2/table4all/public/api/collection', {
+        providerId: proveedorId,
+        quantityMenus: parseInt(quantityMenus, 10)
     })
     .then(function(response) {
         console.log('Reserva realizada con éxito:', response.data);
-        // Cerrar el modal o limpiar el formulario después de realizar la reserva
-        $('#exampleModal2').modal('hide');
-        $('#quantityMenus').val(''); // Limpiar el campo de cantidad
+        $('#exampleModal2').modal('hide');  // Cerrar el modal tras la reserva
+        $('#exampleModal2').find('#quantityMenus').val('');  // Limpiar el campo de cantidad
     })
     .catch(function(error) {
         console.error('Error al realizar la reserva:', error);
