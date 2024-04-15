@@ -130,6 +130,8 @@ map.on('click', (event) => {
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
 
+
+
     if (!lngLat) {
         console.log("Event object does not have latlng properties.");
         return;
@@ -201,14 +203,14 @@ map.on('click', (event) => {
                 const latitude = coordinates[1]; // Latitud del lugar
                 const longitude = coordinates[0]; // Longitud del lugar
             
-                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
+                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw`)
                     .then(response => response.json())
                     .then(data => {
                         // La respuesta contiene una lista de lugares cercanos, la dirección del lugar se encuentra en la primera entrada
                         const place = data.features[0];
                         const address = place.place_name;
                         // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
-                        document.getElementById('direcciongo').textContent = 'Dirección del lugar al que se va: ' + address;
+                        document.getElementById('direcciongo').textContent = address;
                     })
                     .catch(error => {
                         console.error('Error al obtener la dirección:', error);
@@ -225,6 +227,7 @@ map.on('click', (event) => {
                     document.getElementById('beneficiary-state').innerText = nuevoEstado;
                     // Cerrar modal
                     $('#exampleModal').modal('hide');
+                    document.querySelector('.sticky-div').style.display = 'none';
                 });
             
                 popup.remove();

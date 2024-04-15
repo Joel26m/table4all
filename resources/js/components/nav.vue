@@ -16,9 +16,16 @@
 <div class="animate__animated animate__fadeInDown content-wrapper" id="content-wrapper">
 
   <div class="sticky-div" v-if="ruta">
-    <p id="direcciongo">{{ direccion }}</p>
-    <button id="complete" class="full-width-button" @click="completar">COMPLETAR</button>
+  <div class="row contsticky">
+    <div class="col">
+      <p id="direcciongo">{{ direccion }}</p>
+    </div>
+    <div class="col">
+      <button id="complete" class="full-width-button" @click="completar">COMPLETAR</button>
+    </div>
+  </div>
 </div>
+
 
     </div>
 
@@ -65,7 +72,6 @@ export default {
   data() {
    return {
     ruta: true, 
-    direccion: 'Nombre de la dirección' 
    
 
     };
@@ -77,8 +83,16 @@ export default {
       $('#exampleModal').modal('show');
     } else {
       if (confirm('¿Estás seguro de completar?')) {
-        completeBtn.innerText = 'Añadir estado';
-      }
+    completeBtn.innerText = 'Añadir estado';
+    completeBtn.style.backgroundColor = '#FF691F'; 
+    completeBtn.style.width = '335px'; 
+    completeBtn.style.marginLeft = '60px'; 
+    completeBtn.style.marginRight = '80px';
+    completeBtn.style.transition = 'background-color 0.5s, width 0.5s, margin 0.5s'; 
+    document.getElementById('direcciongo').style.display = 'none'; 
+}
+
+
     }
   }
 }
@@ -91,6 +105,14 @@ export default {
   }
 </script>
 <style>
+
+#direcciongo{
+z-index: 11111;
+color: #fff;
+}
+.contsticky{
+  margin-top: 90px;
+}
 .navcont{
     color: rgb(255, 255, 255);
     height: 34px;
@@ -187,7 +209,6 @@ color: rgb(255, 255, 255);
 
 .full-width-button {
   
-  margin-top: 50px;
   float: right;
   padding: 10px;
   background-color: #3d89e2;
