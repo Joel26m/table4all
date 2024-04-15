@@ -10,7 +10,7 @@ createApp(nav).mount('#nav')
 
 //   let proveedores = []; 
 
-//   axios.get('http://localhost:8080/M12/table4all/public/api/provider')
+//   axios.get('http://localhost/M12/Proyecto2/table4all/public/api/provider')
 //   .then(response => {
 //     const proveedores = response.data.map(proveedor => ({
 //         ...proveedor,
@@ -258,6 +258,7 @@ const proveedores = [
 
 
   function crearMarcadoresDeProveedores(proveedores, map) {
+    console.log(proveedores); 
     for (let i = 0; i < proveedores.length; i++) {
         let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
 
@@ -306,9 +307,11 @@ $(document).ready(function() {
 
     // Asignar la información a los elementos del modal
     $('#exampleModal2').find('#proveedorId').val(proveedorId); 
-    console.log('#exampleModal2')
     $('#exampleModal2').find('#localNameModal').text(localName);
     $('#exampleModal2').find('#quantityMenus').val(cantidadMenus);
+
+    console.log(proveedorId, localName, cantidadMenus); 
+
 
     // Mostrar el modal
     $('#exampleModal2').modal('show');
@@ -321,15 +324,19 @@ $(document).ready(function() {
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {
     const proveedorId = $('#exampleModal2').find('#proveedorId').val();
-    const quantityMenus = $('#exampleModal2').find('#quantityMenus').val();
+    const quantityReserve = $('#exampleModal2').find('#quantityMenus').val();
+
+    console.log(proveedorId, quantityReserve); 
 
     // Llamar a la API para hacer la reserva
     axios.post('http://localhost/M12/Proyecto2/table4all/public/api/collection', {
-        providerId: proveedorId,
-        quantityMenus: parseInt(quantityMenus, 10)
+        provider: proveedorId,
+        quantityMenus: parseInt(quantityReserve, 10)
+        
     })
     .then(function(response) {
         console.log('Reserva realizada con éxito:', response.data);
+        console.log(provider, quantityMenus);
         $('#exampleModal2').modal('hide');  // Cerrar el modal tras la reserva
         $('#exampleModal2').find('#quantityMenus').val('');  // Limpiar el campo de cantidad
     })

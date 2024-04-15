@@ -93,6 +93,11 @@
 
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
+    <input type="hidden" id="proveedorId">
+    <input type="hidden" id="quantityReserve">
+    <input type="hidden"id="localName">
+    <input type="hidden"id="rider">
+
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Reservar Menú</h5>
@@ -111,6 +116,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="salirreservar" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" id="reservarButton">Reservar</button>
+
       </div>
     </div>
   </div>
