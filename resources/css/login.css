@@ -85,7 +85,17 @@ width: 450px;
 #boton-login:hover{
     font-weight:500;
 }
+#boton-register{
+    margin-top: 10px;
+    background-color: var(--color-3);
+    border-radius: 30px;
+    width: auto;  
 
+}
+
+#boton-register:hover{
+    font-weight:500;
+}
 .enlace_registro{
     margin-top: 20px;
     display: flex;
@@ -232,6 +242,10 @@ width: 450px;
 }
 
 #boton-login{
+    margin-top: 130px;
+}
+
+#boton-register{
     margin-top: 10px;
 }
 
@@ -274,6 +288,10 @@ width: 450px;
 
 #boton-login{
     margin-top: 130px;
+}
+
+#boton-register{
+    margin-top: 0px;
 }
 }
 
