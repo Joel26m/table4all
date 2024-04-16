@@ -31,15 +31,20 @@ class UsersController extends Controller
 
         if ($user != null && Hash::check($password, $user->password) ) {
            Auth::login($user);
-
-           $response = redirect('/home');
+        // Verificar el rol del usuario
+        if ($user->rol == 'provider') {
+            $response = redirect('/home_provider');
+        } elseif ($user->rol == 'rider') {
+            $response = redirect('/welcome');
+        } else {
+            $response = redirect('/homeAdmin');
+        }
         }else {
             $request->session()->flash('error', 'Usuario o contraseña incorrectos');
             $response = redirect('/login')->withInput();
         }
         return $response;
     }
-
     public function logout(){
         Auth::logout();
         return redirect('/login');
