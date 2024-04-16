@@ -14,7 +14,7 @@
         <div class="card mt-4">
             <div class="card-header">Crear Usuario</div>
             <div class="card-body">
-                <form action="{{ action([App\Http\Controllers\UsuarisController::class, 'store']) }}" method="POST">
+                <form action="{{ action([App\Http\Controllers\UsersController::class, 'store']) }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>

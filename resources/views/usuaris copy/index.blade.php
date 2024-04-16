@@ -28,7 +28,7 @@
 
           <td>
             <form
-             action="{{ action([App\Http\Controllers\UsuarisController::class, 'destroy'], ['usuari'=> $usuario->id]) }}" method="POST">
+             action="{{ action([App\Http\Controllers\UsersController::class, 'destroy'], ['usuari'=> $usuario->id]) }}" method="POST">
               @csrf
               @method('DELETE')
             <button type="submit" class="btn btn-danger">
@@ -46,7 +46,6 @@
                 Editar
               </button>
             </form>
-
           </td>
       </tr>
     @endforeach
