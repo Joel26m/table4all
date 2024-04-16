@@ -234,6 +234,9 @@ width: 450px;
 #boton-login{
     margin-top: 150px;
 }
+#boton-register{
+    margin-top: 0px;
+}
 
 }
 
