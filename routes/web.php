@@ -30,6 +30,12 @@ Route::get('/', function () {
     return view('nav/index');
 });
 
+Route::get('/admin', function () {
+    
+    
+    return view('layouts/principal');
+});
+
 Route::resource('rider', RidersController::class);
 
 Route::resource('provider', ProviderController::class);

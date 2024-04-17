@@ -76,9 +76,6 @@ class UsersController extends Controller
     {
         $usuarios = Users::paginate(4)
         ->withQueryString();
-        foreach ($usuarios as $usuario) {
-            $usuario->activo_checkbox = $usuario->actiu ? 'checked' : '';
-        }
         return view('usuaris\index', compact('usuarios'));
     }
 

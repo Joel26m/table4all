@@ -17,15 +17,11 @@
     @foreach ($usuarios as $usuario)
       <tr>  
           <td>{{ $usuario->id }}</td>
-          <td>{{ $usuario->nom_usuari }}</td>
-          <td>{{ $usuario->correu }}</td>
-          <td>{{ $usuario->nom }}</td>
-          <td>{{ $usuario->cognom }}</td>
+          <td>{{ $usuario->userName }}</td>
+          <td>{{ $usuario->rol }}</td>
+ 
           <td>
-    <input type="checkbox" disabled {{ $usuario->activo_checkbox }}>
 </td>
-          <td>{{ $usuario->tipus_usuaris_id }}</td>
-
           <td>
             <form
              action="{{ action([App\Http\Controllers\UsersController::class, 'destroy'], ['usuari'=> $usuario->id]) }}" method="POST">
