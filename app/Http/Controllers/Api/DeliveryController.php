@@ -35,7 +35,27 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $collection = new Collection();
+        $collection->collection = $request->input('collection');
+        $collection->beneficiary = $request->input('beneficiary');
+        $collection->completed = $request->input('completed');
+        $collection->quantityMenus = $request->input('quantityMenus');
+
+
+        try 
+        {
+            $collection->save();
+            $response = (new CollectionResource($collection))
+                        ->response()
+                        ->setStatusCode(201);
+        } 
+        catch (QueryException $ex) 
+        {
+            $mensaaje = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
 
     /**

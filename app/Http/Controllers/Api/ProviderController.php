@@ -49,7 +49,7 @@ class ProviderController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasaje = Utilitat::errorMessage($ex);
+            $mensaaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
