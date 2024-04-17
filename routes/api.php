@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProviderController;
 use App\Http\Controllers\Api\CollectionController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('provider', ProviderController::class);
-Route::apiResource('user', UserController::class);
+Route::apiResource('user', UsersController::class);
 
 Route::apiResource('collection', CollectionController::class);
-Route::apiResource('collection', CollectionController::class);
+
