@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\UsersController;
 
 class UsersController extends Controller
 {
@@ -73,7 +74,7 @@ class UsersController extends Controller
     
     public function index()
     {
-        $usuarios = Usuari::paginate(4)
+        $usuarios = Users::paginate(4)
         ->withQueryString();
         foreach ($usuarios as $usuario) {
             $usuario->activo_checkbox = $usuario->actiu ? 'checked' : '';
@@ -89,7 +90,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         try {
-            $usuarios = new Usuari();
+            $usuarios = new Users();
             $usuarios->nom_usuari = $request->input('nom_usuari');
             $usuarios->contrasenya= $request->input('contrasenya');
             $usuarios->correu= $request->input('correu');
@@ -110,21 +111,21 @@ class UsersController extends Controller
     
     }
 
-    public function edit(Usuaris $usuarios)
+    public function edit(Users $usuarios)
     {
     }
 
-    public function update(Request $request, Usuaris $usuarios)
+    public function update(Request $request, Users $usuarios)
     {
 
     }
         
 
-    public function destroy(Usuaris $usuarios, Request $request)
+    public function destroy(Users $usuarios, Request $request)
     {
         $usuarios->delete();
 
-        return redirect()->action([UsuarisController::class, 'index']);
+        return redirect()->action([UsersController::class, 'index']);
     }
 }
 
