@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\UsersController;
 
 class UsersController extends Controller
 {
@@ -72,55 +73,58 @@ class UsersController extends Controller
     
     public function index()
     {
-        //
+        $usuarios = Users::paginate(4)
+        ->withQueryString();
+        foreach ($usuarios as $usuario) {
+            $usuario->activo_checkbox = $usuario->actiu ? 'checked' : '';
+        }
+        return view('usuaris\index', compact('usuarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('usuaris\create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            $usuarios = new Users();
+            $usuarios->nom_usuari = $request->input('nom_usuari');
+            $usuarios->contrasenya= $request->input('contrasenya');
+            $usuarios->correu= $request->input('correu');
+            $usuarios->nom= $request->input('nom');
+            $usuarios->cognom= $request->input('cognom');
+            $usuarios->actiu = $request->input('activo');
+            $usuarios->tipus_usuaris_id= $request->input('tipus_usuaris_id');
+    
+            $usuarios->actiu = ($request->input('activo') == 'activo');
+            $usuarios->save();
+            return redirect()->action([UsuarisController::class, 'index']);
+
+        } catch (Exception $e) {
+            // Catching the exception and handling it
+            echo "Error: " . $e->getMessage();
+        }
+        
+    
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Users $users)
+    public function edit(Users $usuarios)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Users $users)
+    public function update(Request $request, Users $usuarios)
     {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Users $users)
-    {
-        //
     }
+        
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Users $users)
+    public function destroy(Users $usuarios, Request $request)
     {
-        //
+        $usuarios->delete();
+
+        return redirect()->action([UsersController::class, 'index']);
     }
 }
 
