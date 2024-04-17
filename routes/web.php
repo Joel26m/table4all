@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UsersController;
 
 
 /*
@@ -14,11 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RidersController;
 use App\Http\Controllers\ProviderController;
-use App\Http\Controllers\UsersController;
+
 
 
 Route::get('/plantilla', function () {
@@ -84,13 +83,3 @@ Route::resource('provider', ProviderController::class);
 Route::get('/loader', function () {
     return view('loader/loader');
 });
-
-Route::get('nav', function () {
-    return view('nav/index');
-});
-
-Route::resource('rider', RidersController::class);
-
-Route::resource('provider', ProviderController::class);
-
-//Route::get('provider/{provider}', [ProviderController::class, 'show']);
