@@ -201,7 +201,6 @@ map.on('click', (event) => {
                 fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
                     .then(response => response.json())
                     .then(data => {
-                        // La respuesta contiene una lista de lugares cercanos, la dirección del lugar se encuentra en la primera entrada
                         const place = data.features[0];
                         const address = place.place_name;
                         // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
