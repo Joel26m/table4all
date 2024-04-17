@@ -33,6 +33,10 @@ class Collection extends Model
     {
         return $this->belongsTo(Rider::class, 'rider');
     }
+    public function provider(): BelongsTo
+    {
+        return $this->belongsTo(Provider::class, 'provider');
+    }
 
     public function deliveries(): HasMany
     {

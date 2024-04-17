@@ -58,10 +58,47 @@ class CollectionController extends Controller
      * @param  \App\Models\Collection  $collection
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Collection $collection)
+    public function update(Request $request, Provider $Provider)
     {
-        //
+
+        $Collection->Rider = $request->input('rider');
+        $Collection->Provider = $request->input('provider');
+        $Collection->QuantityMenus = $request->input('quantityMenus');
+        $Collection->Date = $request->input('date');
+        $Collection->Completed = $request->input('completed');
+
+
+
+        try 
+        {
+            $Collection->save();
+            $response = (new CollectionResource($Collection))
+                        ->response()
+                        ->setStatusCode(201);
+        } 
+        catch (QueryException $ex) 
+        {
+            $mensaje = Utilitat::errorMessage($ex);
+            $response = \response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $response;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Collection  $Collection
+     * @return \Illuminate\Http\Response
+     */
+    
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Provider  $provider
+     * @return \Illuminate\Http\Response
+     */
 
     /**
      * Remove the specified resource from storage.

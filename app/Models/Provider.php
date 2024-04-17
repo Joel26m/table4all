@@ -29,7 +29,7 @@ class Provider extends Model
      */
     public function collections(): HasMany
     {
-        return $this->hasMany(Collection::class, 'rider');
+        return $this->hasMany(Collection::class, 'provider');
     }
 
     public function users() {
