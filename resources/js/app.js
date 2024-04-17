@@ -5,32 +5,26 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
-
-
-
-
 //Manejar datos proveedores
 
 
-  let proveedores = []; // Array para almacenar los datos de los proveedores
+//   let proveedores = []; 
 
-  axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
-  .then(function (response) {
-    proveedores = response.data; // Guarda los proveedores en el array
-    console.log(proveedores);
-  })
-  .catch(function (error) {
-    console.error('Error al obtener los proveedores:', error);
-  });
+//   axios.get('http://localhost/M12/Proyecto2/table4all/public/api/provider')
+//   .then(response => {
+//     const proveedores = response.data.map(proveedor => ({
+//         ...proveedor,
+//         lat: parseFloat(proveedor.latitude),
+//         lon: parseFloat(proveedor.longitude)
+//     }));
+
+//     console.log(proveedores); 
+// })
+// .catch(error => {
+//     console.error('Error al obtener los datos de los proveedores:', error);
+// });
 
 
-  function obtenerProveedorPorId(id) {
-    const proveedor = proveedores.find(prov => prov.id === id);
-    return proveedor;
-  }
-    
-  let proveedor = obtenerProveedorPorId(1);
-  console.log(proveedor);
 
 let primerClicBene = true;
 let primerClicProv = true;
@@ -109,6 +103,9 @@ let botonprov = document.getElementById('prov');
 botonprov.addEventListener("click", toggleProveedores);
 
 
+
+  
+
 mapboxgl.accessToken = 'pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -129,8 +126,6 @@ let currentPopup = null; // Variable para almacenar el popup actualmente abierto
 map.on('click', (event) => {
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
-
-
 
     if (!lngLat) {
         console.log("Event object does not have latlng properties.");
@@ -203,14 +198,14 @@ map.on('click', (event) => {
                 const latitude = coordinates[1]; // Latitud del lugar
                 const longitude = coordinates[0]; // Longitud del lugar
             
-                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw`)
+                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
                     .then(response => response.json())
                     .then(data => {
                         // La respuesta contiene una lista de lugares cercanos, la dirección del lugar se encuentra en la primera entrada
                         const place = data.features[0];
                         const address = place.place_name;
                         // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
-                        document.getElementById('direcciongo').textContent = address;
+                        document.getElementById('direcciongo').textContent = 'Dirección del lugar al que se va: ' + address;
                     })
                     .catch(error => {
                         console.error('Error al obtener la dirección:', error);
@@ -227,7 +222,6 @@ map.on('click', (event) => {
                     document.getElementById('beneficiary-state').innerText = nuevoEstado;
                     // Cerrar modal
                     $('#exampleModal').modal('hide');
-                    document.querySelector('.sticky-div').style.display = 'none';
                 });
             
                 popup.remove();
@@ -237,6 +231,7 @@ map.on('click', (event) => {
             
             document.getElementById('complete').addEventListener('click', function(event) {
                 event.preventDefault();
+                document.querySelector(".content-wrapper").style.display = "none";     
                            console.log("Iniciando ruta...");
                            map.removeLayer('ruta');
 
@@ -246,71 +241,108 @@ map.on('click', (event) => {
             });
     }
 });
-
-
-
-
-
     
 });
 
 
 
 
-
-  
-let proveedorMarker = new mapboxgl.Marker({ element: createCustomMarker() })
-  .setLngLat([2.1734, 41.3851])
-  .setPopup(new mapboxgl.Popup().setHTML(`
-  <div class="<!-- proveedor-title -->" id="proveedor-popup"> <!-- Agregamos un ID único -->
-    <h3>Proveedor</h3>
-  </div>    
-  <div class="<!--sticky-div-prov -->">
-    <p id="localName"> nombre </p>
-  </div>
- 
-  <button class="btn btn-primary d-block mx-auto mb-2" id="verButton">Ver</button>
-`))
+const proveedores = [
+    { IDuser: 4, lat: 41.3851, lon: 2.1734, quantityMenus: 50, localName: 'Restaurante Sol' },
+    { IDuser: 5, lat: 41.3858, lon: 2.1735, quantityMenus: 60, localName: 'Restaurante Mar' },
+    { IDuser: 6, lat: 41.3863, lon: 2.1736, quantityMenus: 70, localName: 'Bistro Luna' },
+    { IDuser: 15, lat: 41.3875, lon: 2.1737, quantityMenus: 80, localName: 'Café Estrella' },
+    { IDuser: 16, lat: 41.3883, lon: 2.1738, quantityMenus: 90, localName: 'Taverna Oceano' }
+];
 
 
 
+  function crearMarcadoresDeProveedores(proveedores, map) {
+    console.log(proveedores); 
+    for (let i = 0; i < proveedores.length; i++) {
+        let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
 
-  
-  .addTo(map);
+        let el = createCustomMarker();   // Crear el elemento de marcador personalizado
 
-  
-const markerElement = proveedorMarker.getElement();
-markerElement.classList.add('proveedor-marker');
+        let proveedorMarker = new mapboxgl.Marker({ element: el })
+            .setLngLat([proveedor.lon, proveedor.lat])
+            .setPopup(new mapboxgl.Popup().setHTML(`
+                <div class="proveedor-popup">
+                    <h3>${proveedor.localName}</h3> 
+                    <div class="">
+                        <p class="localName">Proveedor Nº ${proveedor.IDuser}</p>  
+                    </div>
+                    <button class="btn btn-primary d-block mx-auto mb-2 verButton"
+                            data-id="${proveedor.IDuser}"
+                            data-name="${proveedor.localName}"
+                            data-menus="${proveedor.quantityMenus}">Ver</button>
+                </div>
+            `))
+            .addTo(map);
+
+
+    }
+}
+
+crearMarcadoresDeProveedores(proveedores, map);
+
 
 function createCustomMarker() {
-  const el = document.createElement('div');
-  el.className = 'proveedor-marker';
-  return el;
+    const el = document.createElement('div');
+    el.className = 'proveedor-marker';
+    return el;
 }
 
 
-
 // Adjuntar el evento de clic utilizando delegación de eventos
-$(document).on('click', '#verButton', function(event) {
-    event.preventDefault();
+$(document).ready(function() {
+    $(document).on('click', '.verButton', function(event) {
+        event.preventDefault();
+        console.log('Ver button clicado');
 
-    // Obtener el nombre del local y la cantidad de menús disponibles (simulados)
-    const localName = "Nombre del local";
-    const cantidadMenus = 5; // Simulación de la cantidad de menús disponibles
-  
-    // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
-    $('#localNameModal').text(localName);
-    $('#cantidadMenusModal').text(cantidadMenus);
-  
+       // Recuperar la información desde los atributos data del botón que fue clicado
+    const proveedorId = $(this).data('id');
+    const localName = $(this).data('name');
+    const cantidadMenus = $(this).data('menus');
+
+    // Asignar la información a los elementos del modal
+    $('#exampleModal2').find('#proveedorId').val(proveedorId); 
+    $('#exampleModal2').find('#localNameModal').text(localName);
+    $('#exampleModal2').find('#quantityMenus').val(cantidadMenus);
+
+    console.log(proveedorId, localName, cantidadMenus); 
+
+
     // Mostrar el modal
     $('#exampleModal2').modal('show');
+    });
 });
+
+
+
 
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {
-    // Realizar la lógica de reserva aquí
-    
-    // Cerrar el modal después de realizar la reserva
+    const proveedorId = $('#exampleModal2').find('#proveedorId').val();
+    const quantityReserve = $('#exampleModal2').find('#quantityMenus').val();
+
+    console.log(proveedorId, quantityReserve); 
+
+    // Llamar a la API para hacer la reserva
+    axios.post('http://localhost/M12/Proyecto2/table4all/public/api/collection', {
+        provider: proveedorId,
+        quantityMenus: parseInt(quantityReserve, 10)
+        
+    })
+    .then(function(response) {
+        console.log('Reserva realizada con éxito:', response.data);
+        console.log(provider, quantityMenus);
+        $('#exampleModal2').modal('hide');  // Cerrar el modal tras la reserva
+        $('#exampleModal2').find('#quantityMenus').val('');  // Limpiar el campo de cantidad
+    })
+    .catch(function(error) {
+        console.error('Error al realizar la reserva:', error);
+    });
     $('#exampleModal2').modal('hide');
 });
 $('#salirreservar').on('click', function() {

@@ -29,7 +29,15 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $collection = new Collection();
+        $collection->provider = $request->input('provider');
+        $collection->quantityMenus = $request->input('quantityMenus');
+        // $collection->rider = $request->input('rider');
+
+    
+        $collection->save();
+    
+        return response()->json(['message' => 'Reserva realizada con éxito', 'data' => $collection], 201);
     }
 
     /**

@@ -23,7 +23,6 @@ class UsersController extends Controller
     }
 
     public function login(Request $request) {
-        
         $userName = $request->input('userName');
         $password = $request->input('password');
 
