@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080/M12/Proyecto2/table4all/public/nav",
+            "url": "http://table4all/public/nav",
             "webRoot": "${workspaceFolder}"
         }
     ]
