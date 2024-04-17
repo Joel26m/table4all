@@ -20,6 +20,7 @@ use App\Http\Controllers\RidersController;
 use App\Http\Controllers\ProviderController;
 
 
+
 Route::get('/plantilla', function () {
     
     return view('contenido');

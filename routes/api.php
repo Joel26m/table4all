@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\Api\CollectionController;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,3 +26,4 @@ Route::apiResource('provider', ProviderController::class);
 Route::apiResource('user', UsersController::class);
 
 Route::apiResource('collection', CollectionController::class);
+

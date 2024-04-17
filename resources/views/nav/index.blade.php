@@ -15,12 +15,12 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
-
 </head>
 <body>
 
-<div id="nav"></div> <!-- es un compoenente -->
 
+
+<div id="nav"></div>
 <div id='map'></div>
 
 
@@ -75,7 +75,7 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">¿Deseas iniciar la ruta? </h4>
+                <h4 class="modal-title">¿Deseas iniciar la ruta?</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
@@ -93,6 +93,11 @@
 
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
+    <input type="hidden" id="proveedorId">
+    <input type="hidden" id="quantityReserve">
+    <input type="hidden"id="localName">
+    <input type="hidden"id="rider">
+
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Reservar Menú</h5>
@@ -111,6 +116,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="salirreservar" data-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" id="reservarButton">Reservar</button>
+
       </div>
     </div>
   </div>
@@ -122,8 +128,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 
 
 </body>

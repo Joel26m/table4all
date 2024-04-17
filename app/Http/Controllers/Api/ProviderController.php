@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use Utilitat;
+use App\Clases\Utilitat;
 use App\Models\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,7 +49,7 @@ class ProviderController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasje = Utilitat::errorMessage($ex);
+            $menasaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
@@ -92,7 +92,7 @@ class ProviderController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasje = Utilitat::errorMessage($ex);
+            $mensaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
@@ -123,7 +123,7 @@ class ProviderController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasje = Utilitat::errorMessage($ex);
+            $mensaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
