@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Users;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UsersController;
+use Symfony\Component\HttpFoundation\Request;
 
 class UsersController extends Controller
 {
@@ -73,34 +74,26 @@ class UsersController extends Controller
     
     public function index()
     {
-        $usuarios = Users::paginate(4)
-        ->withQueryString();
-        foreach ($usuarios as $usuario) {
-            $usuario->activo_checkbox = $usuario->actiu ? 'checked' : '';
-        }
-        return view('usuaris\index', compact('usuarios'));
+        $usuariosad = Users::all();
+        return view('usuariosad\index', compact('usuariosad'));
     }
 
     public function create()
     {
-        return view('usuaris\create');
+        return view('usuariosad\create');
     }
 
     public function store(Request $request)
     {
         try {
-            $usuarios = new Users();
-            $usuarios->nom_usuari = $request->input('nom_usuari');
-            $usuarios->contrasenya= $request->input('contrasenya');
-            $usuarios->correu= $request->input('correu');
-            $usuarios->nom= $request->input('nom');
-            $usuarios->cognom= $request->input('cognom');
-            $usuarios->actiu = $request->input('activo');
-            $usuarios->tipus_usuaris_id= $request->input('tipus_usuaris_id');
+            $usuariosad = new Users();
+            $usuariosad->userName = $request->input('userName');
+            $usuariosad->password= $request->input('password');
+            $usuariosad->rol= $request->input('rol');
+       
     
-            $usuarios->actiu = ($request->input('activo') == 'activo');
-            $usuarios->save();
-            return redirect()->action([UsuarisController::class, 'index']);
+            $usuariosad->save();
+            return redirect()->action([UsersController::class, 'index']);
 
         } catch (Exception $e) {
             // Catching the exception and handling it
@@ -109,23 +102,58 @@ class UsersController extends Controller
         
     
     }
-
-    public function edit(Users $usuarios)
+    public function edit($ID)
     {
+        $usuario = Users::findOrFail($ID);
+        return view('usuariosad.edit', ['usuario' => $usuario]);
     }
+    
 
-    public function update(Request $request, Users $usuarios)
+    public function update(Request $request, $admin)
     {
+
+        try {
+            $usuario = Users::findOrFail($admin);
+            
+            // Actualizar los campos con los nuevos valores del formulario
+            $usuario->userName = $request->input('userName');
+            $usuario->password = $request->input('password');
+            $usuario->rol = $request->input('rol');
+          
+    
+            // Verificar si se proporcionó una nueva contraseña
+            $nuevaContrasenya = $request->input('password');
+            if ($nuevaContrasenya) {
+                $usuario->password = bcrypt($nuevaContrasenya);
+            }
+    
+            $usuario->save();
+            
+            return redirect()->action([UsersController::class, 'index']);
+    
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
 
     }
         
 
-    public function destroy(Users $usuarios, Request $request)
+    public function destroy(Request $request, $admin)
     {
-        $usuarios->delete();
-
+        $usuario = Users::findOrFail($admin);
+    
+        try {
+            $usuario->delete();
+            $request->session()->flash('mensaje', 'El usuario ha sido eliminado correctamente.');
+        } catch (QueryException $ex) {
+            $mensaje = Utilitat::errorMessage($ex);
+            $request->session()->flash('error', $mensaje);
+        }
+    
         return redirect()->action([UsersController::class, 'index']);
     }
+    
+
 }
 
 

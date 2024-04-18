@@ -8,6 +8,5 @@
 
 </head>
 <body>
-    <div id="mapa"></div>
 </body>
 </html>

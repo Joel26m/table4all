@@ -31,6 +31,12 @@ Route::get('/', function () {
     return view('nav/index');
 });
 
+Route::get('/admin', function () {
+    
+    
+    return view('layouts/principal');
+});
+
 Route::resource('rider', RidersController::class);
 
 Route::resource('provider', ProviderController::class);
@@ -70,3 +76,23 @@ Route::get('/register', [UsersController::class, 'showRegister'])->name('registe
 Route::post('/register',[UsersController::class, 'register']);
 
 // -----------------------------------------------------------------------
+Route::get('nav', function () {
+    return view('nav/index');
+});
+
+Route::resource('rider', RidersController::class);
+
+Route::resource('provider', ProviderController::class);
+
+//Route::get('provider/{provider}', [ProviderController::class, 'show']);
+
+
+// -----------------------------------------------------------------------
+
+Route::get('/loader', function () {
+    return view('loader/loader');
+});
+
+
+//---admin routes --------------------------------
+Route::resource('admin', UsersController::class);
