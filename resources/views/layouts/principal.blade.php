@@ -13,7 +13,7 @@
        
         <!-- Lista de Usuarios -->
         <div class="card mt-4">
-            <div class="card-header">Lista de Usuarios</div>
+            <div class="card-header">Lista  de Usuarios</div>
             <div class="card-body">
                     @yield('contenido')
                     </div>

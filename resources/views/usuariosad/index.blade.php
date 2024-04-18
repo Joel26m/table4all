@@ -1,30 +1,25 @@
 @extends('layouts.principal')
 
 @section('contenido')
+@include('partials.mensajes')
+
 <table class="table table-dark">
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Nombre de Usuario</th>
-      <th scope="col">Correo</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido</th>
-      <th scope="col">Activo</th>
-      <th scope="col">Tipo de Usuario</th>
+      <th scope="col">userName</th>
+      <th scope="col">rol</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($usuarios as $usuario)
+    @foreach ($usuariosad as $usuario)
       <tr>  
-          <td>{{ $usuario->id }}</td>
-          <td>{{ $usuario->userName }}</td>
-          <td>{{ $usuario->rol }}</td>
- 
+      <td>{{ $usuario->id }}</td>
+    <td>{{ $usuario->userName }}</td>
+    <td>{{ $usuario->rol }}</td>
+    <td>
           <td>
-</td>
-          <td>
-            <form
-             action="{{ action([App\Http\Controllers\UsersController::class, 'destroy'], ['usuari'=> $usuario->id]) }}" method="POST">
+            <form action="{{ action([App\Http\Controllers\UsersController::class, 'destroy'], ['usuario' => $usuario->id]) }}" method="POST">
               @csrf
               @method('DELETE')
             <button type="submit" class="btn btn-danger">
@@ -47,9 +42,8 @@
     @endforeach
   </tbody>
 </table>
-{{ $usuarios->links() }}
 
-<a href="{{ url('usuari/create') }}" class="btn btn-success">
+<a href="{{ url('usuariosad/create') }}" class="btn btn-success">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
       <path d="M8 1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V1.5A.5.5 0 0 1 8 1zM1.5 8a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5zM8 14a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zM15 8a.5.5 0 0 1-.5.5h-6a.5.5 0 0 1 0-1h6a.5.5 0 0 1 .5.5z"/>
     </svg>

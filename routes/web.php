@@ -89,3 +89,7 @@ Route::resource('provider', ProviderController::class);
 Route::get('/loader', function () {
     return view('loader/loader');
 });
+
+
+//---admin routes --------------------------------
+Route::resource('admin', UsersController::class);

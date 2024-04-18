@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Users;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\UsersController;
+use Symfony\Component\HttpFoundation\Request;
 
 class UsersController extends Controller
 {
@@ -74,9 +75,8 @@ class UsersController extends Controller
     
     public function index()
     {
-        $usuarios = Users::paginate(4)
-        ->withQueryString();
-        return view('usuaris\index', compact('usuarios'));
+        $usuariosad = Users::all();
+        return view('usuariosad\index', compact('usuariosad'));
     }
 
     public function create()
@@ -108,22 +108,32 @@ class UsersController extends Controller
     
     }
 
-    public function edit(Users $usuarios)
+    public function edit($id)
     {
     }
 
-    public function update(Request $request, Users $usuarios)
+    public function update(Request $request, Users $admin)
     {
 
     }
         
 
-    public function destroy(Users $usuarios, Request $request)
+    public function destroy(Request $request, $admin)
     {
-        $usuarios->delete();
-
+        $usuario = Users::findOrFail($admin);
+    
+        try {
+            $usuario->delete();
+            $request->session()->flash('mensaje', 'El usuario ha sido eliminado correctamente.');
+        } catch (QueryException $ex) {
+            $mensaje = Utilitat::errorMessage($ex);
+            $request->session()->flash('error', $mensaje);
+        }
+    
         return redirect()->action([UsersController::class, 'index']);
     }
+    
+
 }
 
 
