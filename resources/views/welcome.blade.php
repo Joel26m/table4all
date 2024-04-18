@@ -65,7 +65,7 @@
 
 <div class="animate__animated animate__bounceInUp submenu container fixed-bottom mb-3">
     <div class="row justify-content-center">
-        <button id="prov" class=" subop col bg-white p-3" ">
+        <button id="prov" class=" subop col bg-white p-3" >
             <div class="logoprov"></div> <!-- Div que contiene la imagen de los proveedores -->
             <div class="text-center">
                 <p class="subtext">Proveedores</p>
