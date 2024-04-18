@@ -8,15 +8,16 @@
 
 </head>
 <body>
-<h1 class="mt-5">CRUD de Usuarios</h1>
+<h1 class="mt-5">Bitiby edit users</h1>
         
         <!-- Formulario para crear usuario -->
         <div class="card mt-4">
-            <div class="card-header">Crear Usuario</div>
+            <div class="card-header">Editar Usuario</div>
             <div class="card-body">
-                <form action="{{ action([App\Http\Controllers\UsersController::class, 'store']) }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
+            <form action="{{ route('admin.update', ['admin' => $usuario->ID]) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="mb-3">
                         <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
                         <input type="text" class="form-control" id="nombreUsuario" name="userName">
                     </div>
@@ -34,7 +35,7 @@
                             <option value="provider">provider</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-primary">edit</button>
                     <a href="{{ url('admin') }}" " class="btn btn-danger">Salir</a>
 
                 </form>
