@@ -5,7 +5,7 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
-//Manejar datos proveedores
+//Obtener lista proveedores
 
 
 //   let proveedores = []; 
@@ -22,6 +22,25 @@ createApp(nav).mount('#nav')
 // })
 // .catch(error => {
 //     console.error('Error al obtener los datos de los proveedores:', error);
+// });
+
+
+//Obtener lista beneficiarios
+
+//   let beneficiarios = []; 
+
+//   axios.get('http://localhost/M12/Proyecto2/table4all/public/api/beneficiary')
+//   .then(response => {
+//     const beneficiarios = response.data.map(beneficiario => ({
+//         ...beneficiario,
+//         lat: parseFloat(beneficiario.latitude),
+//         lon: parseFloat(beneficiario.longitude)
+//     }));
+
+//     console.log(beneficiarios); 
+// })
+// .catch(error => {
+//     console.error('Error al obtener los datos de los beneficiarios:', error);
 // });
 
 
@@ -244,9 +263,10 @@ map.on('click', (event) => {
 });
 
 
+// Lista providional de proveedores
 
-
-const proveedores = [
+const proveedores = 
+[
     { IDuser: 4, lat: 41.3851, lon: 2.1734, quantityMenus: 50, localName: 'Restaurante Sol' },
     { IDuser: 5, lat: 41.3858, lon: 2.1735, quantityMenus: 60, localName: 'Restaurante Mar' },
     { IDuser: 6, lat: 41.3863, lon: 2.1736, quantityMenus: 70, localName: 'Bistro Luna' },
@@ -254,7 +274,7 @@ const proveedores = [
     { IDuser: 16, lat: 41.3883, lon: 2.1738, quantityMenus: 90, localName: 'Taverna Oceano' }
 ];
 
-
+//Colocar las púas de lso proveedores en el mapa
 
   function crearMarcadoresDeProveedores(proveedores, map) {
     console.log(proveedores); 
@@ -262,7 +282,8 @@ const proveedores = [
         let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
 
         let el = createCustomMarker();   // Crear el elemento de marcador personalizado
-
+        
+        // Editar el pop up con los datos del proveedor
         let proveedorMarker = new mapboxgl.Marker({ element: el })
             .setLngLat([proveedor.lon, proveedor.lat])
             .setPopup(new mapboxgl.Popup().setHTML(`
@@ -353,14 +374,38 @@ $('#salirreservar').on('click', function() {
 
 
 
+let beneficiarios = [
+    { ID: 1, lat: 41.3851, lon: 2.1734, state: true },
+    { ID: 2, lat: 41.3852, lon: 2.1735, state: true },
+    { ID: 3, lat: 41.3853, lon: 2.1736, state: true },
+    { ID: 4, lat: 41.49230, lon: 2.03310, state: true },
+];
+
+//Colocar las púas de los beneficiarios en el mapa
+
+function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
+    console.log(beneficiarios); 
+    for (let i = 0; i < beneficiarios.length; i++) {
+        let beneficiario = beneficiarios[i];  // Acceder al proveedor en el índice actual
+
+        let el = createCustomMarkerb();   // Crear el elemento de marcador personalizado
+        
+        // Editar el pop up con los datos del proveedor
+        let proveedorMarker = new mapboxgl.Marker({ element: el })
+            .setLngLat([beneficiario.lon, beneficiario.lat])
+            .setPopup(new mapboxgl.Popup().setHTML(`
+                <div class="proveedor-popup">
+                    <h3>${beneficiario.ID}</h3> 
+                </div>
+            `))
+            .addTo(map);
 
 
+    }
+}
 
+crearMarcadoresDeBeneficiarios(beneficiarios, map);
 
-let beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb() })
-  .setLngLat([2.0330500, 41.4922600])
-  .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
-  .addTo(map);
 
 const markerElementb = beneficiaryMarker.getElement();
 markerElementb.classList.add('beneciciary-marker');
@@ -370,6 +415,7 @@ function createCustomMarkerb() {
   el.className = 'beneciciary-marker';
   return el;
 }
+
 
 
 
