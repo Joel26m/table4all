@@ -7,3 +7,5 @@ document.onreadystatechange = function () {
         }, 1500); // Tiempo en milisegundos (en este caso, 5000 milisegundos = 5 segundos)
     }
 };
+
+

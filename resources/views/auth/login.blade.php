@@ -17,7 +17,6 @@
       </a>
   </div>
 </div>
-
 <div class="separador">
     <h3>INICIA SESIÓN</h3>
 </div>
@@ -50,7 +49,7 @@
         </div>
        
         <div class="enlace_registro">
-          <p>¿No tienes cuenta? <a href="{{action([App\Http\Controllers\UsersController::class, 'register'])}}"  rel="noopener noreferrer">Registrate</a></p>
+          <p>¿No tienes cuenta? <a href="{{action([App\Http\Controllers\UsersController::class, 'register'])}}" rel="noopener noreferrer">Registrate</a></p>
         </div>
       
       </form>

@@ -15,9 +15,6 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Rol</th>
-
-            
-
           </tr>
         </thead>
         <tbody>

@@ -59,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         return view('welcome', compact('user'));
     });
 });
+
+
 // -----------------------------------------------------------------------
 
 
@@ -68,19 +70,3 @@ Route::get('/register', [UsersController::class, 'showRegister'])->name('registe
 Route::post('/register',[UsersController::class, 'register']);
 
 // -----------------------------------------------------------------------
-Route::get('nav', function () {
-    return view('nav/index');
-});
-
-Route::resource('rider', RidersController::class);
-
-Route::resource('provider', ProviderController::class);
-
-//Route::get('provider/{provider}', [ProviderController::class, 'show']);
-
-
-// -----------------------------------------------------------------------
-
-Route::get('/loader', function () {
-    return view('loader/loader');
-});
