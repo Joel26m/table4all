@@ -1,42 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Antic&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Doodle+Shadow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap');
 :root {
     /* TIPOGRAFIAS */
     --font-Family-1: 'Poppins', sans-serif;
-
+    --font-Family-2: "Montserrat", sans-serif;
+    --font-Family-3: "Roboto", sans-serif;
     /* PALETA DE COLORES */
     --color-1: #FF691F;
-    --color-2: #FFFF;
+    --color-2: #ffffff;
     --color-3: #3D89E2;
     --color-4: #001D38;
     --color-5: #CB2A3A;
 }
 
 body{
-    overflow:hidden;
     font-family: var(--font-Family-1);
 }
 
 
 #menus{
+    margin-top: 30px;
     display: flex;  
     flex-direction: column;
     align-items: center; /* Centra el contenido horizontalmente */
-    border: 1px solid red;
+    
 }
     
 
 .menus-title{
     height: 25px;
     position: relative;
-    width: 80%;
+    width: 100%;
     margin-top: 20px ;
     text-align: center;
-    background-color: var(--color-1);
+    background-color: var(--color-4);
     color: var(--color-2);
     border-radius: 30px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
@@ -46,48 +48,72 @@ body{
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 100px;
-    background-color: var(--color-4);
+    height: 100%;
+    background-color: transparent;
+    border: 2px solid var(--color-4);
     border-radius: 30px;
+    transition: background-color 0.5s ease;
+}
+
+.new-menus:hover{
+    background-color:#3d8ae223;
+    border: none;
 }
 
 .bag{
     width: 70px;
     height: auto;
 }
+.bag:hover{
+    width: 75px;
+   }
 
 #reservados{
+    margin-top: 30px;   
     position: relative;
-    border: 1px solid rgb(0, 4, 255);
     justify-content: center;
     align-items: center; /* Centra el contenido horizontalmente */
-    position: relative;
-    display: flex;
+    display: inline;
     flex-direction: column;
+    
 }
 
 
 #reser-title{
+    align-items: center; /* Centra el contenido horizontalmente */
     position: relative;
     height: 25px;  
-    width: 80%;
+    width: 100%;
     margin-top: 20px ;
     text-align: center;
     background-color: var(--color-1);
     color: var(--color-2);
     border-radius: 30px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
 }
 
 .registro{
-    position: relative;
+    position:relative;
     padding: 15px;
     border-radius: 30px;
     width: 100%;
     border: 1px solid var(--color-4);
     margin-bottom: 15px;
+   
+}
+
+.registros{
+    border: 2px solid var(--color-1);
+    padding: 15px;
+    overflow-y: auto; /* Agregar scroll vertical cuando el contenido exceda la altura */
+    height: 280px;
+    border-radius: 30px;
+    
+}
+.registros::-webkit-scrollbar {
+    display: none;
 }
 
 .rider {
@@ -120,18 +146,203 @@ body{
  gap: 15px;
 }
 
+.entregado{
+    position: absolute;
+    right: 10px;
+    top: 28px;
+}
+
+#dates-row{
+    display: flex;
+    justify-content:space-between;
+    
+    
+}
+
+.col-lg-3{
+    margin-top: 60px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 30px;
+    width: 20%;
+    cursor: pointer;
+    
+}
+
+
+.col-lg-3 svg{
+margin-left: 5px;
+}
+
+
+.col-lg-3 p{
+    font-family: var(--font-Family-2);
+    margin: 10px;
+    color: var(--color-4);
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+#por-recoger p{
+    color: var(--color-3);
+  }
+
+#historial p{
+  color: var(--color-5);
+}
+
+#entregadas p{
+    color: var(--color-1);
+}
+#por-recoger:hover{
+    border: 2px solid var(--color-3);
+}
+#historial:hover{
+    border: 2px solid var(--color-5);
+}
+#entregadas:hover{
+    border: 2px solid var(--color-1);
+}
+#disponibles:hover{
+    border: 2px solid var(--color-4);
+}
+
+/*      MODAL     */
+
+.modal {
+    font-family: var(--font-Family-1);
+    display: none; /* Ocultar modal por defecto */
+    position: fixed; /* Posición fija */
+    z-index: 1; /* Por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Permitir desplazamiento si el contenido es demasiado grande */
+    background-color: rgba(0,0,0,0.4); /* Fondo oscuro */
+    font-size: 18px;
+    color: var(--color-4);
+}
+
+/* CONTENIDO DEL MODAL */
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrar verticalmente */
+    padding: 20px;
+    border: 3px solid var(--color-3);
+    width: 35%; /* 80% del ancho de la ventana */
+    height: auto;
+}
+
+/* Botón de cierre */
+.close {
+    position: absolute;
+    left: 20px;
+    top:10px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--color-3);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.guardar{
+    margin-top: 20px;
+    background-color: var(--color-3);
+    border-radius: 30px;
+    width: 100%;  
+    color: var(--color-2);
+    border: none;
+}
+
+
+.guardar:hover{
+    font-weight:500;
+}
+
+
+.sumar-restar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid var(--color-4);
+    border-radius: 30px;
+}
+
+.sumar-restar button{
+ border: none;
+ background: none;
+ font-size: 24px;
+ color: var(--color-4);
+ 
+}
+
+.sumar-restar button:hover{
+    color: var(--color-3);
+   }
+
+.cantidadMenus{
+    font-size: 25px;
+}
+
+.input-form{
+    border-radius: 30px;
+    border: 1px solid var(--color-3);
+    padding: 5px;
+}
+
+/* Oculta los checkboxes por defecto */
+input[type="radio"] {
+    display: none;
+}
+
+/* Estiliza la etiqueta que contiene la imagen */
+.bebidas {
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* Estiliza la imagen dentro de la etiqueta */
+.bebidas img {
+    width: 60px; /* Ajusta el tamaño de la imagen según sea necesario */
+    height: auto; /* Mantén la proporción de la imagen */
+    border: 2px solid transparent; /* Establece un borde transparente alrededor de la imagen */
+}
+
+/* Cambia el estilo de la imagen cuando el checkbox está marcado */
+input[type="radio"]:checked + .bebidas img {
+    padding: 3px;
+    border-color: var(--color-3); /* Cambia el color del borde cuando el checkbox está marcado */
+    border-radius: 30px;
+
+}
+
+/* ------------- JQUERIEEEEES --------------*/
 @media (max-width: 992px) {
 
 
-    #menus{
-        border: 2px solid red;
-    }
+#menus{
+    margin-top: 20px;
+}
         
     
     .menus-title{
         height: 22px;    
         width: 100%;
-        margin-top: 20px ;
+        margin-top: 10px ;
         font-size: 14px;
         margin-bottom: 10px;
     }
@@ -144,12 +355,14 @@ body{
         width: 50px;
     }
     
+    .bag:hover{
+        width: 52px;
+       }
     #reservados{
         position: relative;
-        border: 1px solid rgb(0, 4, 255);
         display: inline;
         justify-content: center;
-        align-items: center; /* Centra el contenido horizontalmente */
+        align-items: center;
     }
     
     
@@ -158,6 +371,11 @@ body{
         width: 100%;
         font-size: 14px;
         margin-bottom: 10px;
+        margin-top: 0px;
+    }
+
+    .registros{       
+        height: 180px;   
     }
     
     .registro{
@@ -171,7 +389,7 @@ body{
     }
     
     .rider svg {
-        margin-left: 5px; /* Espacio entre el SVG y el texto */
+        margin-left: 10px; /* Espacio entre el SVG y el texto */
         width: 60px;
         height: 70px;
     }
@@ -185,10 +403,11 @@ body{
         font-weight: bold;
         display: flex;
         align-items: center; /* Alinea el nombre con el SVG */
+        margin: 0px 40px 0px 0px;
     }
     
     .info p {
-        margin: 0px 10px; /* Espacio entre los elementos de texto */
+        margin: 0px 0px; /* Espacio entre los elementos de texto */
     }
     
     .datos{
@@ -196,5 +415,91 @@ body{
      display: flex;
      gap: 0px;
     }
+    .fecha{
+        display: none;
+    }
+
+    .entregado{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 40px;
+        width: 60px;
+        height: 25px;
+    }
+
+
+    #dates-row{
+        display: flex;
+        justify-content:center;
+        
+    }
+    .col-lg-3{
+        margin-top: 25px;
+        padding: 5px; 
+        justify-content: center;
+        border-radius: 30px;
+        width: 40%;
+     margin-bottom: 5px;
+    }
+    
+    .col-lg-3 svg{
+    margin-left: 0px;
+    width: 40px;
+    height: 70px;
+    }
+    
+    
+    .col-lg-3 p{
+        font-size: 15px;
+        margin: 10px;
+        color: var(--color-4);
+        display: flex;
+        align-items: center;
+    }
+
+    #por-recoger:hover{
+        border: 1px solid var(--color-3);
+    }
+    #historial:hover{
+        border: 1px solid var(--color-5);
+    }
+    #entregadas:hover{
+        border: 1px solid var(--color-1);
+    }
+    #disponibles:hover{
+        border: 1px solid var(--color-4);
+    }
+
+    /* Contenido del modal */
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrar verticalmente */
+    padding: 20px;
+    border: 2px solid var(--color-3);
+    width: 100%; /* 80% del ancho de la ventana */
+    height: 70%;
+}
+
+/* Botón de cierre */
+.close {
+    position: absolute;
+    right: 20px;
+    top:10px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--color-3);
+    text-decoration: none;
+    cursor: pointer;
+}
 
 }
