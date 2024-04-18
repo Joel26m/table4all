@@ -30,7 +30,7 @@ class BeneficiaryController extends Controller
      */
     public function store(Request $request)
     {
-        $beneficiary = new Provider();
+        $beneficiary = new Beneficiary();
         $beneficiary->latitude = $request->input('latitude');
         $beneficiary->longitude = $request->input('longitude');
         $beneficiary->state = $request->input('state');
@@ -38,7 +38,7 @@ class BeneficiaryController extends Controller
         try 
         {
             $beneficiary->save();
-            $response = (new BroviderResource($beneficiary))
+            $response = (new BeneficiaryResource($beneficiary))
                         ->response()
                         ->setStatusCode(201);
         } 
