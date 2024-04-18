@@ -173,6 +173,12 @@ map.on('click', (event) => {
             
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
+
+                axios.post('http://localhost/M12/Proyecto2/table4all/public/api/beneficiary', {
+                    latitude: latitude,
+                    longitude: longitude,
+                    state: true
+                })
             
                 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
@@ -395,7 +401,7 @@ function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
             .setLngLat([beneficiario.lon, beneficiario.lat])
             .setPopup(new mapboxgl.Popup().setHTML(`
                 <div class="proveedor-popup">
-                    <h3>${beneficiario.ID}</h3> 
+                    <h3>Beneficiario ${beneficiario.ID}</h3> 
                 </div>
             `))
             .addTo(map);
