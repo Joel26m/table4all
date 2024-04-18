@@ -1,16 +1,21 @@
 $primary: #ff691f;
-
+$danger:#CB2A3A;
 // Estilos para todos los botones primarios
 .btn.btn-primary {
   border-radius: 30px;
   background-color: $primary; // Fondo con color primario
   color: white; // Texto en color blanco
   // Otros estilos aquí
+  border-color: #ff691f;
 
   &:hover {
     color: white; // Texto en color blanco durante el hover
-    // Otros estilos de hover aquí
+    background-color: #e04f07;
+    border-color: #ffffff;
+
   }
+
+  
 }
 
 .btn.btn-secondary{
@@ -18,4 +23,17 @@ $primary: #ff691f;
 
 }
 
+
+.btn.btn-danger{
+  border-radius: 30px;
+  background-color: $danger; // Fondo con color primario
+  color: white; // Texto en color blanco
+  // Otros estilos aquí
+
+  &:hover {
+    color: white; // Texto en color blanco durante el hover
+
+  }
+
+}
 @import 'bootstrap/scss/bootstrap'
