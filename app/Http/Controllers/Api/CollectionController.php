@@ -61,11 +61,11 @@ class CollectionController extends Controller
     public function update(Request $request, Provider $Provider)
     {
 
-        $Collection->Rider = $request->input('rider');
-        $Collection->Provider = $request->input('provider');
-        $Collection->QuantityMenus = $request->input('quantityMenus');
-        $Collection->Date = $request->input('date');
-        $Collection->Completed = $request->input('completed');
+        $collection->Rider = $request->input('rider');
+        $collection->Provider = $request->input('provider');
+        $collection->QuantityMenus = $request->input('quantityMenus');
+        $collection->Date = $request->input('date');
+        $collection->Completed = $request->input('completed');
 
 
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\ProviderResource;
-use App\Http\Controllers\Api\ProviderController;
+
 
 class ProviderController extends Controller
 {
@@ -28,7 +28,7 @@ class ProviderController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -49,7 +49,7 @@ class ProviderController extends Controller
         } 
         catch (QueryException $ex) 
         {
-            $menasaje = Utilitat::errorMessage($ex);
+            $mensaje = Utilitat::errorMessage($ex);
             $response = \response()
                         ->json(['error' => $mensaje], 400);
         }
