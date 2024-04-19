@@ -35,9 +35,12 @@
             </div>
         </button>
         <button id="bene" class="subop col bg-white p-3" >
+            <input type="hidden" id="proveedorId">
             <div class="logobene"></div> <!-- Div que contiene la imagen de los beneficiarios -->
             <div class="text-center">
                 <p class="subtext">Beneficiarios</p>
+                <input type="hidden" id="beneficiarioid">
+
             </div>
         </button>
     </div>
