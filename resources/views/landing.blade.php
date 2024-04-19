@@ -114,8 +114,7 @@
                 <img src="../resources/css/media-landing/pasos_rider/registro-rider.png" alt="iPhone Image">
             </div>
 
-            <div class="carousel-slide" style="display: none;">
-              
+            <div class="carousel-slide" style="display: none;">              
               <img src="../resources/css/media-landing/pasos_negocio/coming-soon.png" alt="iPhone Image">
           </div>
 
@@ -248,28 +247,28 @@
         <div class="equipo row">
           <div class="col-md-6 col-lg-3">
             <div class="info-team">
-              <img src="../resources/css//media-landing/userpng.png" alt="Team member image">
+              <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Raúl</h3>
               <p>Backend Developer</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="info-team">
-              <img src="../resources/css//media-landing/userpng.png" alt="Team member image">
+              <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Joel</h3>
               <p>Fronted Developer</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="info-team">
-              <img src="../resources/css//media-landing/userpng.png" alt="Team member image">
+              <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Roger</h3>
               <p>Backend Developer</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="info-team">
-              <img src="../resources/css//media-landing/userpng.png" alt="Team member image">
+              <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Alex</h3>
               <p>Fronted Developer</p>
             </div>
