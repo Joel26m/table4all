@@ -51,4 +51,50 @@
     Agregar
 </a>
 
+
+<div id="containergraf" style="width: 100%; height: 400px;"></div>
+
+<script>
+Highcharts.chart('containergraf', {
+    chart: {
+        type: 'pie', // Cambiamos el tipo de gráfico a pie (donut)
+        plotBorderWidth: null,
+        plotShadow: false
+    },
+    title: {
+        text: 'Total user types of Bitiby',
+        style: {
+            color: '#333333', // Cambiamos el color del título a negro
+            fontSize: '24px' // Cambiamos el tamaño del título
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y}'
+            },
+            colors: ['#FF691F', '#3D89E2'] // Cambiamos los colores de las secciones a naranja y rojo
+        }
+    },
+    series: [{
+        name: 'Users',
+        data: [
+            {
+                name: 'Riders', // Etiqueta para Riders
+                y: {{ $totalRiders ?? 0 }}
+            },
+            {
+                name: 'Providers', // Etiqueta para Providers
+                y: {{ $totalProviders ?? 0 }}
+            }
+        ]
+    }]
+});
+</script>
+<div class="container-wrapper-genially" style="position: relative; min-height: 400px; max-width: 100%;"><video class="loader-genially" autoplay="autoplay" loop="loop" playsinline="playsInline" muted="muted" style="position: absolute;top: 45%;left: 50%;transform: translate(-50%, -50%);width: 80px;height: 80px;margin-bottom: 10%"><source src="https://static.genial.ly/resources/loader-default.mp4" type="video/mp4" />Your browser does not support the video tag.</video><div id="662281eb57c6e800147b41d7" class="genially-embed" style="margin: 0px auto; position: relative; height: auto; width: 100%;"></div></div><script>(function (d) { var js, id = "genially-embed-js", ref = d.getElementsByTagName("script")[0]; if (d.getElementById(id)) { return; } js = d.createElement("script"); js.id = id; js.async = true; js.src = "https://view.genial.ly/static/embed/embed.js"; ref.parentNode.insertBefore(js, ref); }(document));</script>
+
+
 @endsection
