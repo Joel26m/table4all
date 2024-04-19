@@ -37,6 +37,10 @@ Route::get('/admin', function () {
     return view('layouts/principal');
 });
 
+Route::get('/landing', function () {
+    
+    return view('landing');
+});
 Route::resource('rider', RidersController::class);
 
 Route::resource('provider', ProviderController::class);
