@@ -74,9 +74,17 @@ class UsersController extends Controller
     
     public function index()
     {
+        // Obtener la cantidad de usuarios por rol
+        $totalRiders = Users::where('rol', 'rider')->count();
+        $totalProviders = Users::where('rol', 'provider')->count();
+    
+        // Obtener todos los usuarios
         $usuariosad = Users::all();
-        return view('usuariosad\index', compact('usuariosad'));
+    
+        // Pasar los datos a la vista
+        return view('usuariosad.index', compact('usuariosad', 'totalRiders', 'totalProviders'));
     }
+    
 
     public function create()
     {
@@ -153,6 +161,8 @@ class UsersController extends Controller
         return redirect()->action([UsersController::class, 'index']);
     }
     
+
+
 
 }
 
