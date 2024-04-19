@@ -1,0 +1,982 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Doodle+Shadow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap');
+:root {
+    /* TIPOGRAFIAS */
+    --font-Family-1: 'Poppins', sans-serif;
+    --font-Family-2: "Montserrat", sans-serif;
+    --font-Family-3: "Roboto", sans-serif;
+    /* PALETA DE COLORES */
+    --color-1: #FF691F;
+    --color-2: #ffffff;
+    --color-3: #3D89E2;
+    --color-4: #001D38;
+    --color-5: #CB2A3A;
+}
+
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-family: var(--font-Family-1);
+}
+
+
+/* --------------- SECCION INICIAL ---------------*/
+.inicial {
+  background-color: #ffff;
+  background-repeat: no-repeat;
+  background-position: top;
+  display: flex; /* Usamos flexbox para centrar vertical y horizontalmente */
+  align-items: center; /* Centramos verticalmente */
+  flex-direction: column; /* Alinear elementos en columna */
+  text-align: center; /* Centrar texto */
+  height: 100vh;
+  user-select: none;
+}
+
+
+
+.descripcion p {
+  position: relative;
+  margin: 230px 80px 30px 80px;
+  color: var(--color-4);
+  font-size: 24px;
+  font-family: var(--font-Family-2);
+  font-weight: 500;
+}
+
+
+.navbar{  
+  background-color: var(--color-1);
+  
+}
+
+.title-app{
+  position: absolute;
+  display: flex;
+  width: 50%;
+  height: 100vh;
+  left: 0px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.right-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  position: absolute;
+  height: 100vh;
+  right: 0px;
+}
+.right-content img{
+  
+  position: absolute;
+  margin-top: 100px;
+  height: 100%; 
+  width: 75%; /* Ajusta el tamaño máximo de la imagen */
+}
+
+.right-content a{
+  position: relative; 
+  
+}
+
+
+.title-app h1{
+  font-size: 120px;
+  font-weight: bold;
+  color: var(--color-4);
+}
+.title-app h2{
+  font-size: 72px;
+  font-weight: bold;
+  color: var(--color-4);
+}
+
+.highlight {
+  color: var(--color-1); 
+}
+
+
+.boton {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px ;
+    width: 320px;
+  }
+
+  #boton_rider {
+    background-color: var(--color-3);
+  }
+
+  #boton_proveedor {
+    background-color: var(--color-1);
+  }
+  #boton_rider:hover {
+    background-color: #0963c3;
+    font-weight: 500;
+  }
+
+  #boton_proveedor:hover {
+    background-color:#ee4f00;
+    font-weight: 500;
+  }
+  .icono {
+    margin-left: 5px;
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+  }
+
+
+  /* --------------- SECCION FUNCION ---------------*/
+
+
+  .funcion {
+    position: relative;
+    display: flex;
+    height: 100vh; /* Altura igual al 100% de la altura visible del viewport */
+}
+.title {
+  color: var(--color-4);
+  position: absolute;
+  top: 0px; /* Ajusta esta propiedad según necesites */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; /* Asegura que el título esté sobre los divs de colores */
+
+}
+
+.title h2{
+  font-size: 50px;
+  font-weight: 800;
+}
+.div-rider, .div-negocio {
+    flex: 1; /* Ambos divs ocuparán el mismo espacio */
+    border-radius: 10px; /* Radio de borde de ejemplo */
+    display: flex; /* Para usar flexbox */
+    flex-direction: column; /* Alinear elementos verticalmente */
+    justify-content: center; /* Centrar verticalmente los elementos */
+    align-items: center; /* Centrar horizontalmente los elementos */
+      
+  
+  
+  
+  }
+
+.div-rider {
+    background-color: var(--color-1); 
+    margin: 0px 5px 0px 0px; 
+    border-radius: 0px 0px 30px 0px; /* Ajusta el radio de los bordes según sea necesario */
+  }
+
+.div-negocio {
+  border-radius: 0px 0px 0px 30px; /* Ajusta el radio de los bordes según sea necesario */
+    background-color: var(--color-3); /* Color de fondo azul */
+    margin: 0px 0px 0px 5px; /* Ajusta el espaciado horizontal entre los divs */
+}
+
+.negocio-title { 
+    border-radius: 30px 0px 0px 30px;
+    padding: 10px 20px 0px 60px;
+    right: 0;
+    color: var(--color-3);
+}
+.rider-title,
+.negocio-title {
+    position: absolute;
+    top: 70px;
+    background-color: var(--color-2);
+}
+.rider-title{
+  border-radius: 0px 30px 30px 0px;
+  padding: 10px 50px 0px 20px;
+  left: 0;
+  color: var(--color-1);
+}
+
+.rider-title h1 {
+    font-weight: bold;
+}
+
+.negocio-title h1{
+  font-weight: bold;
+}
+
+
+.rider-content,
+.negocio-content {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px; 
+    margin-bottom: 20px;
+    flex-direction: column;
+  }
+
+.rider-content img,
+.negocio-content img {
+    width: 250px; 
+    height: auto; 
+    margin-top: 50px;
+  }
+
+.text-container{
+  margin-top: 30px;
+  color: var(--color-2);
+  font-family: var(--font-Family-2);
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.text-container-rider{
+  margin-top: 30px;
+  color: var(--color-2);
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  position:absolute;
+  bottom: 30px;
+}
+
+.carousel-controls button {
+  background: none;
+  color: var(--color-4);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  
+}
+
+
+.carousel-controls .dots {
+  display: flex;
+  margin: 0 20px;
+}
+
+.carousel-controls .dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 92%);
+  margin: 0 5px;
+}
+
+.dot.active {
+  background-color: var(--color-4);
+}
+
+/* ----------------------------*/
+.text-container2{
+  margin-top: 30px;
+  color: var(--color-2);
+  font-family: var(--font-Family-2);
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.carousel-controls2 {
+  display: flex;
+  align-items: center;
+  position:absolute;
+  bottom: 30px;
+}
+
+.carousel-controls2 button {
+  background: none;
+  color: var(--color-4);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+  
+}
+
+
+.carousel-controls2 .dots2 {
+  display: flex;
+  margin: 0 20px;
+}
+
+.carousel-controls2 .dot2 {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: hsl(0, 0%, 92%);
+  margin: 0 5px;
+}
+
+.dot2.active {
+  background-color: var(--color-4);
+}
+
+
+/* ------- SECCION IMPACTO---------*/
+
+#impacto{
+height: 100vh;
+position: relative;
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: center;
+width: 100%;
+}
+.info1{
+  margin-top: 180px;
+}
+.info1, .info2, .info3 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.info1 img, .info3 img {
+  width: 200px; /* Ajusta el tamaño de la imagen según sea necesario */
+  margin-right: 40px; /* Espacio entre la imagen y el contenido de texto */
+  border: 3px solid var(--color-3);
+  border-radius: 30px;
+  
+}
+
+.info2 img {
+  width: 200px; /* Ajusta el tamaño de la imagen según sea necesario */
+  margin-left: 40px; /* Espacio entre la imagen y el contenido de texto */
+  border: 3px solid var(--color-3);
+  border-radius: 30px;
+  
+}
+
+.info1 img {
+height: 200px;
+  
+}
+.content h1{
+  font-weight: 500;
+  color: var(--color-1);
+}
+
+.content {
+  flex: 1; /* El contenido ocupará todo el espacio restante */
+  font-weight: 400;
+  font-size: 24px;
+}
+.info2 .content{
+  text-align:end;
+}
+
+
+
+/* ----------- SECCION SOCIOS ---------------*/
+
+
+#socios{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color:#3d8ae21a;
+}
+
+
+.equipo {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.text-socios{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+  text-align: center;
+  font-size: 26px;
+  font-family: var(--font-Family-2);
+  font-weight: 500;
+}
+
+.info-team {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: 2rem 10px 10%;
+  color: var(--color-3);
+  font-family: var(--font-Family-1);
+}
+
+.info-team h3 {
+  margin-top: 20px;
+  font-size: 3rem;
+  color: var(--color-4);
+ 
+}
+.info-team p {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-1);
+}
+
+.info-team img {
+  width: 200px;
+  height: 200px;
+  background-color: var(--color-2);
+  padding: 10px;
+  border-radius: 30px;
+  border: 1rem solid var(--color-3);
+}
+
+/* --------------- FOOTER ---------------*/
+
+.footer {
+  height: 100vh;
+  width: 100%;
+  padding: 2rem 10%;
+  background: var(--color-4);
+  position: relative;
+  font-family: var(--font-Family-2);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+
+.logo-footer {
+  padding: 10rem 0 0 6rem;
+}
+
+.logo-footer a {
+  text-decoration: none;
+}
+.logo-footer svg {
+  text-decoration: none;
+  width: 150px;
+  height: 150px;
+}
+
+.menu-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 180px;
+  width: 40%;
+
+  border-radius: 30px;
+}
+
+.menu-footer a {
+  color: var(--color-2);
+  font-size: 36px;
+}
+
+.menu-footer a:hover {
+  color: var(--color-3);
+}
+
+.redes-sociales {
+  color: var(--color-2);
+  margin-top: 5rem;
+}
+
+.redes-sociales i {
+  justify-content: left;
+  font-size: 3.5rem;
+  margin: 0 1.5rem;
+}
+
+.redes-sociales i:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  color: var(--color-3);
+}
+
+.copyright {
+bottom: 20px;
+right: 0px;
+position: absolute;
+text-align: center;
+color: var(--color-2);
+width: 100%;
+}
+
+
+/* -------------------- PANTALLAS-MOVILES -------------------- */
+
+/* --------------- SECCION INICIAL ---------------*/
+@media (max-width: 992px) {
+
+  .right-content { 
+    border: none;
+    display: flex; /* Usamos flexbox para centrar vertical y horizontalmente */
+    align-items: center; /* Centramos verticalmente */
+    flex-direction: column; /* Alinear elementos en columna */
+    text-align: center; /* Centrar texto */
+    width: 100%;
+    position: relative;
+  }
+
+  .right-content a{
+    margin-top: 0px;
+    
+  }
+  .right-content img{
+   display: none;
+  }
+  .inicial {
+    background-image:url('/img/fondo_section1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex; 
+    align-items: center;
+    flex-direction: column; 
+    text-align: center; 
+    
+  }
+  
+  .descripcion p {
+    margin: 50px 10px 70px 10px;
+    color: var(--color-4);
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+
+  
+  .title-app{
+    margin-top: 200px;
+    border: none;
+    position: relative;
+    height: auto;
+  }
+  
+  .title-app h1{
+    font-size: 64px;
+    font-weight: bold;
+    color: var(--color-4);
+  }
+  .title-app h2{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--color-4);
+  }
+  
+  .highlight {
+    color: var(--color-1); 
+  }
+  
+  
+  .boton {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px ;
+    width: 320px;
+    }
+
+
+     /* --------------- SECCION FUNCION ---------------*/
+
+     .funcion {
+      position: relative;
+      display: flex;
+      height: 100vh; 
+  }
+  .title {
+    margin-top: 10px;
+    color: var(--color-4);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Asegura que el título esté sobre los divs de colores */
+  }
+  
+  .title h2{
+    font-size: 32px;
+    font-weight: 800;
+  }
+
+  
+  .div-rider {
+      margin: 0px 2px 0px 0px;  
+    }
+  
+  .div-negocio { 
+      margin: 0px 0px 0px 2px; /* Ajusta el espaciado horizontal entre los divs */
+  }
+  
+  .negocio-title { 
+      border-radius: 30px 0px 0px 30px;
+      padding: 10px 20px 0px 60px;
+      right: 0;
+      color: var(--color-3);
+  }
+  .rider-title,
+  .negocio-title {
+      position: absolute;
+      top: 65px;
+      background-color: var(--color-2);
+  }
+  .rider-title{
+    border-radius: 0px 30px 30px 0px;
+    padding: 10px 50px 0px 20px;
+    left: 0;
+    color: var(--color-1);
+  }
+  
+  .rider-title h1 {
+    font-size: 28px;
+  }
+  
+  .negocio-title h1{
+    font-size: 28px;
+  }
+  
+  
+  .rider-content,
+  .negocio-content {
+      display: flex; 
+      align-items: center; 
+      justify-content:center;
+      padding: 20px;
+      margin-bottom: 20px;
+      flex-direction: column;
+    }
+  
+  .rider-content img,
+  .negocio-content img {
+      width: 150px; 
+      height: auto; 
+      margin-top: 60px;
+    }
+  
+  .text-container{
+    margin-top: 30px;
+    color: var(--color-2);
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .text-container-rider{
+    margin-top: 30px;
+    color: var(--color-2);
+    
+  }
+  
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    bottom: 50px;
+  }
+  
+  .carousel-controls button {
+    background: none;
+    color: var(--color-4);
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px;
+    
+  }
+  
+  .carousel-controls .dots {
+    display: flex;
+    margin: 0 10px;
+  }
+  
+  .carousel-controls .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .dot.active {
+    background-color: var(--color-4);
+  }
+
+
+/*----------------------------------- */
+
+  .text-container2{
+    margin-top: 30px;
+    color: var(--color-2);
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .text-container-rider{
+    margin-top: 30px;
+    color: var(--color-2);
+    
+  }
+  
+  .carousel-controls2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:absolute;
+    bottom: 50px;
+  }
+  
+  .carousel-controls2 button {
+    background: none;
+    color: var(--color-4);
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px;
+    
+  }
+  
+  .carousel-controls2 .dots2 {
+    display: flex;
+    margin: 0 10px;
+  }
+  
+  .carousel-controls2 .dot2 {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .dot2.active {
+    background-color: var(--color-4);
+  }
+/*-------- IMPACTO ---------- */
+
+  #impacto{
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    
+    }
+    .info1{
+      margin-top: 130px;
+    }
+    .info1, .info2, .info3 {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    
+    .info1 img, .info3 img {
+      width: 170px; /* Ajusta el tamaño de la imagen según sea necesario */
+      margin-right: 30px; /* Espacio entre la imagen y el contenido de texto */
+      border: 3px solid var(--color-3);
+      border-radius: 30px;
+      
+    }
+    
+    .info2 img {
+      width: 170px; /* Ajusta el tamaño de la imagen según sea necesario */
+      margin-left: 30px; /* Espacio entre la imagen y el contenido de texto */
+      border: 3px solid var(--color-3);
+      border-radius: 30px;
+      
+    }
+    
+    .info1 img {
+    height: 170px;
+      
+    }
+    .content h1{
+      font-weight: 600;
+      color: var(--color-1);
+      font-size: 24px;
+    }
+    
+    .content {
+      text-align:left;
+      flex: 1; /* El contenido ocupará todo el espacio restante */
+      font-weight: 500;
+      font-size: 20px;
+    }
+
+    .info2 .content{
+      text-align:end;
+    }
+    
+
+/*-------- SOCIOS ---------- */
+
+#socios{
+  height: 100%;
+}
+  
+  .equipo {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 100px;
+  }
+  
+  .text-socios{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    text-align: center;
+    font-size: 20px;
+    font-family: var(--font-Family-2);
+    font-weight: 600;
+  }
+  
+  .info-team {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    margin: 0rem 10px 10%;
+    color: var(--color-3);
+    font-family: var(--font-Family-1);
+  }
+  
+  .info-team h3 {
+    margin-top: 10px;
+    font-size: 2rem;
+    color: var(--color-4);
+  }
+  
+  .info-team img {
+    width: 200px;
+    height: 200px;
+  }
+
+/*-------- FOOTER ---------- */
+
+  .footer {
+    width: 100%;
+    background: var(--color-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .logo-footer {
+    padding: 0 0 0 5.7rem;
+    margin-top: 70px;
+  }
+  
+  .logo-footer a {
+    text-decoration: none;
+  }
+  .logo-footer svg {
+    text-decoration: none;
+    width: 130px;
+    height: 130px;
+  }
+  
+  .menu-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    width: 100%;
+  
+  }
+  
+  .menu-footer a {
+    color: var(--color-2);
+    font-size: 28px;
+  }
+  
+  .menu-footer a:hover {
+    color: var(--color-3);
+  }
+  
+  .redes-sociales {
+    color: var(--color-2);
+  }
+  
+  .redes-sociales i {
+    justify-content: left;
+    font-size: 3.0rem;
+    margin: 2.0rem 1.5rem;
+  }
+  
+  .redes-sociales i:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    color: var(--color-3);
+  }
+  
+  .copyright h5{
+  font-size: 18px;
+  }
+  
+  .copyright{
+    bottom: 50px;
+    }
+}
+
+
+@media (max-width: 400px) {
+
+
+}
+
+@media (max-width: 360px) {
+
+
+
+
+}
