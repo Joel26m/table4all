@@ -7,6 +7,8 @@
     <!-- Enlaces a los archivos CSS de Bootstrap -->
     @vite(['resources/css/app.css', 'resources/css/app.scss', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
 </head>
 <body>
 
@@ -23,8 +25,10 @@
                     
     </div>
     </div>
-   
+
         <br>
+
+        
     <!-- Scripts de Bootstrap y cualquier otro script necesario -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

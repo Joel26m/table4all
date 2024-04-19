@@ -51,4 +51,50 @@
     Agregar
 </a>
 
+
+<div id="containergraf" style="width: 100%; height: 400px;"></div>
+
+<script>
+Highcharts.chart('containergraf', {
+    chart: {
+        type: 'pie', // Cambiamos el tipo de gráfico a pie (donut)
+        plotBorderWidth: null,
+        plotShadow: false
+    },
+    title: {
+        text: 'Total user types of Bitiby',
+        style: {
+            color: '#333333', // Cambiamos el color del título a negro
+            fontSize: '24px' // Cambiamos el tamaño del título
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y}'
+            },
+            colors: ['#FF691F', '#3D89E2'] // Cambiamos los colores de las secciones a naranja y rojo
+        }
+    },
+    series: [{
+        name: 'Users',
+        data: [
+            {
+                name: 'Riders', // Etiqueta para Riders
+                y: {{ $totalRiders ?? 0 }}
+            },
+            {
+                name: 'Providers', // Etiqueta para Providers
+                y: {{ $totalProviders ?? 0 }}
+            }
+        ]
+    }]
+});
+</script>
+
+
+
 @endsection
