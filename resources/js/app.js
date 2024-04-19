@@ -147,7 +147,7 @@ map.on('click', (event) => {
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
 
-                axios.post('http://localhost/M12/Proyecto2/table4all/public/api/beneficiary', {
+                axios.post('http://localhost/table4all/public/api/beneficiary', {
                     latitude: latitude,
                     longitude: longitude,
                     state: true
@@ -161,8 +161,7 @@ map.on('click', (event) => {
                     <div id="beneficiary-state">No se ha añadido ningún estado</div>
                     <br>
                     <div class="button-container">
-                      <button type="button" class="btn-primary-modifyButton" id="guardarEstado" data-toggle="modal" data-target="#exampleModal">
-                      <input type="hidden" data-id="${beneficiario.ID}">
+                      <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
                       <div class="image"></div>
                       </button>
                       <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
@@ -247,7 +246,7 @@ map.on('click', (event) => {
 
 function crearMarcadoresDeProveedores(map) {
     // Obtener lista de proveedores
-    axios.get('http://localhost/M12/Proyecto2/table4all/public/api/provider')
+    axios.get('http://localhost/table4all/public/api/provider')
     .then(response => {
         const proveedores = response.data.map(proveedor => ({
             ...proveedor,
@@ -331,7 +330,7 @@ $('#reservarButton').on('click', function() {
     console.log(proveedorId, quantityReserve); 
 
     // Llamar a la API para hacer la reserva
-    axios.post('http://localhost/M12/Proyecto2/table4all/public/api/collection', {
+    axios.post('http://localhost/table4all/public/api/collection', {
         provider: proveedorId,
         quantityMenus: parseInt(quantityReserve, 10)
         
@@ -359,7 +358,7 @@ $('#salirreservar').on('click', function() {
 //Colocar las púas de los beneficiarios en el mapa
 
 function crearMarcadoresDeBeneficiarios(map) {
-    axios.get('http://localhost/M12/Proyecto2/table4all/public/api/beneficiary')
+    axios.get('http://localhost/table4all/public/api/beneficiary')
     .then(response => {
       // Parseamos y transformamos los datos directamente dentro de la promesa
       const beneficiarios = response.data.map(beneficiario => ({
@@ -385,7 +384,7 @@ function crearMarcadoresDeBeneficiarios(map) {
               <div id="beneficiary-state">No se ha añadido ningún estado</div>
               <br>
               <div class="button-container">
-                <button type="button" class="btn-primary-modifyButton" id="guardarEstado" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
                 <div class="image"></div>
                 <input type="hidden" data-id="${beneficiario.ID}">
                 </button>
