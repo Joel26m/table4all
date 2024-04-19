@@ -6,7 +6,28 @@ import nav from './components/nav.vue'
 createApp(nav).mount('#nav')
 
 
-
+(function(d) {
+    var js, id = "genially-embed-js",
+        ref = d.getElementsByTagName("script")[0];
+    if (d.getElementById(id)) {
+        return;
+    }
+    js = d.createElement("script");
+    js.id = id;
+    js.async = true;
+    js.onload = function() {
+        var iframe = document.getElementById("662281eb57c6e800147b41d7").querySelector("iframe");
+        if (iframe) {
+            iframe.setAttribute("allowfullscreen", "true");
+            var genially = GeniallyIframePlayer.getGenially(iframe);
+            genially.on("ready", function() {
+                genially.fullscreen();
+            });
+        }
+    };
+    js.src = "https://view.genial.ly/static/embed/embed.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));
 
 
 //Manejar datos proveedores
