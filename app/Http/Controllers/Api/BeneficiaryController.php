@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Clases\Utilitat;
-use App\Models\Provider;
+use App\Models\Beneficiary;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\QueryException;
-use App\Http\Resources\ProviderResource;
-use App\Http\Controllers\Api\ProviderController;
+use App\Http\Resources\BeneficiaryResource;
 
-class ProviderController extends Controller
+class BeneficiaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +16,10 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Provider::all();
-        //$provider = Provider::where('IDuser', '=', 4)->first();
+        $beneficiaries = Beneficiary::all();
 
 
-        return ProviderResource::collection($providers);
+        return BeneficiaryResource::collection($beneficiaries);
     }
 
     /**
@@ -34,16 +30,15 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $provider = new Provider();
-        $provider->IDuser = $request->input('IDuser');
-        $provider->latitude = $request->input('latitude');
-        $provider->longitude = $request->input('longitude');
-        $provider->quantityMenus = $request->input('quantityMenus');
+        $beneficiary = new Beneficiary();
+        $beneficiary->latitude = $request->input('latitude');
+        $beneficiary->longitude = $request->input('longitude');
+        $beneficiary->state = $request->input('state');
 
         try 
         {
-            $provider->save();
-            $response = (new ProviderResource($provider))
+            $beneficiary->save();
+            $response = (new BeneficiaryResource($beneficiary))
                         ->response()
                         ->setStatusCode(201);
         } 
@@ -59,34 +54,31 @@ class ProviderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Beneficiary  $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function show(Provider $provider)
+    public function show(Beneficiary $beneficiary)
     {
-        return new ProviderResource($provider);
+        //
     }
-    
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Provider  $provider
+     * @param  \App\Models\Beneficiary  $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $Provider)
+    public function update(Request $request, Beneficiary $beneficiary)
     {
-
-        $Provider->ID = $request->input('ID');
-        $Provider->UserName = $request->input('userName');
-        $Provider->Password = $request->input('password');
-        $Provider->rol = $request->input('rol');
+        $Beneficiary->UserName = $request->input('latitude');
+        $Beneficiary->Password = $request->input('longitude');
+        $Beneficiary->rol = $request->input('state');
 
         try 
         {
-            $Provider->save();
-            $response = (new ProviderResource($Provider))
+            $Beneficiary->save();
+            $response = (new BeneficiaryResource($Beneficiary))
                         ->response()
                         ->setStatusCode(201);
         } 
@@ -102,22 +94,14 @@ class ProviderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Provider  $Provider
+     * @param  \App\Models\Beneficiary  $beneficiary
      * @return \Illuminate\Http\Response
      */
-    
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Provider  $provider
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Provider $Provider)
+    public function destroy(Beneficiary $beneficiary)
     {
         try 
         {
-            $Provider->delete();
+            $Beneficiary->delete();
             $response = \response()
                         ->json(['mensaje' => 'Registro borrado correctamente'], 200);
         } 

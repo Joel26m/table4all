@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\Api\BeneficiaryController;
+use App\Http\Controllers\Api\DeliveriesController;
+use App\Http\Controllers\Api\ProviderController;
 use App\Http\Controllers\Api\CollectionController;
 
 
@@ -26,4 +28,8 @@ Route::apiResource('provider', ProviderController::class);
 Route::apiResource('user', UsersController::class);
 
 Route::apiResource('collection', CollectionController::class);
+Route::apiResource('delivery', DeliveriesController::class);
+Route::apiResource('beneficiary', BeneficiaryController::class);
+
+
 

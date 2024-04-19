@@ -5,24 +5,16 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
-//Manejar datos proveedores
 
 
-//   let proveedores = []; 
 
-//   axios.get('http://localhost/M12/Proyecto2/table4all/public/api/provider')
-//   .then(response => {
-//     const proveedores = response.data.map(proveedor => ({
-//         ...proveedor,
-//         lat: parseFloat(proveedor.latitude),
-//         lon: parseFloat(proveedor.longitude)
-//     }));
 
-//     console.log(proveedores); 
-// })
-// .catch(error => {
-//     console.error('Error al obtener los datos de los proveedores:', error);
-// });
+
+
+
+
+
+
 
 
 
@@ -154,6 +146,12 @@ map.on('click', (event) => {
             
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
+
+                axios.post('http://localhost/M12/Proyecto2/table4all/public/api/beneficiary', {
+                    latitude: latitude,
+                    longitude: longitude,
+                    state: true
+                })
             
                 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
@@ -163,7 +161,8 @@ map.on('click', (event) => {
                     <div id="beneficiary-state">No se ha añadido ningún estado</div>
                     <br>
                     <div class="button-container">
-                      <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
+                      <button type="button" class="btn-primary-modifyButton" id="guardarEstado" data-toggle="modal" data-target="#exampleModal">
+                      <input type="hidden" data-id="${beneficiario.ID}">
                       <div class="image"></div>
                       </button>
                       <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
@@ -244,46 +243,50 @@ map.on('click', (event) => {
 });
 
 
+//Colocar las púas de los proveedores en el mapa
 
+function crearMarcadoresDeProveedores(map) {
+    // Obtener lista de proveedores
+    axios.get('http://localhost/M12/Proyecto2/table4all/public/api/provider')
+    .then(response => {
+        const proveedores = response.data.map(proveedor => ({
+            ...proveedor,
+            lat: parseFloat(proveedor.latitude),
+            lon: parseFloat(proveedor.longitude)
+        }));
 
-const proveedores = [
-    { IDuser: 4, lat: 41.3851, lon: 2.1734, quantityMenus: 50, localName: 'Restaurante Sol' },
-    { IDuser: 5, lat: 41.3858, lon: 2.1735, quantityMenus: 60, localName: 'Restaurante Mar' },
-    { IDuser: 6, lat: 41.3863, lon: 2.1736, quantityMenus: 70, localName: 'Bistro Luna' },
-    { IDuser: 15, lat: 41.3875, lon: 2.1737, quantityMenus: 80, localName: 'Café Estrella' },
-    { IDuser: 16, lat: 41.3883, lon: 2.1738, quantityMenus: 90, localName: 'Taverna Oceano' }
-];
+        console.log(proveedores);
 
+        for (let i = 0; i < proveedores.length; i++) {
+            let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
 
-
-  function crearMarcadoresDeProveedores(proveedores, map) {
-    console.log(proveedores); 
-    for (let i = 0; i < proveedores.length; i++) {
-        let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
-
-        let el = createCustomMarker();   // Crear el elemento de marcador personalizado
-
-        let proveedorMarker = new mapboxgl.Marker({ element: el })
-            .setLngLat([proveedor.lon, proveedor.lat])
-            .setPopup(new mapboxgl.Popup().setHTML(`
-                <div class="proveedor-popup">
-                    <h3>${proveedor.localName}</h3> 
-                    <div class="">
-                        <p class="localName">Proveedor Nº ${proveedor.IDuser}</p>  
+            let el = createCustomMarker();   // Crear el elemento de marcador personalizado
+            
+            // Crear y configurar el marcador en el mapa
+            let proveedorMarker = new mapboxgl.Marker({ element: el })
+                .setLngLat([proveedor.lon, proveedor.lat])
+                .setPopup(new mapboxgl.Popup().setHTML(`
+                    <div class="proveedor-popup">
+                        <h3>${proveedor.localName}</h3> 
+                        <div class="">
+                            <p class="localName">Proveedor Nº ${proveedor.IDuser}</p>  
+                        </div>
+                        <button class="btn btn-primary d-block mx-auto mb-2 verButton"
+                                data-id="${proveedor.IDuser}"
+                                data-name="${proveedor.localName}"
+                                data-menus="${proveedor.quantityMenus}">Ver</button>
                     </div>
-                    <button class="btn btn-primary d-block mx-auto mb-2 verButton"
-                            data-id="${proveedor.IDuser}"
-                            data-name="${proveedor.localName}"
-                            data-menus="${proveedor.quantityMenus}">Ver</button>
-                </div>
-            `))
-            .addTo(map);
-
-
-    }
+                `))
+                .addTo(map);
+        }
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos de los proveedores:', error);
+    });
 }
 
-crearMarcadoresDeProveedores(proveedores, map);
+crearMarcadoresDeProveedores(map);
+
 
 
 function createCustomMarker() {
@@ -353,14 +356,57 @@ $('#salirreservar').on('click', function() {
 
 
 
+//Colocar las púas de los beneficiarios en el mapa
 
+function crearMarcadoresDeBeneficiarios(map) {
+    axios.get('http://localhost/M12/Proyecto2/table4all/public/api/beneficiary')
+    .then(response => {
+      // Parseamos y transformamos los datos directamente dentro de la promesa
+      const beneficiarios = response.data.map(beneficiario => ({
+          ...beneficiario,
+          lat: parseFloat(beneficiario.latitude),
+          lon: parseFloat(beneficiario.longitude)
+      }));
 
+      console.log(beneficiarios); // Ahora beneficiarios tiene los datos transformados
 
+      // Crear marcadores después de que los datos estén disponibles
+      for (let i = 0; i < beneficiarios.length; i++) {
+          let beneficiario = beneficiarios[i];  // Acceder al beneficiario en el índice actual
 
-let beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb() })
-  .setLngLat([2.0330500, 41.4922600])
-  .setPopup(new mapboxgl.Popup().setHTML("<h3>Beneficiario</h3>"))
-  .addTo(map);
+          let el = createCustomMarkerb();   // Crear el elemento de marcador personalizado
+
+          // Editar el pop up con los datos del beneficiario
+          let beneficiaryMarker = new mapboxgl.Marker({ element: el })
+              .setLngLat([beneficiario.lon, beneficiario.lat])
+              .setPopup(new mapboxgl.Popup().setHTML(`
+              <h2>Beneficiario ${beneficiario.ID}</h2>
+              <h6>Información/Estado:</h6>
+              <div id="beneficiary-state">No se ha añadido ningún estado</div>
+              <br>
+              <div class="button-container">
+                <button type="button" class="btn-primary-modifyButton" id="guardarEstado" data-toggle="modal" data-target="#exampleModal">
+                <div class="image"></div>
+                <input type="hidden" data-id="${beneficiario.ID}">
+                </button>
+                <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
+                  <div class="image">
+                  
+                  </div>
+                </button>
+                </button>
+              </div>      
+              `))
+              .addTo(map);
+      }
+  })
+  .catch(error => {
+      console.error('Error al obtener los datos de los beneficiarios:', error);
+  });
+}
+
+crearMarcadoresDeBeneficiarios(map);
+
 
 const markerElementb = beneficiaryMarker.getElement();
 markerElementb.classList.add('beneciciary-marker');
@@ -370,6 +416,7 @@ function createCustomMarkerb() {
   el.className = 'beneciciary-marker';
   return el;
 }
+
 
 
 
