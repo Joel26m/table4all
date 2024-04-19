@@ -6,18 +6,6 @@ import nav from './components/nav.vue'
 createApp(nav).mount('#nav')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 let primerClicBene = true;
 let primerClicProv = true;
 obtenerUbicacion();
