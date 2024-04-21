@@ -13,7 +13,7 @@
     <link href="{{ asset('../resources/css/landing.css') }}" rel="stylesheet"> 
     <script src="{{ asset('../resources/js/loader.js') }}"></script>
     <link href="{{ asset('../resources/css/loader.css') }}" rel="stylesheet">
-   
+    <title>@yield('Landing Page')</title>
 </head>
 <body>
 
@@ -50,15 +50,15 @@
 
 
    
-<section class="inicial" id="inicial">
+<section class="inicial " id="inicial">
 
    
-    <div class="title-app">
-        <h1>Bitiby</h1>
-        <h2>"<span class="highlight">Table</span>4<span class="highlight">All</span>"</h2>
+    <div class="title-app ">
+        <h1 class="animatedInicial">Bitiby</h1>
+        <h2 class="animatedInicial">"<span class="highlight animatedInicial">Table</span >4<span class="highlight animatedInicial">All</span>"</h2>
 
     </div>
-<div class="right-content">
+<div class="right-content animatedInicial">
         <img src="../resources/css/media-landing/fondo_section1.png" alt="">
 
         <div class="descripcion">
@@ -67,7 +67,7 @@
             </p>
         </div>
     
-            <a href="#" class="boton" id="boton_rider" >¡Quiero ayudar! <svg class="icono" width="30" height="34" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <a href="{{action([App\Http\Controllers\UsersController::class, 'register'])}}" class="boton" id="boton_rider" >¡Quiero ayudar! <svg class="icono" width="30" height="34" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="40" height="44" fill="url(#pattern0)"/>
                 <defs>
                 <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -78,7 +78,7 @@
                 </svg>
             </a>
     
-            <a href="#" class="boton" id="boton_proveedor">¡Registrar mi negocio!
+            <a href="{{action([App\Http\Controllers\UsersController::class, 'register'])}}" class="boton" id="boton_proveedor">¡Registrar mi negocio!
               <svg class="icono" width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="34" height="35" fill="url(#pattern0_172_24)"/>
                 <defs>
@@ -104,7 +104,7 @@
     </div>
 
     <div class="div-rider">
-        <div class="rider-title">
+        <div class="rider-title animated">
             <h1>RIDER</h1>
 
         </div>
@@ -155,7 +155,7 @@
         </div>
     </div>
     <div class="div-negocio">
-        <div class="negocio-title">
+        <div class="negocio-title animated">
             <h1>NEGOCIO</h1>
         </div>
 
@@ -209,7 +209,7 @@
     <h2 data-translate="impacto">NUESTRO IMPACTO</h2>
 </div>
 
-<div class="info1">
+<div class="info1 animated">
   <img src="../resources/css/media-landing/barcelona.png" alt="">
   <div class="content">
       <h1>SOCIEDAD</h1>
@@ -217,7 +217,7 @@
   </div>
 </div>
 
-<div class="info2">
+<div class="info2 animated">
   <div class="content">
       <h1>VOLUNTARIOS</h1>
       <p>Colaboramos con voluntarios que dedican su tiempo y esfuerzo para llevar esperanza y ayuda a <br>quienes más lo necesitan.</p>
@@ -226,7 +226,7 @@
   <img src="../resources/css/media-landing/rider.jpeg" alt="">
 </div>
 
-<div class="info3">
+<div class="info3 animated">
   <img src="../resources/css/media-landing/restaurante.jpeg" alt="">
   <div class="content">
       <h1>RESTAURANTES</h1>
@@ -243,31 +243,31 @@
             <h2 data-translate="dev-team">SOCIOS</h2>
         </div>
 
-        <p class="text-socios">Bitiby esta compuesto actualmente de 4 jovenes emprendedores </p>
+        <p class="text-socios animated">Bitiby esta compuesto actualmente de 4 jovenes emprendedores </p>
         <div class="equipo row">
           <div class="col-md-6 col-lg-3">
-            <div class="info-team">
+            <div class="info-team animated">
               <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Raúl</h3>
               <p>Backend Developer</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="info-team">
+            <div class="info-team animated">
               <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Joel</h3>
               <p>Fronted Developer</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="info-team">
+            <div class="info-team animated">
               <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Roger</h3>
               <p>Backend Developer</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
-            <div class="info-team">
+            <div class="info-team animated">
               <img src="../resources/css/media-landing/userpng.png" alt="Team member image">
               <h3>Alex</h3>
               <p>Fronted Developer</p>
@@ -284,7 +284,7 @@
             <!-- logo -->
             <div class="logo-footer">
                 <a href="#" style="text-decoration: none"> 
-                    <svg width="100" height="99"  viewBox="0 0 555 534" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                    <svg width="100" height="99"  viewBox="0 0 555 534" fill="none" xmlns="http://www.w3.org/2000/svg" class="animated">
                         <path d="M433.129 23.3836C415.895 27.1189 402.569 38.4584 396.459 54.6242C394.222 60.6503 393.591 72.2884 395.16 78.5985C401.809 104.638 430.004 120.95 456.872 114.234C465.212 112.118 471.108 109.092 477.902 103.312C498.191 86.1248 499.493 57.4818 480.782 37.8705C471.664 28.2723 460.385 23.3037 446.128 22.6871C441.157 22.4178 436.323 22.7007 433.129 23.3836Z" fill="white"/>
                         <path d="M268.706 23.3546C251.471 27.0899 238.145 38.4293 232.035 54.5951C229.798 60.6213 229.168 72.2593 230.737 78.5695C237.385 104.608 265.581 120.921 292.448 114.205C300.788 112.089 306.685 109.063 313.478 103.283C333.768 86.0958 335.07 57.4527 316.358 37.8414C307.241 28.2432 295.961 23.2746 281.704 22.658C276.734 22.3888 271.9 22.6716 268.706 23.3546Z" fill="white"/>
                         <path d="M104.282 23.3246C87.0474 27.06 73.7215 38.3994 67.6116 54.5652C65.3742 60.5914 64.7438 72.2294 66.3129 78.5396C72.9615 104.579 101.157 120.891 128.024 114.175C136.364 112.059 142.261 109.033 149.054 103.253C169.344 86.0659 170.646 57.4228 151.934 37.8115C142.817 28.2133 131.537 23.2447 117.28 22.6281C112.31 22.3589 107.476 22.6417 104.282 23.3246Z" fill="white"/>
@@ -294,14 +294,14 @@
                           
                   </a>
             </div>
-            <div class="redes-sociales">
+            <div class="redes-sociales animated">
               <i class="fa-brands fa-github"></i>
               <i class="fa-brands fa-linkedin"></i>
               <i class="fa-brands fa-instagram"></i>
             </div>
           </div>
 
-          <div class="menu-footer">
+          <div class="menu-footer animated">
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a href="#" class="nav-link" aria-current="page" data-translate="inicio">INICIO</a>
@@ -319,7 +319,7 @@
           </div>
         </div>
 
-        <div class="copyright">
+        <div class="copyright animated">
           <h5>2024 | Made with ❤️ | DAW | Team 4 </h5>
         </div>
 

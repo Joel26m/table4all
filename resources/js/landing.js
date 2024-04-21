@@ -111,3 +111,54 @@ function showSlide2(direction) {
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Simula un loader de 3 segundos
+    setTimeout(function() {
+        const elements = document.querySelectorAll('.animatedInicial');
+        elements.forEach(element => {
+            element.classList.add('visible3');
+        });
+    }, 1600); // 3000 milisegundos = 3 segundos
+});
+
+  
+
+window.addEventListener('scroll', () => {
+    const elements = document.querySelectorAll('.animated');
+    elements.forEach(element => {
+      if (isElementInViewport(element)) {
+        element.classList.add('visible2');
+      } else {
+        element.classList.remove('visible2');
+      }
+    });
+  });
+window.addEventListener('scroll', () => {
+    const titles = document.querySelectorAll('.title');
+    titles.forEach(title => {
+      if (isElementInViewport(title)) {
+        title.classList.add('visible');
+      } else {
+        title.classList.remove('visible');
+      }
+    });
+  });
+  
+  function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+
+  
+
+
+  
+
+  
