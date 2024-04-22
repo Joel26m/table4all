@@ -22,6 +22,11 @@ let primerClicBene = true;
 let primerClicProv = true;
 obtenerUbicacion();
 
+let beneficiarios = [];
+
+
+
+  
 
 function toggleBeneficiarios() {
     primerClicProv = true; 
@@ -147,7 +152,7 @@ map.on('click', (event) => {
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
 
-                axios.post('http://localhost/table4all/public/api/beneficiary', {
+                axios.post('http://localhost:8080/table4all/public/api/beneficiary', {
                     latitude: latitude,
                     longitude: longitude,
                     state: true
@@ -178,113 +183,113 @@ map.on('click', (event) => {
 
           
 
-            // Agregar evento de clic al botón "Aceptar" del modal
-            document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
-                event.preventDefault();
-                document.querySelector(".content-wrapper").style.display = "block";    
-                console.log("Iniciando ruta...");
-                crearRuta(usuarioCoordinates, destinationCoordinates);
-            
-                // Obtener la dirección del lugar al que se va
-                obtenerDireccion(destinationCoordinates);
-                
-                // Ocultar el modal de confirmación
-                $('#confirmarModal').modal('hide');
-            });
-            
-            function obtenerDireccion(coordinates) {
-                const latitude = coordinates[1]; // Latitud del lugar
-                const longitude = coordinates[0]; // Longitud del lugar
-            
-                fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const place = data.features[0];
-                        const address = place.place_name;
-                        // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
-                        document.getElementById('direcciongo').textContent = 'Dirección del lugar al que se va: ' + address;
-                    })
-                    .catch(error => {
-                        console.error('Error al obtener la dirección:', error);
-                    });
-            }
-            
-
-
-                // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
-                document.getElementById('guardarEstado').addEventListener('click', function(event) {
+                // Agregar evento de clic al botón "Aceptar" del modal
+                document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                     event.preventDefault();
-                    const nuevoEstado = document.getElementById('nuevoEstado').value;
-                    // Modificar el estado del beneficiario
-                    document.getElementById('beneficiary-state').innerText = nuevoEstado;
-                    // Cerrar modal
-                    $('#exampleModal').modal('hide');
+                    document.querySelector(".content-wrapper").style.display = "block";    
+                    console.log("Iniciando ruta...");
+                    crearRuta(usuarioCoordinates, destinationCoordinates);
+                
+                    // Obtener la dirección del lugar al que se va
+                    obtenerDireccion(destinationCoordinates);
+                    
+                    // Ocultar el modal de confirmación
+                    $('#confirmarModal').modal('hide');
                 });
+            
+                function obtenerDireccion(coordinates) {
+                    const latitude = coordinates[1]; // Latitud del lugar
+                    const longitude = coordinates[0]; // Longitud del lugar
+                
+                    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const place = data.features[0];
+                            const address = place.place_name;
+                            // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
+                            document.getElementById('direcciongo').textContent = 'Dirección del lugar al que se va: ' + address;
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener la dirección:', error);
+                        });
+                }
+                
+
+
+
             
                 popup.remove();
             });
-            
+
 
             
-            document.getElementById('complete').addEventListener('click', function(event) {
-                event.preventDefault();
-                document.querySelector(".content-wrapper").style.display = "none";     
-                           console.log("Iniciando ruta...");
-                           map.removeLayer('ruta');
+                document.getElementById('complete').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    document.querySelector(".content-wrapper").style.display = "none";     
+                            console.log("Iniciando ruta...");
+                            map.removeLayer('ruta');
 
-                // Ocultar modal
-                $('#confirmarModal').modal('hide');
-                
-            });
+                    // Ocultar modal
+                    $('#confirmarModal').modal('hide');
+                    
+                });
     }
 });
     
 });
-
+                            // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
+                            document.getElementById('guardarEstado').addEventListener('click', function(event) {
+                                
+                                event.preventDefault();
+                                const nuevoEstado = document.getElementById('nuevoEstado').value;
+                                // Modificar el estado del beneficiario
+                                document.getElementById('beneficiary-state').innerText = nuevoEstado;
+                                // Cerrar modal
+                                $('#exampleModal').modal('hide');
+                            });
+            
 
 //Colocar las púas de los proveedores en el mapa
 
-function crearMarcadoresDeProveedores(map) {
-    // Obtener lista de proveedores
-    axios.get('http://localhost/table4all/public/api/provider')
-    .then(response => {
-        const proveedores = response.data.map(proveedor => ({
+function obtenerDatosProveedores() {
+    return axios.get('http://localhost:8080/table4all/public/api/provider')
+        .then(response => response.data.map(proveedor => ({
             ...proveedor,
             lat: parseFloat(proveedor.latitude),
             lon: parseFloat(proveedor.longitude)
-        }));
+        })))
+        .catch(error => {
+            console.error('Error al obtener los datos de los proveedores:', error);
+            throw error;  // Propaga el error para que los consumidores de la función lo manejen.
+        });
+}
 
-        console.log(proveedores);
+function crearMarcadoresDeProveedores(proveedores, map) {
+    proveedores.forEach(proveedor => {
+        let el = createCustomMarker();   // Crear el elemento de marcador personalizado
 
-        for (let i = 0; i < proveedores.length; i++) {
-            let proveedor = proveedores[i];  // Acceder al proveedor en el índice actual
-
-            let el = createCustomMarker();   // Crear el elemento de marcador personalizado
-            
-            // Crear y configurar el marcador en el mapa
-            let proveedorMarker = new mapboxgl.Marker({ element: el })
-                .setLngLat([proveedor.lon, proveedor.lat])
-                .setPopup(new mapboxgl.Popup().setHTML(`
-                    <div class="proveedor-popup">
-                        <h3>${proveedor.localName}</h3> 
-                        <div class="">
-                            <p class="localName">Proveedor Nº ${proveedor.IDuser}</p>  
-                        </div>
-                        <button class="btn btn-primary d-block mx-auto mb-2 verButton"
-                                data-id="${proveedor.IDuser}"
-                                data-name="${proveedor.localName}"
-                                data-menus="${proveedor.quantityMenus}">Ver</button>
+        new mapboxgl.Marker({ element: el })
+            .setLngLat([proveedor.lon, proveedor.lat])
+            .setPopup(new mapboxgl.Popup().setHTML(`
+                <div class="proveedor-popup">
+                    <h3>${proveedor.localName}</h3>
+                    <div class="">
+                        <p class="localName">Proveedor Nº ${proveedor.IDuser}</p>
                     </div>
-                `))
-                .addTo(map);
-        }
-    })
-    .catch(error => {
-        console.error('Error al obtener los datos de los proveedores:', error);
+                    <button class="btn btn-primary d-block mx-auto mb-2 verButton"
+                            data-id="${proveedor.IDuser}"
+                            data-name="${proveedor.localName}"
+                            data-menus="${proveedor.quantityMenus}">Ver</button>
+                </div>
+            `))
+            .addTo(map);
     });
 }
 
-crearMarcadoresDeProveedores(map);
+obtenerDatosProveedores().then(proveedores => {
+    crearMarcadoresDeProveedores(proveedores, map);
+    // Aquí también podrías hacer otras cosas con los datos de proveedores
+});
 
 
 
@@ -330,7 +335,7 @@ $('#reservarButton').on('click', function() {
     console.log(proveedorId, quantityReserve); 
 
     // Llamar a la API para hacer la reserva
-    axios.post('http://localhost/table4all/public/api/collection', {
+    axios.post('http://localhost:8080/table4all/public/api/collection', {
         provider: proveedorId,
         quantityMenus: parseInt(quantityReserve, 10)
         
@@ -356,57 +361,49 @@ $('#salirreservar').on('click', function() {
 
 
 //Colocar las púas de los beneficiarios en el mapa
-
-function crearMarcadoresDeBeneficiarios(map) {
-    axios.get('http://localhost/table4all/public/api/beneficiary')
-    .then(response => {
-      // Parseamos y transformamos los datos directamente dentro de la promesa
-      const beneficiarios = response.data.map(beneficiario => ({
-          ...beneficiario,
-          lat: parseFloat(beneficiario.latitude),
-          lon: parseFloat(beneficiario.longitude)
-      }));
-
-      console.log(beneficiarios); // Ahora beneficiarios tiene los datos transformados
-
-      // Crear marcadores después de que los datos estén disponibles
-      for (let i = 0; i < beneficiarios.length; i++) {
-          let beneficiario = beneficiarios[i];  // Acceder al beneficiario en el índice actual
-
-          let el = createCustomMarkerb();   // Crear el elemento de marcador personalizado
-
-          // Editar el pop up con los datos del beneficiario
-          let beneficiaryMarker = new mapboxgl.Marker({ element: el })
-              .setLngLat([beneficiario.lon, beneficiario.lat])
-              .setPopup(new mapboxgl.Popup().setHTML(`
-              <h2>Beneficiario ${beneficiario.ID}</h2>
-              <h6>Información/Estado:</h6>
-              <div id="beneficiary-state">No se ha añadido ningún estado</div>
-              <br>
-              <div class="button-container">
-                <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
-                <div class="image"></div>
-                <input type="hidden" data-id="${beneficiario.ID}">
-                </button>
-                <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
-                  <div class="image">
-                  
-                  </div>
-                </button>
-                </button>
-              </div>      
-              `))
-              .addTo(map);
-      }
-  })
-  .catch(error => {
-      console.error('Error al obtener los datos de los beneficiarios:', error);
-  });
+function obtenerDatosBeneficiarios() {
+    return axios.get('http://localhost:8080/table4all/public/api/beneficiary')
+        .then(response => response.data.map(beneficiario => ({
+            ...beneficiario,
+            lat: parseFloat(beneficiario.latitude),
+            lon: parseFloat(beneficiario.longitude)
+        })))
+        .catch(error => {
+            console.error('Error al obtener los datos de los beneficiarios:', error);
+            throw error;  // Propaga el error para que los consumidores de la función lo manejen.
+        });
 }
 
-crearMarcadoresDeBeneficiarios(map);
+function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
+    beneficiarios.forEach(beneficiario => {
+        let el = createCustomMarkerb();  // Crear el elemento de marcador personalizado
 
+        new mapboxgl.Marker({ element: el })
+            .setLngLat([beneficiario.lon, beneficiario.lat])
+            .setPopup(new mapboxgl.Popup().setHTML(`
+                <h2>Beneficiario ${beneficiario.ID}</h2>
+                <h6>Información/Estado:</h6>
+                <div id="beneficiary-state">No se ha añadido ningún estado</div>
+                <br>
+                <div class="button-container">
+                    <button type="button" class="btn-primary-modifyButton" data-toggle="modal" data-target="#exampleModal" data-beneficiario-id="${beneficiario.ID}">
+                        <div class="image"></div>
+                    </button>
+                    <button type="button" class="btn-with-image" data-toggle="modal" data-target="#confirmarModal">
+                        <div class="image"></div>
+                    </button>
+                </div>
+            `))
+            .addTo(map);
+    });
+}
 
+    
+    obtenerDatosBeneficiarios().then(beneficiarios => {
+        crearMarcadoresDeBeneficiarios(beneficiarios, map);
+        // Aquí también podrías hacer otras cosas con los datos de beneficiarios
+    });
+    
 const markerElementb = beneficiaryMarker.getElement();
 markerElementb.classList.add('beneciciary-marker');
 

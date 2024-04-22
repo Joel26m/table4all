@@ -39,7 +39,6 @@
             <div class="logobene"></div> <!-- Div que contiene la imagen de los beneficiarios -->
             <div class="text-center">
                 <p class="subtext">Beneficiarios</p>
-                <input type="hidden" id="beneficiarioid">
 
             </div>
         </button>
@@ -66,7 +65,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                    <button type="button" class="btn btn-primary" id="guardarEstado">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="guardarEstado" data-id="id_beneficiario">Guardar</button>
                 </div>
             </div>
         </div>
