@@ -7,6 +7,9 @@
     width: 100%;
     border-color: rgb(255, 255, 255);
 }
+#loader-wrapper{
+  z-index: 1111111;
+}
 
 #btnDesaparecer {
   position: absolute;
