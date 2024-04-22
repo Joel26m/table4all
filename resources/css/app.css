@@ -8,6 +8,23 @@
     border-color: rgb(255, 255, 255);
 }
 
+#btnDesaparecer {
+  position: absolute;
+  top: 80px; /* Margen superior de 80px */
+  left: 50%; /* Centra horizontalmente el botón */
+  transform: translateX(-50%); /* Ajusta el centro del botón */
+  z-index: 1; /* Asegura que el botón esté sobre otros elementos */
+  background-color: #3D89E2; /* Color de fondo azul */
+  font-size: 25px;
+  color: #fff; /* Color de texto blanco */
+  padding: 7px 7px; /* Espacio interior del botón */
+  border: none; /* Sin borde */
+  border-top-left-radius: 0px; /* Bordes superiores izquierdos redondeados */
+  border-top-right-radius: 0px; /* Bordes superiores derechos redondeados */
+  border-bottom-left-radius: 20px; /* Bordes inferiores izquierdos no redondeados */
+  border-bottom-right-radius: 20px; /* Bordes inferiores derechos no redondeados */
+  width: 220px; /* Ancho del botón */
+}
 
 .admincont{
   background-color: #ffffff;
