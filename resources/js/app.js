@@ -22,8 +22,6 @@ let primerClicBene = true;
 let primerClicProv = true;
 obtenerUbicacion();
 
-let beneficiarios = [];
-
 
 
   
@@ -138,7 +136,7 @@ map.on('click', (event) => {
             currentPopup.remove();
         }
         const popup = new mapboxgl.Popup({ offset: [0, -15], className: 'popup-custom' })
-        .setLngLat(lngLat)
+            .setLngLat(lngLat)
             .setHTML('<h3><div class="add-container">' +
                 '<h1>¿Deseas añadir un Beneficiario?</h1>' +
                 '<form id="ubicacionForm" action="#">' +
@@ -148,105 +146,83 @@ map.on('click', (event) => {
                 '</h3>')
             .addTo(map);
 
-            
-            document.getElementById('aceptarBtn').addEventListener('click', function(event) {
-                event.preventDefault();
+        document.getElementById('aceptarBtn').addEventListener('click', function(event) {
+            event.preventDefault();
 
-                axios.post('http://localhost:8080/table4all/public/api/beneficiary', {
-                    latitude: latitude,
-                    longitude: longitude,
-                    state: true
-                })
-            
+            axios.post('http://localhost:8080/table4all/public/api/beneficiary', {
+                latitude: latitude,
+                longitude: longitude,
+                state: 'No se ha añadido ningún estado'
+            })
+            .then(response => {
+                const beneficiary = response.data;
                 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
                     .setPopup(new mapboxgl.Popup().setHTML(`
                     <h2>Beneficiario</h2>
                     <h6>Información/Estado:</h6>
-                    <div id="beneficiary-state">No se ha añadido ningún estado</div>
+                    <div id="beneficiary-state">${beneficiary.state}</div>
                     <br>
                     <div class="button-container">
-                      <button type="button" class="btn-primary-modifyButton" id="modifyButton" data-toggle="modal" data-target="#exampleModal">
-                      <div class="image"></div>
-                      </button>
-                      <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
+                        <button type="button" class="btn-primary-modifyButton" data-toggle="modal" data-target="#exampleModal" data-beneficiario-id="${beneficiary.ID}">
                         <div class="image"></div>
-                      </button>
-                      </button>
+                        </button>
+                        <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
+                            <div class="image"></div>
+                        </button>
                     </div>                    
-                      
                     `))
                     .addTo(map);
-           
-                event.preventDefault();
-           
-
-          
-
-                // Agregar evento de clic al botón "Aceptar" del modal
-                document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    document.querySelector(".content-wrapper").style.display = "block";    
-                    console.log("Iniciando ruta...");
-                    crearRuta(usuarioCoordinates, destinationCoordinates);
-                
-                    // Obtener la dirección del lugar al que se va
-                    obtenerDireccion(destinationCoordinates);
-                    
-                    // Ocultar el modal de confirmación
-                    $('#confirmarModal').modal('hide');
-                });
-            
-                function obtenerDireccion(coordinates) {
-                    const latitude = coordinates[1]; // Latitud del lugar
-                    const longitude = coordinates[0]; // Longitud del lugar
-                
-                    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const place = data.features[0];
-                            const address = place.place_name;
-                            // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
-                            document.getElementById('direcciongo').textContent = 'Dirección del lugar al que se va: ' + address;
-                        })
-                        .catch(error => {
-                            console.error('Error al obtener la dirección:', error);
-                        });
-                }
-                
-
-
-
-            
-                popup.remove();
+                console.log('Beneficiario creado con ID:', beneficiary.ID);
+            })
+            .catch(error => {
+                console.error('Error al crear el beneficiario:', error);
             });
+            popup.remove();
 
+            // Evento para confirmar inicio de ruta
+            document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.querySelector(".content-wrapper").style.display = "block";    
+                console.log("Iniciando ruta...");
+                crearRuta(usuarioCoordinates, destinationCoordinates);
 
-            
-                document.getElementById('complete').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    document.querySelector(".content-wrapper").style.display = "none";     
-                            console.log("Iniciando ruta...");
-                            map.removeLayer('ruta');
-
-                    // Ocultar modal
-                    $('#confirmarModal').modal('hide');
-                    
-                });
+                // Ocultar el modal de confirmación
+                $('#confirmarModal').modal('hide');
+            });
+        });
     }
 });
-    
+
+$(document).on('click', '.btn-primary-modifyButton', function() {
+    var beneficiarioId = $(this).data('beneficiario-id'); // Captura el ID desde el botón que abre el modal
+    $('#beneficiaryId').val(beneficiarioId); // Establece el ID en el input oculto dentro del modal
+    $('#exampleModal').modal('show');
 });
-                            // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
-                            document.getElementById('guardarEstado').addEventListener('click', function(event) {
-                                
-                                event.preventDefault();
-                                const nuevoEstado = document.getElementById('nuevoEstado').value;
-                                // Modificar el estado del beneficiario
-                                document.getElementById('beneficiary-state').innerText = nuevoEstado;
-                                // Cerrar modal
-                                $('#exampleModal').modal('hide');
-                            });
+
+
+// Manejador para el estado del beneficiario
+// Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
+document.getElementById('guardarEstado').addEventListener('click', function(event) {
+    event.preventDefault();
+    const nuevoEstado = document.getElementById('nuevoEstado').value;
+    const beneficiarioId = document.getElementById('beneficiaryId').value; // Asegúrate de que este input existe y tiene el valor correcto
+    console.log(beneficiarioId);
+    
+     // Modificar el estado del beneficiario
+    axios.put(`http://localhost:8080/table4all/public/api/beneficiary/${beneficiarioId}`, {
+        state: nuevoEstado
+    })
+    .then(() => {
+        document.getElementById('beneficiary-state').innerText = nuevoEstado;
+        $('#exampleModal').modal('hide');
+    })
+    .catch(error => {
+        console.error('Error al actualizar el estado del beneficiario:', error);
+    });
+});
+
+});
             
 
 //Colocar las púas de los proveedores en el mapa
@@ -383,10 +359,11 @@ function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
             .setPopup(new mapboxgl.Popup().setHTML(`
                 <h2>Beneficiario ${beneficiario.ID}</h2>
                 <h6>Información/Estado:</h6>
-                <div id="beneficiary-state">No se ha añadido ningún estado</div>
+                <div id="beneficiary-state">${beneficiario.state}</div>
                 <br>
                 <div class="button-container">
                     <button type="button" class="btn-primary-modifyButton" data-toggle="modal" data-target="#exampleModal" data-beneficiario-id="${beneficiario.ID}">
+                    <input type="hidden" id="beneficiaryId">
                         <div class="image"></div>
                     </button>
                     <button type="button" class="btn-with-image" data-toggle="modal" data-target="#confirmarModal">
