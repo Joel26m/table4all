@@ -177,6 +177,7 @@ const map = new mapboxgl.Map({
 });
 
 
+let clickEnabled = true;
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -188,9 +189,10 @@ let currentPopup = null; // Variable para almacenar el popup actualmente abierto
 map.on('click', (event) => {
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
-
-
-
+   
+    if (!clickEnabled) {
+        return;
+    }
     if (!lngLat) {
         console.log("Event object does not have latlng properties.");
         return;
@@ -204,6 +206,8 @@ map.on('click', (event) => {
         if (currentPopup) {
             currentPopup.remove();
         }
+
+        
         const popup = new mapboxgl.Popup({ offset: [0, -15], className: 'popup-custom' })
         .setLngLat(lngLat)
             .setHTML('<h3><div class="add-container">' +
@@ -253,7 +257,8 @@ map.on('click', (event) => {
             
                 // Obtener la dirección del lugar al que se va
                 obtenerDireccion(destinationCoordinates);
-                
+                clickEnabled = false;
+
                 // Ocultar el modal de confirmación
                 $('#confirmarModal').modal('hide');
             });
@@ -296,12 +301,13 @@ map.on('click', (event) => {
             
             document.getElementById('complete').addEventListener('click', function(event) {
                 event.preventDefault();
-                           console.log("Iniciando ruta...");
-                           map.removeLayer('ruta');
-
+                console.log("Iniciando ruta...");
+                map.removeLayer('ruta');
+        
+                clickEnabled = false;
+        
                 // Ocultar modal
                 $('#confirmarModal').modal('hide');
-                
             });
     }
 });
