@@ -15,7 +15,6 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
-  <link href="{{ asset('../resources/css/login.css') }}" rel="stylesheet">
     <script src="{{ asset('../resources/js/loader.js') }}"></script>
     <link href="{{ asset('../resources/css/loader.css') }}" rel="stylesheet"> 
 </head>
@@ -35,18 +34,18 @@
       </a>
   </div>
 </div>
-<div class="usarappbutton">
 
-</div>
-
+<div class="interactivo">
 <div class="container-wrapper-genially" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
 <button id="btnDesaparecer" class="btn btn-primary ">¡Ya sé usar Bitiby!</button>
    
-<video class="loader-genially" autoplay loop playsinline muted style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px;">
+<video class="loader-genially" autoplay loop playsinline muted style=" top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px;">
         <source src="https://static.genial.ly/resources/loader-default.mp4" type="video/mp4" />
         Your browser does not support the video tag.
     </video>
     <div id="662281eb57c6e800147b41d7" class="genially-embed" style="margin: 0 auto; position: relative; width: 100%; height: 100%;"></div>
+
+</div>
 
 </div>
 

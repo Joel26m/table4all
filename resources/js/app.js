@@ -26,6 +26,17 @@ function setCookie(name, value, days) {
     }
     return null;
   }
+  var btnDesaparecer = document.getElementById("btnDesaparecer");
+  var divGenially = document.querySelector(".container-wrapper-genially")
+  function esPantallaDeEscritorio() {
+    return window   .matchMedia("(min-width: 768px)").matches;
+  }
+  
+  // Ocultar elementos si no es una pantalla de escritorio
+  if (esPantallaDeEscritorio()) {
+    divGenially.style.display = "none";
+    btnDesaparecer.style.display = "none";
+  }
 
   document.addEventListener("DOMContentLoaded", function() {
     var btnDesaparecer = document.getElementById("btnDesaparecer");
@@ -34,6 +45,7 @@ function setCookie(name, value, days) {
       divGenially.style.display = "none";
       btnDesaparecer.style.display = "none"; // Oculta el botón también
       setCookie("visited", "true", 30); // Establece la cookie 'visited' con valor 'true' durante 30 días
+    
     });
 
     var visited = getCookie("visited");
