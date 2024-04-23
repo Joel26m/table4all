@@ -11,6 +11,12 @@
   z-index: 1111111;
 }
 
+.disabled {
+  pointer-events: none; /* Evita que los eventos del mouse sean dirigidos al elemento */
+  opacity: 0.5; /* Aplica una opacidad para simular el efecto de deshabilitado */
+  /* Otros estilos según sea necesario */
+}
+
 #btnDesaparecer {
   position: absolute;
   top: 80px; /* Margen superior de 80px */

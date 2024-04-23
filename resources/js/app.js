@@ -185,14 +185,20 @@ document.addEventListener('DOMContentLoaded', function() {
 let destinationCoordinates; // Variable para almacenar las coordenadas del destino
 
 let currentPopup = null; // Variable para almacenar el popup actualmente abierto
+let clickEnabled = true; 
+let beneficiaryMarker;
 
 map.on('click', (event) => {
+
+
+
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
    
     if (!clickEnabled) {
         return;
     }
+    
     if (!lngLat) {
         console.log("Event object does not have latlng properties.");
         return;
@@ -223,7 +229,7 @@ map.on('click', (event) => {
             document.getElementById('aceptarBtn').addEventListener('click', function(event) {
                 event.preventDefault();
             
-                const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
+                 beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
                     .setPopup(new mapboxgl.Popup().setHTML(`
                     <h2>Beneficiario</h2>
@@ -248,6 +254,7 @@ map.on('click', (event) => {
 
           
 
+
             // Agregar evento de clic al botón "Aceptar" del modal
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
@@ -258,11 +265,36 @@ map.on('click', (event) => {
                 // Obtener la dirección del lugar al que se va
                 obtenerDireccion(destinationCoordinates);
                 clickEnabled = false;
-
-                // Ocultar el modal de confirmación
+                document.querySelectorAll('.button-container').forEach(container => {
+                    container.classList.add('disabled');
+                });
                 $('#confirmarModal').modal('hide');
             });
             
+            // Función para desactivar los botones en un marker específico
+function disableMarkerButtons(marker) {
+    const popupContent = marker.getPopup().getContent();
+    const popupElement = document.createElement('div');
+    popupElement.innerHTML = popupContent;
+
+    // Desactiva los botones en el contenido del popup
+    const buttonContainer = popupElement.querySelector('.button-container');
+    if (buttonContainer) {
+        buttonContainer.classList.add('disabled');
+    }
+
+    // Actualiza el contenido del popup con los botones desactivados
+    marker.getPopup().setContent(popupElement.innerHTML);
+}
+
+// Desactivar los botones en todos los markers con la clase 'beneficiary-marker'
+document.querySelectorAll('.beneficiary-marker').forEach(markerElement => {
+    const marker = markerElement._marker; // Suponiendo que '_marker' contiene la referencia al objeto del marker
+    disableMarkerButtons(marker);
+});
+
+
+
             function obtenerDireccion(coordinates) {
                 const latitude = coordinates[1]; // Latitud del lugar
                 const longitude = coordinates[0]; // Longitud del lugar
