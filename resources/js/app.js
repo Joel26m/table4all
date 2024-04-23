@@ -149,7 +149,7 @@ map.on('click', (event) => {
         document.getElementById('aceptarBtn').addEventListener('click', function(event) {
             event.preventDefault();
 
-            axios.post('http://localhost:8080/table4all/public/api/beneficiary', {
+            axios.post('http://localhost/table4all/public/api/beneficiary', {
                 latitude: latitude,
                 longitude: longitude,
                 state: 'No se ha añadido ningún estado'
@@ -164,7 +164,7 @@ map.on('click', (event) => {
                     <div id="beneficiary-state">${beneficiary.state}</div>
                     <br>
                     <div class="button-container">
-                        <button type="button" class="btn-primary-modifyButton" data-toggle="modal" data-target="#exampleModal" data-beneficiario-id="${beneficiary.ID}">
+                        <button type="button"  class="btn-primary-modifyButton" data-toggle="modal" data-target="#exampleModal" data-beneficiario-id="${beneficiary.ID}">
                         <div class="image"></div>
                         </button>
                         <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
@@ -183,7 +183,7 @@ map.on('click', (event) => {
             // Evento para confirmar inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
-                document.querySelector(".content-wrapper").style.display = "block";    
+                document.querySelector(".content-wrapper").style.display = "block";
                 console.log("Iniciando ruta...");
                 crearRuta(usuarioCoordinates, destinationCoordinates);
 
@@ -205,21 +205,26 @@ $(document).on('click', '.btn-primary-modifyButton', function() {
 // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
 document.getElementById('guardarEstado').addEventListener('click', function(event) {
     event.preventDefault();
+    let clase = document.querySelector('.modal-backdrop');
     const nuevoEstado = document.getElementById('nuevoEstado').value;
     const beneficiarioId = document.getElementById('beneficiaryId').value; // Asegúrate de que este input existe y tiene el valor correcto
     console.log(beneficiarioId);
     
      // Modificar el estado del beneficiario
-    axios.put(`http://localhost:8080/table4all/public/api/beneficiary/${beneficiarioId}`, {
+    axios.put(`http://localhost/table4all/public/api/beneficiary/${beneficiarioId}`, {
         state: nuevoEstado
+        
     })
+    
     .then(() => {
         document.getElementById('beneficiary-state').innerText = nuevoEstado;
         $('#exampleModal').modal('hide');
+        clase.style.display= 'none';
     })
     .catch(error => {
         console.error('Error al actualizar el estado del beneficiario:', error);
     });
+
 });
 
 });
@@ -228,7 +233,7 @@ document.getElementById('guardarEstado').addEventListener('click', function(even
 //Colocar las púas de los proveedores en el mapa
 
 function obtenerDatosProveedores() {
-    return axios.get('http://localhost:8080/table4all/public/api/provider')
+    return axios.get('http://localhost/table4all/public/api/provider')
         .then(response => response.data.map(proveedor => ({
             ...proveedor,
             lat: parseFloat(proveedor.latitude),
@@ -311,7 +316,7 @@ $('#reservarButton').on('click', function() {
     console.log(proveedorId, quantityReserve); 
 
     // Llamar a la API para hacer la reserva
-    axios.post('http://localhost:8080/table4all/public/api/collection', {
+    axios.post('http://localhost/table4all/public/api/collection', {
         provider: proveedorId,
         quantityMenus: parseInt(quantityReserve, 10)
         
@@ -338,7 +343,7 @@ $('#salirreservar').on('click', function() {
 
 //Colocar las púas de los beneficiarios en el mapa
 function obtenerDatosBeneficiarios() {
-    return axios.get('http://localhost:8080/table4all/public/api/beneficiary')
+    return axios.get('http://localhost/table4all/public/api/beneficiary')
         .then(response => response.data.map(beneficiario => ({
             ...beneficiario,
             lat: parseFloat(beneficiario.latitude),
@@ -389,8 +394,6 @@ function createCustomMarkerb() {
   el.className = 'beneciciary-marker';
   return el;
 }
-
-
 
 
 function obtenerUbicacion() {

@@ -3,10 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\Api\BeneficiaryController;
-use App\Http\Controllers\Api\DeliveriesController;
 use App\Http\Controllers\Api\ProviderController;
+use App\Http\Controllers\Api\ProviderMenusController;
 use App\Http\Controllers\Api\CollectionController;
+use App\Http\Controllers\Api\DeliveriesController;
+use App\Http\Controllers\Api\BeneficiaryController;
 
 
 /*
@@ -30,6 +31,8 @@ Route::apiResource('user', UsersController::class);
 Route::apiResource('collection', CollectionController::class);
 Route::apiResource('delivery', DeliveriesController::class);
 Route::apiResource('beneficiary', BeneficiaryController::class);
+Route::apiResource('providerMenus', ProviderMenusController::class);
+
 
 
 
