@@ -15,7 +15,6 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   }
 
-  // Función para obtener el valor de una cookie
   function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -43,9 +42,8 @@ function setCookie(name, value, days) {
     btnDesaparecer.addEventListener("click", function() {
       var divGenially = document.querySelector(".container-wrapper-genially");
       divGenially.style.display = "none";
-      btnDesaparecer.style.display = "none"; // Oculta el botón también
-      setCookie("visited", "true", 30); // Establece la cookie 'visited' con valor 'true' durante 30 días
-    
+      btnDesaparecer.style.display = "none"; 
+      setCookie("visited", "true", 30); 
     });
 
     var visited = getCookie("visited");
@@ -83,7 +81,7 @@ function setCookie(name, value, days) {
 //Manejar datos proveedores
 
 
-  let proveedores = []; // Array para almacenar los datos de los proveedores
+  let proveedores = []; 
 
   axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
   .then(function (response) {
@@ -283,7 +281,6 @@ map.on('click', (event) => {
                 $('#confirmarModal').modal('hide');
             });
             
-            // Función para desactivar los botones en un marker específico
 function disableMarkerButtons(marker) {
     const popupContent = marker.getPopup().getContent();
     const popupElement = document.createElement('div');
@@ -301,23 +298,21 @@ function disableMarkerButtons(marker) {
 
 // Desactivar los botones en todos los markers con la clase 'beneficiary-marker'
 document.querySelectorAll('.beneficiary-marker').forEach(markerElement => {
-    const marker = markerElement._marker; // Suponiendo que '_marker' contiene la referencia al objeto del marker
+    const marker = markerElement._marker; 
     disableMarkerButtons(marker);
 });
 
 
 
             function obtenerDireccion(coordinates) {
-                const latitude = coordinates[1]; // Latitud del lugar
-                const longitude = coordinates[0]; // Longitud del lugar
+                const latitude = coordinates[1];    
+                const longitude = coordinates[0];    
             
                 fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw`)
                     .then(response => response.json())
                     .then(data => {
-                        // La respuesta contiene una lista de lugares cercanos, la dirección del lugar se encuentra en la primera entrada
                         const place = data.features[0];
                         const address = place.place_name;
-                        // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
                         document.getElementById('direcciongo').textContent = address;
                     })
                     .catch(error => {
@@ -327,13 +322,10 @@ document.querySelectorAll('.beneficiary-marker').forEach(markerElement => {
             
 
 
-                // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
                 document.getElementById('guardarEstado').addEventListener('click', function(event) {
                     event.preventDefault();
                     const nuevoEstado = document.getElementById('nuevoEstado').value;
-                    // Modificar el estado del beneficiario
                     document.getElementById('beneficiary-state').innerText = nuevoEstado;
-                    // Cerrar modal
                     $('#exampleModal').modal('hide');
                     document.querySelector('.sticky-div').style.display = 'none';
                 });
@@ -350,7 +342,6 @@ document.querySelectorAll('.beneficiary-marker').forEach(markerElement => {
         
                 clickEnabled = false;
         
-                // Ocultar modal
                 $('#confirmarModal').modal('hide');
             });
     }
@@ -399,15 +390,11 @@ function createCustomMarker() {
 
 
 
-// Adjuntar el evento de clic utilizando delegación de eventos
 $(document).on('click', '#verButton', function(event) {
     event.preventDefault();
 
-    // Obtener el nombre del local y la cantidad de menús disponibles (simulados)
     const localName = "Nombre del local";
-    const cantidadMenus = 5; // Simulación de la cantidad de menús disponibles
   
-    // Actualizar el contenido del modal con el nombre del local y la cantidad de menús
     $('#localNameModal').text(localName);
     $('#cantidadMenusModal').text(cantidadMenus);
   
@@ -415,17 +402,12 @@ $(document).on('click', '#verButton', function(event) {
     $('#exampleModal2').modal('show');
 });
 
-// Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {
-    // Realizar la lógica de reserva aquí
     
-    // Cerrar el modal después de realizar la reserva
     $('#exampleModal2').modal('hide');
 });
 $('#salirreservar').on('click', function() {
-    // Realizar la lógica de reserva aquí
     
-    // Cerrar el modal después de realizar la reserva
     $('#exampleModal2').modal('hide');
 });
 
@@ -476,7 +458,6 @@ function mostrarUbicacion(position) {
         .setLngLat(usuarioCoordinates)
         .addTo(map);
 
-    // Centrar el mapa en la ubicación del usuario
     map.flyTo({
         center: usuarioCoordinates,
         zoom: 15
@@ -496,18 +477,9 @@ function errorUbicacion(error) {
 }
 
 
-// document.getElementById('aceptarBtn').addEventListener('click', function(event) {
-//     event.preventDefault();
 
-//     // Crear la ruta desde la posición del usuario hasta el destino
-//     crearRuta(usuarioCoordinates, destinationCoordinates);
-
-//     // Ocultar el modal
-//     $('#confirmarModal').modal('hide');
-// });
 
 function crearRuta(origen, destino) {
-    // Llamar al servicio de enrutamiento de Mapbox
     const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${origen[0]},${origen[1]};${destino[0]},${destino[1]}?geometries=geojson&steps=true&access_token=${mapboxgl.accessToken}`;
 
     fetch(url)
@@ -515,12 +487,11 @@ function crearRuta(origen, destino) {
         .then(data => {
             const route = data.routes[0];
             const geometry = route.geometry;
-            const duration = route.duration; // Duración estimada del viaje en segundos
+            const duration = route.duration;
 
             // Convertir la duración a minutos
             const durationMinutes = Math.round(duration / 60);
 
-            // Mostrar la ruta en el mapa
             map.addLayer({
                 'id': 'ruta',
                 'type': 'line',
@@ -537,18 +508,16 @@ function crearRuta(origen, destino) {
                     'line-cap': 'round'
                 },
                 'paint': {
-                    'line-color': '#FF691F', // Cambia el color de la línea a naranja
-                    'line-width': 10, // Ajusta el ancho de la línea según sea necesario
-                    'line-opacity': 1, // Ajusta la opacidad de la línea si es necesario
-                    'line-blur': 10, // Agrega un efecto de desenfoque para simular una sombra
-                    'line-offset': 2 // Agrega un desplazamiento para simular una sombra
+                    'line-color': '#FF691F', 
+                    'line-width': 10, 
+                    'line-opacity': 1, 
+                    'line-blur': 10, 
+                    'line-offset': 2 
                 }
             });
 
-            // Crear el contenido del pop-up con la duración estimada del viaje
             const popupContent = `<h3>Tiempo estimado de llegada</h3><p>${durationMinutes} minutos</p>`;
 
-            // Mostrar el pop-up en las coordenadas de destino
             new mapboxgl.Popup()
                 .setLngLat(destino)
                 .setHTML(popupContent)
