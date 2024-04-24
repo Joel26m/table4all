@@ -63,10 +63,10 @@ Route::middleware(['auth'])->group(function(){
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('welcome', function (){
+    Route::get('/', function (){
         $user = Auth::user();
 
-        return view('welcome', compact('user'));
+        return view('nav/index', compact('user'));
     });
 });
 
