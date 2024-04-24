@@ -1,5 +1,27 @@
 // Obtener el contenedor de los registros
+let providerId = document.getElementById('providerId').innerHTML;
+console.log(providerId);
+
+
+function getProviderCollections(providerId) {
+    axios.get(`http://localhost/table4all/public/api/provider/${providerId}/collections`)
+        .then(response => {
+            console.log('Collections del proveedor:', response.data);
+            // Procesa aquí los datos como necesites
+        })
+        .catch(error => {
+            console.error('Error al obtener las collections del proveedor:', error);
+        });
+}
+
+// Llamar a la función con el ID del proveedor que desees
+getProviderCollections(1); // Sustituye '1' con el ID real del proveedor
+
 const registrosContainer = document.querySelector('.registros');
+
+
+
+
 
 // Función para agregar un nuevo registro
 function agregarRegistro(nombre, nMenus, fecha) {

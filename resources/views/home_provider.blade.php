@@ -238,6 +238,9 @@
   <div class="datos">
       <p class="n-menus">Nº MENÚS: 2</p>
       <p class="fecha">FECHA: 2024-03-11</p>
+      {{-- Suponiendo que estás en una vista Blade y el ID del proveedor ha sido pasado a la vista --}}
+<p id="providerId" > {{ $user->ID }}</p>
+
   </div>
 
 </div>
