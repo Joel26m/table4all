@@ -5,6 +5,101 @@ import nav from './components/nav.vue'
 
 createApp(nav).mount('#nav')
 
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  var btnDesaparecer = document.getElementById("btnDesaparecer");
+  var divGenially = document.querySelector(".container-wrapper-genially")
+  function esPantallaDeEscritorio() {
+    return window   .matchMedia("(min-width: 768px)").matches;
+  }
+  
+  // Ocultar elementos si no es una pantalla de escritorio
+  if (esPantallaDeEscritorio()) {
+    divGenially.style.display = "none";
+    btnDesaparecer.style.display = "none";
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var btnDesaparecer = document.getElementById("btnDesaparecer");
+    btnDesaparecer.addEventListener("click", function() {
+      var divGenially = document.querySelector(".container-wrapper-genially");
+      divGenially.style.display = "none";
+      btnDesaparecer.style.display = "none"; 
+      setCookie("visited", "true", 30); 
+    });
+
+    var visited = getCookie("visited");
+    if (visited) {
+      var divGenially = document.querySelector(".container-wrapper-genially");
+      var btnDesaparecer = document.getElementById("btnDesaparecer");
+      divGenially.style.display = "none";
+      btnDesaparecer.style.display = "none"; // Oculta el botón si se ha visitado antes
+    }
+  });
+(function(d) {
+    var js, id = "genially-embed-js",
+        ref = d.getElementsByTagName("script")[0];
+    if (d.getElementById(id)) {
+        return;
+    }
+    js = d.createElement("script");
+    js.id = id;
+    js.async = true;
+    js.onload = function() {
+        var iframe = document.getElementById("662281eb57c6e800147b41d7").querySelector("iframe");
+        if (iframe) {
+            iframe.setAttribute("allowfullscreen", "true");
+            var genially = GeniallyIframePlayer.getGenially(iframe);
+            genially.on("ready", function() {
+                genially.fullscreen();
+            });
+        }
+    };
+    js.src = "https://view.genial.ly/static/embed/embed.js";
+    ref.parentNode.insertBefore(js, ref);
+}(document));
+
+
+//Manejar datos proveedores
+
+
+  let proveedores = []; 
+
+  axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
+  .then(function (response) {
+    proveedores = response.data; // Guarda los proveedores en el array
+    console.log(proveedores);
+  })
+  .catch(function (error) {
+    console.error('Error al obtener los proveedores:', error);
+  });
+
+
+  function obtenerProveedorPorId(id) {
+    const proveedor = proveedores.find(prov => prov.id === id);
+    return proveedor;
+  }
+    
+  let proveedor = obtenerProveedorPorId(1);
+  console.log(proveedor);
 
 let primerClicBene = true;
 let primerClicProv = true;
@@ -95,6 +190,7 @@ const map = new mapboxgl.Map({
 });
 
 
+let clickEnabled = true;
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -102,11 +198,20 @@ document.addEventListener('DOMContentLoaded', function() {
 let destinationCoordinates; // Variable para almacenar las coordenadas del destino
 
 let currentPopup = null; // Variable para almacenar el popup actualmente abierto
+let clickEnabled = true; 
+let beneficiaryMarker;
 
 map.on('click', (event) => {
+
+
+
     const lngLat = event.lngLat;
     destinationCoordinates = [lngLat.lng, lngLat.lat];
-
+   
+    if (!clickEnabled) {
+        return;
+    }
+    
     if (!lngLat) {
         console.log("Event object does not have latlng properties.");
         return;
@@ -120,6 +225,8 @@ map.on('click', (event) => {
         if (currentPopup) {
             currentPopup.remove();
         }
+
+        
         const popup = new mapboxgl.Popup({ offset: [0, -15], className: 'popup-custom' })
         .setLngLat(lngLat)
             .setHTML('<h3><div class="add-container">' +
@@ -141,7 +248,7 @@ map.on('click', (event) => {
                     state: true
                 })
             
-                const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
+                 beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
                     .setPopup(new mapboxgl.Popup().setHTML(`
                     <h2>Beneficiario</h2>
@@ -166,6 +273,7 @@ map.on('click', (event) => {
 
           
 
+
             // Agregar evento de clic al botón "Aceptar" del modal
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
@@ -175,14 +283,39 @@ map.on('click', (event) => {
             
                 // Obtener la dirección del lugar al que se va
                 obtenerDireccion(destinationCoordinates);
-                
-                // Ocultar el modal de confirmación
+                clickEnabled = false;
+                document.querySelectorAll('.button-container').forEach(container => {
+                    container.classList.add('disabled');
+                });
                 $('#confirmarModal').modal('hide');
             });
             
+function disableMarkerButtons(marker) {
+    const popupContent = marker.getPopup().getContent();
+    const popupElement = document.createElement('div');
+    popupElement.innerHTML = popupContent;
+
+    // Desactiva los botones en el contenido del popup
+    const buttonContainer = popupElement.querySelector('.button-container');
+    if (buttonContainer) {
+        buttonContainer.classList.add('disabled');
+    }
+
+    // Actualiza el contenido del popup con los botones desactivados
+    marker.getPopup().setContent(popupElement.innerHTML);
+}
+
+// Desactivar los botones en todos los markers con la clase 'beneficiary-marker'
+document.querySelectorAll('.beneficiary-marker').forEach(markerElement => {
+    const marker = markerElement._marker; 
+    disableMarkerButtons(marker);
+});
+
+
+
             function obtenerDireccion(coordinates) {
-                const latitude = coordinates[1]; // Latitud del lugar
-                const longitude = coordinates[0]; // Longitud del lugar
+                const latitude = coordinates[1];    
+                const longitude = coordinates[0];    
             
                 fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${accessToken}`)
                     .then(response => response.json())
@@ -190,7 +323,7 @@ map.on('click', (event) => {
                         const place = data.features[0];
                         const address = place.place_name;
                         // Actualizar el contenido del elemento HTML con la dirección del lugar al que se va
-                        document.getElementById('direcciongo').textContent = 'Dirección del lugar al que se va: ' + address;
+                        document.getElementById('direcciongo').textContent = address;
                     })
                     .catch(error => {
                         console.error('Error al obtener la dirección:', error);
@@ -199,13 +332,10 @@ map.on('click', (event) => {
             
 
 
-                // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
                 document.getElementById('guardarEstado').addEventListener('click', function(event) {
                     event.preventDefault();
                     const nuevoEstado = document.getElementById('nuevoEstado').value;
-                    // Modificar el estado del beneficiario
                     document.getElementById('beneficiary-state').innerText = nuevoEstado;
-                    // Cerrar modal
                     $('#exampleModal').modal('hide');
                 });
             
@@ -216,13 +346,12 @@ map.on('click', (event) => {
             
             document.getElementById('complete').addEventListener('click', function(event) {
                 event.preventDefault();
-                document.querySelector(".content-wrapper").style.display = "none";     
-                           console.log("Iniciando ruta...");
-                           map.removeLayer('ruta');
-
-                // Ocultar modal
+                console.log("Iniciando ruta...");
+                map.removeLayer('ruta');
+        
+                clickEnabled = false;
+        
                 $('#confirmarModal').modal('hide');
-                
             });
     }
 });
@@ -310,7 +439,6 @@ $(document).ready(function() {
 
 
 
-// Manejar el evento de clic en el botón "Reservar" dentro del modal
 $('#reservarButton').on('click', function() {
     const proveedorId = $('#exampleModal2').find('#proveedorId').val();
     const quantityReserve = $('#exampleModal2').find('#quantityMenus').val();
@@ -335,9 +463,7 @@ $('#reservarButton').on('click', function() {
     $('#exampleModal2').modal('hide');
 });
 $('#salirreservar').on('click', function() {
-    // Realizar la lógica de reserva aquí
     
-    // Cerrar el modal después de realizar la reserva
     $('#exampleModal2').modal('hide');
 });
 
@@ -432,7 +558,6 @@ function mostrarUbicacion(position) {
         .setLngLat(usuarioCoordinates)
         .addTo(map);
 
-    // Centrar el mapa en la ubicación del usuario
     map.flyTo({
         center: usuarioCoordinates,
         zoom: 15
@@ -452,18 +577,9 @@ function errorUbicacion(error) {
 }
 
 
-// document.getElementById('aceptarBtn').addEventListener('click', function(event) {
-//     event.preventDefault();
 
-//     // Crear la ruta desde la posición del usuario hasta el destino
-//     crearRuta(usuarioCoordinates, destinationCoordinates);
-
-//     // Ocultar el modal
-//     $('#confirmarModal').modal('hide');
-// });
 
 function crearRuta(origen, destino) {
-    // Llamar al servicio de enrutamiento de Mapbox
     const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${origen[0]},${origen[1]};${destino[0]},${destino[1]}?geometries=geojson&steps=true&access_token=${mapboxgl.accessToken}`;
 
     fetch(url)
@@ -471,12 +587,11 @@ function crearRuta(origen, destino) {
         .then(data => {
             const route = data.routes[0];
             const geometry = route.geometry;
-            const duration = route.duration; // Duración estimada del viaje en segundos
+            const duration = route.duration;
 
             // Convertir la duración a minutos
             const durationMinutes = Math.round(duration / 60);
 
-            // Mostrar la ruta en el mapa
             map.addLayer({
                 'id': 'ruta',
                 'type': 'line',
@@ -493,18 +608,16 @@ function crearRuta(origen, destino) {
                     'line-cap': 'round'
                 },
                 'paint': {
-                    'line-color': '#FF691F', // Cambia el color de la línea a naranja
-                    'line-width': 10, // Ajusta el ancho de la línea según sea necesario
-                    'line-opacity': 1, // Ajusta la opacidad de la línea si es necesario
-                    'line-blur': 10, // Agrega un efecto de desenfoque para simular una sombra
-                    'line-offset': 2 // Agrega un desplazamiento para simular una sombra
+                    'line-color': '#FF691F', 
+                    'line-width': 10, 
+                    'line-opacity': 1, 
+                    'line-blur': 10, 
+                    'line-offset': 2 
                 }
             });
 
-            // Crear el contenido del pop-up con la duración estimada del viaje
             const popupContent = `<h3>Tiempo estimado de llegada</h3><p>${durationMinutes} minutos</p>`;
 
-            // Mostrar el pop-up en las coordenadas de destino
             new mapboxgl.Popup()
                 .setLngLat(destino)
                 .setHTML(popupContent)
