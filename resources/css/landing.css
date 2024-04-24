@@ -77,16 +77,12 @@ body{
   right: 0px;
 }
 .right-content img{
-  
-  position: absolute;
-  margin-top: 100px;
-  height: 100%; 
-  width: 75%; /* Ajusta el tamaño máximo de la imagen */
+  display: none;
 }
 
 .right-content a{
-  position: relative; 
-  
+  position: absolute; 
+  top: 150px;
 }
 
 
@@ -121,19 +117,21 @@ body{
   }
 
   #boton_rider {
-    background-color: var(--color-3);
+    background-color: var(--color-1);
+    margin-bottom: 20px;
   }
 
   #boton_proveedor {
-    background-color: var(--color-1);
+    background-color: var(--color-3);
+    margin-top: 100px;
   }
   #boton_rider:hover {
-    background-color: #0963c3;
+    background-color: #ee4f00;
     font-weight: 500;
   }
 
   #boton_proveedor:hover {
-    background-color:#ee4f00;
+    background-color: #0963c3;
     font-weight: 500;
   }
   .icono {
@@ -569,12 +567,21 @@ width: 100%;
     flex-direction: column; /* Alinear elementos en columna */
     text-align: center; /* Centrar texto */
     width: 100%;
-    position: relative;
+   margin-top: 130px;
   }
 
   .right-content a{
-    margin-top: 0px;
+    top: 0px;
+    position: relative;
+  }
+
+  #boton_rider {
     
+    margin-bottom: 20px;
+  }
+
+  #boton_proveedor {
+    margin-top: 0px;
   }
   .right-content img{
    display: none;
@@ -591,7 +598,7 @@ width: 100%;
   }
   
   .descripcion p {
-    margin: 0px 10px 30px 10px;
+    margin: 0px 10px 80px 10px;
     color: var(--color-4);
     font-size: 18px;
     font-weight: 600;
@@ -600,7 +607,7 @@ width: 100%;
 
   
   .title-app{
-    margin-top: 190px;
+    margin-top: 200px;
     border: none;
     position: relative;
     height: auto;
