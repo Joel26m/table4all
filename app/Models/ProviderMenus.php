@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Models\Menu;
 use App\Models\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -33,8 +34,14 @@ class ProviderMenus extends Model
     //     return $this->hasMany(Menus::class, 'IDMenu');
     // }
 
-    public function Providers() {
+    public function Providers() 
+    {
         return $this->belongsTo(Provider::class, 'IDProvider');
+    }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class, 'ID');
     }
 }
 

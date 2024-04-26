@@ -58,15 +58,18 @@ class ProviderMenusController extends Controller
      * @param  \App\Models\ProviderMenus  $providerMenus
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($providerId)
     {
-        $providerMenu = ProviderMenus::with('menus')->find($id);
-
-        if (!$providerMenu) {
-            return response()->json(['message' => 'Provider menu not found'], 404);
+        // Busca todos los registros de ProviderMenus que pertenecen a un proveedor específico.
+        $providerMenus = ProviderMenus::where('IDProvider', $providerId)->get();
+    
+        // Verifica si la colección está vacía
+        if ($providerMenus->isEmpty()) {
+            return response()->json(['message' => 'No menus found for this provider'], 404);
         }
-
-        return new ProviderMenusResource($providerMenu);
+    
+        // Usando el Resource para formatear la salida
+        return ProviderMenusResource::collection($providerMenus);
     }
 
     /**

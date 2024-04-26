@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Models\Collection;
+use App\Models\ProviderMenus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,6 +35,10 @@ class Provider extends Model
 
     public function users() {
         return $this->belongsTo(Users::class, 'IDuser');
+    }
+    public function menus(): HasMany
+    {
+        return $this->hasMany(ProviderMenus::class, 'IDProvider');
     }
 }
 
