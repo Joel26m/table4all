@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('provider', ProviderController::class);
+Route::get('provider/{provider}/collections', [ProviderController::class, 'Collections']);
 Route::apiResource('user', UsersController::class);
 
 Route::apiResource('collection', CollectionController::class);

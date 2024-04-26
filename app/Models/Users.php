@@ -15,4 +15,10 @@ class Users extends Authenticatable
     protected $primaryKey = 'ID';
     public $timestamps = false;
 
+    public function provider()
+    {
+        return $this->hasOne(Provider::class, 'IDuser');
+    }
+
 }
+

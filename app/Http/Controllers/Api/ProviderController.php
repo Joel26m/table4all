@@ -26,6 +26,7 @@ class ProviderController extends Controller
         return ProviderResource::collection($providers);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      * 
