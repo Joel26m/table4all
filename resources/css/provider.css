@@ -20,7 +20,7 @@ body{
 
 
 #menus{
-    margin-top: 30px;
+    margin-top: 50px;
     display: flex;  
     flex-direction: column;
     align-items: center; /* Centra el contenido horizontalmente */
@@ -40,6 +40,48 @@ body{
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 10px;
+}
+
+#menus-dispo{
+    margin-top: 50px;
+    display: flex;  
+    flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    
+}
+    
+
+.menus-title-dispo{
+    height: 25px;
+    position: relative;
+    width: 100%;
+    margin-top: 20px ;
+    text-align: center;
+    background-color: var(--color-3);
+    color: var(--color-2);
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+   .menus2{
+    border: 2px solid var(--color-3);
+    padding: 15px;
+    overflow-y: auto; /* Agregar scroll vertical cuando el contenido exceda la altura */
+    border-radius: 30px;
+    width: 100%;
+    height: 280px;
+}
+
+.pack{
+    position:relative;
+    padding: 15px;
+    border-radius: 30px;
+    width: 100%;
+    border: 1px solid var(--color-1);
+    margin-bottom: 15px;
 }
 
 .new-menus{
@@ -69,7 +111,7 @@ body{
    }
 
 #reservados{
-    margin-top: 30px;   
+    margin-top: 50px;   
     position: relative;
     justify-content: center;
     align-items: center; /* Centra el contenido horizontalmente */
@@ -160,7 +202,7 @@ body{
 }
 
 .col-lg-3{
-    margin-top: 60px;
+    margin-top: 150px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -329,6 +371,7 @@ input[type="radio"]:checked + .bebidas img {
     border-radius: 30px;
 
 }
+
 
 /* ------------- JQUERIEEEEES --------------*/
 @media (max-width: 992px) {
