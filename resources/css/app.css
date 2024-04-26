@@ -7,7 +7,33 @@
     width: 100%;
     border-color: rgb(255, 255, 255);
 }
+#loader-wrapper{
+  z-index: 1111111;
+}
 
+.disabled {
+  pointer-events: none; /* Evita que los eventos del mouse sean dirigidos al elemento */
+  opacity: 0.5; /* Aplica una opacidad para simular el efecto de deshabilitado */
+  /* Otros estilos según sea necesario */
+}
+
+#btnDesaparecer {
+  position: absolute;
+  top: 80px; /* Margen superior de 80px */
+  left: 50%; /* Centra horizontalmente el botón */
+  transform: translateX(-50%); /* Ajusta el centro del botón */
+  z-index: 1; /* Asegura que el botón esté sobre otros elementos */
+  background-color: #3D89E2; /* Color de fondo azul */
+  font-size: 25px;
+  color: #fff; /* Color de texto blanco */
+  padding: 7px 7px; /* Espacio interior del botón */
+  border: none; /* Sin borde */
+  border-top-left-radius: 0px; /* Bordes superiores izquierdos redondeados */
+  border-top-right-radius: 0px; /* Bordes superiores derechos redondeados */
+  border-bottom-left-radius: 20px; /* Bordes inferiores izquierdos no redondeados */
+  border-bottom-right-radius: 20px; /* Bordes inferiores derechos no redondeados */
+  width: 220px; /* Ancho del botón */
+}
 
 .admincont{
   background-image: linear-gradient(to top, #001D38 0%, #ffffff 100%, #001d38ba 100%, #001d3831 100%);
@@ -51,11 +77,12 @@ color: rgb(255, 255, 255);
 .logo {
   width: 60px;
   height: 52px;
-  background-image: url("logo.png");
+  background-image: url("logo.svg");
   background-size: cover;
   cursor: pointer;
   margin-left: 10px;
 }
+
 
 /* Media query para dispositivos móviles */
 @media (max-width: 768px) {
@@ -128,9 +155,7 @@ color: rgb(255, 255, 255);
 }
 
 
-.popup-custom {
 
-}
 
 
 

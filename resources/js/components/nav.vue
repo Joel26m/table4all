@@ -174,7 +174,7 @@ color: rgb(255, 255, 255);
 .logo {
   width: 60px;
   height: 52px;
-  background-image: url("logo.png");
+  background-image: url("logo.svg");
   background-size: cover;
   cursor: pointer;
   margin-left: 10px;
