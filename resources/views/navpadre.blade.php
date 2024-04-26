@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-     bitiby
+     Bitiby
     </title>
     @vite(['resources/css/app.css', 'resources/css/app.scss', 'resources/js/app.js'])
 
