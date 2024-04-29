@@ -247,7 +247,7 @@ map.on('click', (event) => {
         document.getElementById('aceptarBtn').addEventListener('click', function(event) {
             event.preventDefault();
 
-            axios.post('http://localhost:8080/table4all/public/api/beneficiary', {
+            axios.post('http://localhost/table4all/public/api/beneficiary', {
                 latitude: latitude,
                 longitude: longitude,
                 state: 'No se ha añadido ningún estado'
@@ -309,7 +309,7 @@ document.getElementById('guardarEstado').addEventListener('click', function(even
     console.log(beneficiarioId);
     
      // Modificar el estado del beneficiario
-    axios.put(`http://localhost:8080/table4all/public/api/beneficiary/${beneficiarioId}`, {
+    axios.put(`http://localhost/table4all/public/api/beneficiary/${beneficiarioId}`, {
         state: nuevoEstado
         
     })
@@ -331,7 +331,7 @@ document.getElementById('guardarEstado').addEventListener('click', function(even
 //Colocar las púas de los proveedores en el mapa
 
 function obtenerDatosProveedores() {
-    return axios.get('http://localhost:8080/table4all/public/api/provider')
+    return axios.get('http://localhost/table4all/public/api/provider')
         .then(response => response.data.map(proveedor => ({
             ...proveedor,
             lat: parseFloat(proveedor.latitude),
@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Llamar a la API para hacer la reserva
-        axios.post('http://localhost:8080/table4all/public/api/collection', {
+        axios.post('http://localhost/table4all/public/api/collection', {
             provider: providerId,
             quantityMenus: quantityReserve
         })
@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cantidadReserva').value = ''; // Limpiar el campo de cantidad
 
             // Ahora, actualizar la cantidad de menús del proveedor
-            return axios.patch(`http://localhost:8080/table4all/public/api/provider/${providerId}`, {
+            return axios.patch(`http://localhost/table4all/public/api/provider/${providerId}`, {
                 quantityMenus: +quantityReserve  
             });
         })
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Colocar las púas de los beneficiarios en el mapa
 function obtenerDatosBeneficiarios() {
-    return axios.get('http://localhost:8080/table4all/public/api/beneficiary')
+    return axios.get('http://localhost/table4all/public/api/beneficiary')
         .then(response => response.data.map(beneficiario => ({
             ...beneficiario,
             lat: parseFloat(beneficiario.latitude),

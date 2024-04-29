@@ -4,7 +4,7 @@ console.log(providerId.value);
 
 // obtener las recogidas que tiene el proveedor
 function getProviderCollections(providerId) {
-    axios.get(`http://localhost:8080/table4all/public/api/provider/${providerId}/collections`)
+    axios.get(`http://localhost/table4all/public/api/provider/${providerId}/collections`)
         .then(response => {
             const collections = response.data;
             console.log('Collections del proveedor:', collections);
@@ -82,7 +82,7 @@ function agregarRegistro(nombreRider, numMenus, fecha) {
 
 // obtener los menus del proveedor
 function getProviderMenus(providerId) {
-    axios.get(`http://localhost:8080/table4all/public/api/providerMenus/${providerId}`)
+    axios.get(`http://localhost/table4all/public/api/providerMenus/${providerId}`)
         .then(response => {
             const menus = response.data;
             console.log('Menús del proveedor:', menus);
