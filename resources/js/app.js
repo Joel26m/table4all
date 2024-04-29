@@ -298,7 +298,12 @@ $(document).ready(function() {
     $('#exampleModal2').find('#quantityMenus').val(cantidadMenus);
 
     console.log(proveedorId, localName, cantidadMenus); 
+// Asignar los datos al modal
+    $('#localNameModal').text(localName);
+    $('#cantidadMenusModal').text(cantidadMenus);
 
+// Guardar el ID del proveedor en un input oculto para su uso posterior
+    $('#proveedorId').val(proveedorId);
 
     // Mostrar el modal
     $('#exampleModal2').modal('show');
@@ -309,36 +314,49 @@ $(document).ready(function() {
 
 
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
-$('#reservarButton').on('click', function() {
-    const proveedorId = $('#exampleModal2').find('#proveedorId').val();
-    const quantityReserve = parseInt($('#exampleModal2').find('#quantityMenus').val(), 10);
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener para el botón reservar
+    document.getElementById('reservarButton').addEventListener('click', function() {
+        // Recoger los valores necesarios del modal
+        const providerId = document.getElementById('proveedorId').value;
+        console.log(providerId);
+        const quantityReserve = parseInt(document.getElementById('cantidadReserva').value, 10);
 
-    // Llamar a la API para hacer la reserva
-    axios.post('http://localhost:8080/table4all/public/api/collection', {
-        provider: proveedorId,
-        quantityMenus: quantityReserve
-    })
-    .then(function(response) {
-        console.log('Reserva realizada con éxito:', response.data);
-        $('#exampleModal2').modal('hide');  // Cerrar el modal tras la reserva
-        $('#exampleModal2').find('#quantityMenus').val('');  // Limpiar el campo de cantidad
+        // Verificar si la cantidad es un número válido y mayor que cero
+        if (!quantityReserve || quantityReserve <= 0) {
+            alert('Por favor, ingrese un número válido de menús para reservar.');
+            return;
+        }
 
-        // Ahora, actualizar la cantidad de menús del proveedor
-        return axios.patch(`http://localhost:8080/table4all/public/api/provider/${proveedorId}`, {
-            quantityMenus: -quantityReserve  
+        // Llamar a la API para hacer la reserva
+        axios.post('http://localhost:8080/table4all/public/api/collection', {
+            provider: providerId,
+            quantityMenus: quantityReserve
+        })
+        .then(function(response) {
+            console.log('Reserva realizada con éxito:', response.data);
+            $('#exampleModal2').modal('hide');  // Cerrar el modal tras la reserva
+            document.getElementById('cantidadReserva').value = ''; // Limpiar el campo de cantidad
+
+            // Ahora, actualizar la cantidad de menús del proveedor
+            return axios.patch(`http://localhost:8080/table4all/public/api/provider/${providerId}`, {
+                quantityMenus: +quantityReserve  
+            });
+        })
+        .then(function(response) {
+            console.log('Cantidad de menús actualizada con éxito:', response.data);
+        })
+        .catch(function(error) {
+            console.error('Error durante la operación:', error);
+            alert('Error durante la operación: ' + error.message);
         });
-    })
-    .then(function(response) {
-        console.log('Cantidad de menús actualizada con éxito:', response.data);
-    })
-    .catch(function(error) {
-        console.error('Error durante la operación:', error);
+    });
+
+    $('#salirreservar').on('click', function() {
+        $('#exampleModal2').modal('hide');  // Cerrar el modal después de realizar la reserva
     });
 });
 
-$('#salirreservar').on('click', function() {
-    $('#exampleModal2').modal('hide');  // Cerrar el modal después de realizar la reserva
-});
 
 
 

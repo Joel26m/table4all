@@ -106,6 +106,38 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <input type="hidden" id="proveedorId">
+    <input type="hidden" id="quantityReserve">
+    <input type="hidden"id="localName">
+    <input type="hidden"id="rider">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reservar Menú</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Local: <span id="localNameModal"></span></p>
+        <p>Cantidad de menús disponibles: <span id="cantidadMenusModal"></span></p>
+                <form id="reservaForm">
+                    <div class="form-group">
+                        <label for="cantidadReserva">Cantidad a reservar:</label>
+                        <input type="number" class="form-control" id="cantidadReserva" name="cantidadMenus" min="1" value="1">
+                    </div>
+                </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="salirreservar" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="reservarButton">Reservar</button>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Bootstrap JS -->

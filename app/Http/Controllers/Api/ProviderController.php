@@ -101,29 +101,31 @@ class ProviderController extends Controller
      * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $Provider)
-    {
+    public function update(Request $request, Provider $provider)
+{
+    try {
+        // Actualizar solo la cantidad de menús, suponiendo que 'quantityMenus' es un campo en tu modelo Provider
+        if ($request->has('quantityMenus')) {
+            $quantityToDeduct = (int) $request->input('quantityMenus');
+            $currentQuantity = (int) $provider->quantityMenus;
 
-        $Provider->ID = $request->input('ID');
-        $Provider->UserName = $request->input('userName');
-        $Provider->Password = $request->input('password');
-        $Provider->rol = $request->input('rol');
+            // Asegúrate de que no deduces más de lo disponible
+            if ($quantityToDeduct > $currentQuantity) {
+                return response()->json(['error' => 'Cantidad no disponible'], 400);
+            }
 
-        try 
-        {
-            $Provider->save();
-            $response = (new ProviderResource($Provider))
-                        ->response()
-                        ->setStatusCode(201);
-        } 
-        catch (QueryException $ex) 
-        {
-            $mensaje = Utilitat::errorMessage($ex);
-            $response = \response()
-                        ->json(['error' => $mensaje], 400);
+            $provider->quantityMenus = $currentQuantity - $quantityToDeduct;
+            $provider->save();
+
+            return response()->json(new ProviderResource($provider), 200);
+        } else {
+            return response()->json(['error' => 'No se especificó la cantidad de menús para actualizar'], 400);
         }
-        return $response;
+    } catch (QueryException $ex) {
+        $mensaje = Utilitat::errorMessage($ex);
+        return response()->json(['error' => $mensaje], 400);
     }
+}
 
     /**
      * Remove the specified resource from storage.
