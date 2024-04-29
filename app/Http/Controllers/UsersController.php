@@ -36,7 +36,7 @@ class UsersController extends Controller
         if ($user->rol == 'provider') {
             $response = redirect('/home_provider'. $user->ID);
         } elseif ($user->rol == 'rider') {
-            $response = redirect('/' . $user->ID);
+            $response = redirect('/');
         } else {
             $response = redirect('/homeAdmin');
         }
