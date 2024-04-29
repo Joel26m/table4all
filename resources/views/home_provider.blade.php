@@ -106,37 +106,31 @@
         <div class="menus-title-dispo">
           <p>MENÚS DISPONIBLES</p>
         </div>
-        <div class="menus2">
+        <div class="menus2" id="menus2">
           <div class="pack">          
             <div class="info">
               <div class="nombre-info">
-                  <h4 class="nombre">MENÚ</h4>
+                  <h4 class="nombre">PACK</h4>
                   <form action="">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-rounded" style="margin-inline: 10px">
-                      <i class="fa-solid fa-trash-can"></i>
-                      Borrar
-                    </button>
+                      <button type="submit" class="btn btn-danger btn-rounded" style="margin-inline: 20px; background-color: #CB2A3A"> 
+                          <i class="fa-solid fa-trash-can"></i>
+                          Borrar
+                      </button>
                   </form>
                   <form action="">
-                    @csrf
-                    <button type="submit" class="btn btn-primary btn-rounded">
-                      <i class="fa-solid fa-pencil"></i>
-                      Editar
-                    </button>
+                      <button type="submit" class="btn btn-primary btn-rounded" style="background-color: #FF691F; border: none">
+                          <i class="fa-solid fa-pencil"></i>
+                          Editar
+                      </button>
                   </form>
               </div>
-              <div class="datos">
-                  <p class="n-menus">TIPO: CENA</p>
-                  <p class="fecha">FECHA: 2024-03-11</p>
-              
-                </div>
-               
-            
-            </div>
-            
-
+              <div class="datos-menu">
+                  <p class="primero">PRIMER <br>PLATO: <span>Pizza</span></p>
+                  <p class="segundo">SEGUNDO <br> PLATO: <span>Ensalada</span> </p>
+                  <p class="t-menus">TIPO: <br> <span> Cena </span></p>
+                  <p class="n-menus">CANTIDAD: <br><span>3</span> </p>
+              </div>
+          </div>
             
             </div> 
         </div>
@@ -148,7 +142,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <!-- Aquí va tu formulario -->
-            <form>
+            <form id="formAgregarMenu">
                 <label for="primerPlato">PRIMER PLATO</label>
                 <input class="input-form" type="textarea" id="primerPlato" name="primerPlato"><br><br>
                 <label for="segundoPlato">SEGUNDO PLATO</label>

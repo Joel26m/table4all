@@ -94,6 +94,12 @@ window.onclick = function(event) {
     const sumarBtn = document.getElementById('sumar');
     const restarBtn = document.getElementById('restar');
     const numeroCampo = document.getElementById('cantidadMenus');
+    const alertSuccess = document.createElement('div');
+    alertSuccess.classList.add('alert', 'alert-success');
+    alertSuccess.setAttribute('role', 'alert');
+    alertSuccess.style.display = 'none';
+    alertSuccess.textContent = 'Menú agregado correctamente';
+    formAgregarMenu.appendChild(alertSuccess);
 
     // Manejar clic en el botón de sumar
     sumarBtn.addEventListener('click', () => {
@@ -118,7 +124,19 @@ window.onclick = function(event) {
     });
 
 
-// desaparecer svg y mostrar los datos
+    formAgregarMenu.addEventListener('submit', function(event) {
+        // Evita que el formulario se envíe automáticamente
+        event.preventDefault();
+        alertSuccess.style.display = 'block';
+        alertSuccess.style.marginTop = '5px';
+        alertSuccess.style.backgroundColor = '#FF691F';
+        alertSuccess.style.color = '#ffff';
+
+        // Opcional: Agrega un temporizador para ocultar el mensaje después de cierto tiempo
+        setTimeout(function() {
+            alertSuccess.style.display = 'none';
+        }, 3000); // 3000 milisegundos = 3 segundos
+    });
 
   // Obtener todos los elementos div
   const divs = document.querySelectorAll('.col-sm-12.col-lg-3');
@@ -149,6 +167,58 @@ window.onclick = function(event) {
 
 
 
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const formAgregarMenu = document.getElementById('formAgregarMenu');
+    const contenedorMenus = document.getElementById('menus2');
+
+    formAgregarMenu.addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar que el formulario se envíe
+
+        // Capturar los datos del menú del formulario
+        
+        const fechaMenu = '2024-03-11'; // Obtener la fecha del menú del formulario
+        const primerPlato = document.getElementById('primerPlato').value;
+        const segundoPlato = document.getElementById('segundoPlato').value;
+        const tipoMenu = document.getElementById('tipoMenu').value;
+        const cantidadMenus = document.getElementById('cantidadMenus').textContent;
+        let color = '#CB2A3A';
+        // Crear un nuevo elemento div para el menú
+        const nuevoMenu = document.createElement('div');
+        nuevoMenu.classList.add('pack');
+
+        // Estructura HTML del menú
+        nuevoMenu.innerHTML = `
+            <div class="info">
+                <div class="nombre-info">
+                    <h4 class="nombre">PACK</h4>
+                    <form action="">
+                    <button type="submit" class="btn btn-danger btn-rounded" style="margin-inline: 20px; background-color: ${color}"> 
+                        <i class="fa-solid fa-trash-can"></i>
+                        Borrar
+                    </button>
+                </form>
+                <form action="">
+                    <button type="submit" class="btn btn-primary btn-rounded" style="background-color: #FF691F; border: none">
+                        <i class="fa-solid fa-pencil"></i>
+                        Editar
+                    </button>
+                </form>
+                </div>
+                <div class="datos-menu">
+
+                    <p class="primero">PRIMER <br>PLATO: <span>${primerPlato}</span></p>
+                    <p class="segundo">SEGUNDO <br> PLATO: <span>${segundoPlato}</span> </p>
+                    <p class="t-menus">TIPO: <span>  ${tipoMenu} </span></p>
+                    <p class="n-menus">CANTIDAD: <span>${cantidadMenus}</span> </p>
+                </div>
+            </div>
+        `;
+
+        // Agregar el nuevo menú al contenedor de menús
+        contenedorMenus.appendChild(nuevoMenu);
+    });
+});
 
 
 
