@@ -1,12 +1,10 @@
-
-
-// Obtener el contenedor de los registros
+// obtener el id del proveedor que está usando la app
 let providerId = document.getElementById('providerId');
 console.log(providerId.value);
 
-
+// obtener las recogidas que tiene el proveedor
 function getProviderCollections(providerId) {
-    axios.get(`http://localhost/table4all/public/api/provider/${providerId}/collections`)
+    axios.get(`http://localhost:8080/table4all/public/api/provider/${providerId}/collections`)
         .then(response => {
             const collections = response.data;
             console.log('Collections del proveedor:', collections);
@@ -21,17 +19,13 @@ function getProviderCollections(providerId) {
             console.error('Error al obtener las collections del proveedor:', error);
         });
 }
-
 // Llamar a la función con el ID del proveedor que desees
 let recogidas = getProviderCollections(16); // Sustituye '1' con el ID real del proveedor
 
+// Obtener el contenedor de los registros
 const registrosContainer = document.querySelector('.registros');
 
-
-
-
-
-// Función para agregar un nuevo registro
+// Función para agregar un nuevo registro de recogida
 function agregarRegistro(nombreRider, numMenus, fecha) {
     // Crear un nuevo elemento de registro
     const nuevoRegistro = document.createElement('div');
@@ -86,7 +80,56 @@ function agregarRegistro(nombreRider, numMenus, fecha) {
     registrosContainer.appendChild(nuevoRegistro);
 }
 
+// obtener los menus del proveedor
+function getProviderMenus(providerId) {
+    axios.get(`http://localhost:8080/table4all/public/api/providerMenus/${providerId}`)
+        .then(response => {
+            const menus = response.data;
+            console.log('Menús del proveedor:', menus);
+            countMenusByCategory(menus);
+            console.log(desayunos);
+            console.log(meriendas);
+            console.log(cenas);
+            console.log(total);
 
+
+            // Aquí puedes procesar la lista de menús como necesites
+            // Por ejemplo, podrías actualizar el DOM para mostrar los menús
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los menús del proveedor:', error);
+        });
+}
+let menus = getProviderMenus(16);
+console.log(menus);
+
+let desayunos = 0;
+let meriendas = 0;
+let cenas = 0;
+let total = 0;
+//separar los menus por tipos
+function countMenusByCategory(menus) {
+
+    menus.forEach(menu => {
+        switch(menu.IDMenu) {
+            case 1:
+                desayunos += menu.quantity; // Asegúrate de que `menu.quantity` exista y sea numérico
+                break;
+            case 2:
+                meriendas += menu.quantity;
+                break;
+            case 3:
+                cenas += menu.quantity;
+                break;
+            default:
+                // Opcionalmente manejar categorías desconocidas
+                break;
+        }
+        total = desayunos + meriendas + cenas;
+    });
+    return { desayunos, meriendas, cenas, total };
+}
 
 
 // ------------------ MODAL --------------------
