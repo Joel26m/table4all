@@ -26,12 +26,25 @@ class ProviderController extends Controller
         return ProviderResource::collection($providers);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function collections($id)
+    {
+        $provider = Provider::with('collections')->find($id);
+
+        if (!$provider) {
+            return response()->json(['message' => 'Provider not found'], 404);
+        }
+
+        return response()->json($provider->collections);
+    }
+
     public function store(Request $request)
     {
         $provider = new Provider();
@@ -66,7 +79,20 @@ class ProviderController extends Controller
     {
         return new ProviderResource($provider);
     }
-    
+
+    public function showProfile() 
+    {
+        $providerId = session('providerId'); // Obtener el ID del proveedor de la sesión
+        $provider = Provider::find($providerId); // Encuentra el proveedor por ID
+
+        if ($provider) {
+            // Mostrar la vista del perfil del proveedor con sus datos
+            return view('provider.profile', ['provider' => $provider]);
+        } else {
+            // Redirigir o manejar el caso en que el proveedor no se encuentre
+            return redirect('/somewhere-else')->with('error', 'Proveedor no encontrado');
+        }
+    }
 
     /**
      * Update the specified resource in storage.

@@ -69,7 +69,6 @@
             <div class="logobene"></div> <!-- Div que contiene la imagen de los beneficiarios -->
             <div class="text-center">
                 <p class="subtext">Beneficiarios</p>
-                <input type="hidden" id="beneficiarioid">
 
             </div>
         </button>
@@ -83,6 +82,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modificar Estado</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <input type="hidden" id="beneficiaryId" value="">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -91,12 +91,13 @@
                         <div class="form-group">
                             <label for="nuevoEstado">Nuevo estado:</label>
                             <input type="text" class="form-control" id="nuevoEstado" placeholder="Ingrese el nuevo estado">
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                    <button type="button" class="btn btn-primary" id="guardarEstado">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="guardarEstado" data-id="id_beneficiario">Guardar</button>
                 </div>
             </div>
         </div>

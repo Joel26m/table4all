@@ -69,16 +69,17 @@ class BeneficiaryController extends Controller
      * @param  \App\Models\Beneficiary  $beneficiary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Beneficiary $beneficiary)
+    public function update(Request $request, $id)
     {
-        $Beneficiary->UserName = $request->input('latitude');
-        $Beneficiary->Password = $request->input('longitude');
-        $Beneficiary->rol = $request->input('state');
+
+            $beneficiary = Beneficiary::findOrFail($id);
+            $beneficiary->state = $request->input('state'); 
+            $beneficiary->save(); 
 
         try 
         {
-            $Beneficiary->save();
-            $response = (new BeneficiaryResource($Beneficiary))
+            $beneficiary->save();
+            $response = (new BeneficiaryResource($beneficiary))
                         ->response()
                         ->setStatusCode(201);
         } 

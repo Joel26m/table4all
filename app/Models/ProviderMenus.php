@@ -3,19 +3,19 @@
 namespace App\Models;
 
 
+use App\Models\Menu;
 use App\Models\Collection;
-use App\Models\ProviderMenus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Provider extends Model
+class ProviderMenus extends Model
 {
     use HasFactory;
 
-    protected $table = 'providers';
+    protected $table = 'providermenus';
 
-    protected $primaryKey = 'IDuser'; //por defecto coge la columna que se llame id
+    protected $primaryKey = 'IDprovider'; //por defecto coge la columna que se llame id
 
     // public $incrementing = true; por defecto es true
 
@@ -28,17 +28,20 @@ class Provider extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function collections(): HasMany
+
+    // public function collections(): HasMany
+    // {
+    //     return $this->hasMany(Menus::class, 'IDMenu');
+    // }
+
+    public function Providers() 
     {
-        return $this->hasMany(Collection::class, 'provider');
+        return $this->belongsTo(Provider::class, 'IDProvider');
     }
 
-    public function users() {
-        return $this->belongsTo(Users::class, 'IDuser');
-    }
-    public function menus(): HasMany
+    public function menus()
     {
-        return $this->hasMany(ProviderMenus::class, 'IDProvider');
+        return $this->hasMany(Menu::class, 'ID');
     }
 }
 

@@ -55,7 +55,7 @@ Route::get('/logout',[UsersController::class, 'logout']);
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::get('/home_provider', function (){
+    Route::get('/home_provider{ID}', function (){
         $user = Auth::user();
 
         return view('home_provider', compact('user'));
