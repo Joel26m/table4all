@@ -142,10 +142,12 @@
       <div class="modal-body">
         <p>Local: <span id="localNameModal"></span></p>
         <p>Cantidad de menús disponibles: <span id="cantidadMenusModal"></span></p>
-        <div class="form-group">
-          <label for="cantidadReserva">Cantidad a reservar:</label>
-          <input type="number" class="form-control" id="cantidadReserva" min="1">
-        </div>
+                <form id="reservaForm">
+                    <div class="form-group">
+                        <label for="cantidadReserva">Cantidad a reservar:</label>
+                        <input type="number" class="form-control" id="cantidadReserva" name="cantidadMenus" min="1" value="1">
+                    </div>
+                </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="salirreservar" data-dismiss="modal">Cerrar</button>
