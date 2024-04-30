@@ -35,29 +35,12 @@
           </a>
         </div>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            @if (Auth::check() && Auth::user()->rol == 'rider')
-                <li class="nav-item dropdown">
-                  <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-                    Datos maestros
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a href="" class="dropdown-item">Roles</a>
-                    <a href="" class="dropdown-item">Usuarios</a>
-                  </div>
-                </li>
-            @endif
-
             @if (Auth::check())
-              <li class="nav-item dropdown">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a href="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-                  {{Auth::user()->userName}}
-                </a>
+              
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="{{url('/logout')}}">Logout</a>
                 </div>
-              </li>              
+                       
               @else
               <li class="nav-item" id="enlax_login">
                 <a class="nav-link active" aria-current="page" href="{{url('/login')}}">Login</a>
