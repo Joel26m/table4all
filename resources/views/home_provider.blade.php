@@ -143,55 +143,57 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <!-- Aquí va tu formulario -->
-            <form id="formAgregarMenu">
-                <label for="primerPlato">PRIMER PLATO</label>
-                <input class="input-form" type="textarea" id="primerPlato" name="primerPlato"><br><br>
-                <label for="segundoPlato">SEGUNDO PLATO</label>
-                <input class="input-form" type="text" id="segundoPlato" name="segundoPlato"><br><br>
-                <label  for="bebidas">BEBIDA :</label>
-                <!-- Mini imágenes de bebidas en checkboxes -->
-                <input type="radio" id="bebida1" name="bebida" value="bebida1" hidden>
-                <label class="bebidas" for="bebida1">
-                  <img src="../resources/css/coca_cola.png" alt="Bebida 1">
-                </label>
+            <div id="menuContainer">
+              <form id="formAgregarMenu">
+                  <label for="primerPlato">PRIMER PLATO</label>
+                  <input class="input-form" type="textarea" id="primerPlato" name="primerPlato"><br><br>
+                  <label for="segundoPlato">SEGUNDO PLATO</label>
+                  <input class="input-form" type="text" id="segundoPlato" name="segundoPlato"><br><br>
+                  <label  for="bebidas">BEBIDA :</label>
+                  <!-- Mini imágenes de bebidas en checkboxes -->
+                  <input type="radio" id="bebida1" name="bebida" value="bebida1" hidden>
+                  <label class="bebidas" for="bebida1">
+                    <img src="../resources/css/coca_cola.png" alt="Bebida 1">
+                  </label>
+                  
+                  <input type="radio" id="bebida2" name="bebida" value="bebida2" hidden>
+                  <label class="bebidas" for="bebida2">
+                      <img src="../resources/css/coca_cola.png" alt="Bebida 2">
+                  </label>
+
+                  <input type="radio" id="bebida3" name="bebida" value="bebida3" hidden>
+                  <label class="bebidas" for="bebida3">
+                    <img src="../resources/css/coca_cola.png" alt="Bebida 3">
+                  </label>
+
+                  <input type="radio" id="bebida4" name="bebida" value="bebida4" hidden>
+                  <label class="bebidas" for="bebida4">
+                    <img src="../resources/css/coca_cola.png" alt="Bebida 4">
+                  </label>
+
+                  <input type="radio" id="bebida5" name="bebida" value="bebida5" hidden>
+                  <label class="bebidas" for="bebida5">
+                    <img src="../resources/css/coca_cola.png" alt="Bebida 5">
+                  </label>
+                  
+                  <!-- Agrega más checkboxes para las bebidas -->
+                  <br><br>
+                  <label for="tipoMenu">TIPO DE MENÚ</label>
+                  <select class="input-form" id="tipoMenu" name="tipoMenu">
+                      <option value="desayuno">Desayuno</option>
+                      <option value="comida">Comida</option>
+                      <option value="cena">Cena</option>
+                  </select><br><br>
+
+                  <div class="sumar-restar">
+                    <button type="button" id="restar"><i class="fa-solid fa-minus"></i></button>
+                      <span id="cantidadMenus" class="cantidadMenus">0</span>
+                        <button type="button" id="sumar"><i class="fa-solid fa-plus"></i></button>
+                  </div>
                 
-                <input type="radio" id="bebida2" name="bebida" value="bebida2" hidden>
-                <label class="bebidas" for="bebida2">
-                    <img src="../resources/css/coca_cola.png" alt="Bebida 2">
-                </label>
-
-                <input type="radio" id="bebida3" name="bebida" value="bebida3" hidden>
-                <label class="bebidas" for="bebida3">
-                  <img src="../resources/css/coca_cola.png" alt="Bebida 3">
-                </label>
-
-                <input type="radio" id="bebida4" name="bebida" value="bebida4" hidden>
-                <label class="bebidas" for="bebida4">
-                  <img src="../resources/css/coca_cola.png" alt="Bebida 4">
-                </label>
-
-                <input type="radio" id="bebida5" name="bebida" value="bebida5" hidden>
-                <label class="bebidas" for="bebida5">
-                  <img src="../resources/css/coca_cola.png" alt="Bebida 5">
-                </label>
-                
-                <!-- Agrega más checkboxes para las bebidas -->
-                <br><br>
-                <label for="tipoMenu">TIPO DE MENÚ</label>
-                <select class="input-form" id="tipoMenu" name="tipoMenu">
-                    <option value="desayuno">Desayuno</option>
-                    <option value="comida">Comida</option>
-                    <option value="cena">Cena</option>
-                </select><br><br>
-
-                <div class="sumar-restar">
-                  <button type="button" id="restar"><i class="fa-solid fa-minus"></i></button>
-                    <span id="cantidadMenus" class="cantidadMenus">0</span>
-                      <button type="button" id="sumar"><i class="fa-solid fa-plus"></i></button>
-                </div>
-               
-                <input type="submit" value="Guardar" class="guardar">
-            </form>
+                  <input type="submit" value="Guardar" class="guardar">
+              </form>
+            </div>
           </div>
         </div>
       
