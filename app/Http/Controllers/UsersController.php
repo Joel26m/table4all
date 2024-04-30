@@ -66,8 +66,30 @@ class UsersController extends Controller
         $user->rol = $request->input('rol'); // Emmagatzema el rol seleccionat
         $user->save();
     
-        return redirect()->route('login')->with('success', 'Your account has been registered. Please log in.');
+        $rol = $request->input('rol');
 
+        switch ($rol) {
+            case 'rider':
+                $rider = new Riders();
+                $rider->user_id = $user->id;
+                $rider->save();
+                break;
+            case 'provider':
+                $provider = new Providers();
+                $provider->user_id = $user->id;
+                $provider->save();
+                break;
+            case 'admin':
+                $admin = new Admins();
+                $admin->user_id = $user->id;
+                $admin->save();
+                break;
+            default:
+                // Manejar un rol no reconocido
+                break;
+        }
+
+        return redirect()->route('login')->with('success', 'Your account has been registered. Please log in.');
     }
 
 
