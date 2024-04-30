@@ -101,6 +101,38 @@ function setCookie(name, value, days) {
   let proveedor = obtenerProveedorPorId(1);
   console.log(proveedor);
 
+
+  function obtenerUbicacion() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(mostrarUbicacion, errorUbicacion);
+    } else {
+        console.error("La geolocalización no está soportada por este navegador.");
+    }
+}
+
+let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
+
+function mostrarUbicacion(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // Asignar las coordenadas del usuario a la variable global
+    usuarioCoordinates = [longitude, latitude];
+
+    // Crear un marcador circular en la ubicación actual del usuario
+    const userMarker = new mapboxgl.Marker({
+        element: createCustomUserMarker(),
+        anchor: 'bottom'
+    })
+        .setLngLat(usuarioCoordinates)
+        .addTo(map);
+
+    map.flyTo({
+        center: usuarioCoordinates,
+        zoom: 15
+    });
+}
+
 let primerClicBene = true;
 let primerClicProv = true;
 obtenerUbicacion();
@@ -284,6 +316,7 @@ map.on('click', (event) => {
                 document.querySelector(".content-wrapper").style.display = "block";
                 console.log("Iniciando ruta...");
                 crearRuta(usuarioCoordinates, destinationCoordinates);
+                obtenerDireccion(destinationCoordinates);
 
                 // Ocultar el modal de confirmación
                 $('#confirmarModal').modal('hide');
@@ -291,6 +324,23 @@ map.on('click', (event) => {
         });
     }
 });
+
+function obtenerDireccion(coordinates) {
+    const latitude = coordinates[1];    
+    const longitude = coordinates[0];    
+
+    fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoidmVudHUwMCIsImEiOiJjbHN3MzY5cTkwbWU4MmttdHg2NnhvaDV2In0.4i_tTPy63h2OHahnuJsQpw`)
+        .then(response => response.json())
+        .then(data => {
+            const place = data.features[0];
+            const address = place.place_name;
+            document.getElementById('direcciongo').textContent = address;
+        })
+        .catch(error => {
+            console.error('Error al obtener la dirección:', error);
+        });
+}
+
 
 $(document).on('click', '.btn-primary-modifyButton', function() {
     var beneficiarioId = $(this).data('beneficiario-id'); // Captura el ID desde el botón que abre el modal
@@ -514,36 +564,7 @@ function createCustomMarkerb() {
 }
 
 
-function obtenerUbicacion() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(mostrarUbicacion, errorUbicacion);
-    } else {
-        console.error("La geolocalización no está soportada por este navegador.");
-    }
-}
 
-let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
-
-function mostrarUbicacion(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    // Asignar las coordenadas del usuario a la variable global
-    usuarioCoordinates = [longitude, latitude];
-
-    // Crear un marcador circular en la ubicación actual del usuario
-    const userMarker = new mapboxgl.Marker({
-        element: createCustomUserMarker(),
-        anchor: 'bottom'
-    })
-        .setLngLat(usuarioCoordinates)
-        .addTo(map);
-
-    map.flyTo({
-        center: usuarioCoordinates,
-        zoom: 15
-    });
-}
 
 
 function createCustomUserMarker() {
