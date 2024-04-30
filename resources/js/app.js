@@ -32,10 +32,10 @@ function setCookie(name, value, days) {
   }
   
   // Ocultar elementos si no es una pantalla de escritorio
-  if (esPantallaDeEscritorio()) {
-    divGenially.style.display = "none";
-    btnDesaparecer.style.display = "none";
-  }
+//   if (esPantallaDeEscritorio()) {
+//     divGenially.style.display = "none";
+//     btnDesaparecer.style.display = "none";
+//   }
 
   document.addEventListener("DOMContentLoaded", function() {
     var btnDesaparecer = document.getElementById("btnDesaparecer");
