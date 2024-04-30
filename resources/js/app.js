@@ -83,7 +83,7 @@ function setCookie(name, value, days) {
 
   let proveedores = []; 
 
-  axios.get('http://localhost/M12/Proyecto2/table4all/public/api/user')
+  axios.get('http://localhost/table4all/public/api/user')
   .then(function (response) {
     proveedores = response.data; // Guarda los proveedores en el array
     console.log(proveedores);
