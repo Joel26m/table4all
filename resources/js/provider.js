@@ -239,32 +239,38 @@ window.onclick = function(event) {
 
 
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const formAgregarMenu = document.getElementById('formAgregarMenu');
-    const contenedorMenus = document.getElementById('menus2');
+  function getProviderMenus(providerId) {
+    axios.get(`/table4all/public/api/providerMenus/${providerId}`)
+        .then(response => {
+            const menus = response.data;
+            console.log('Menús del proveedor:', menus);
 
-    formAgregarMenu.addEventListener('submit', function(event) {
-        event.preventDefault(); // Evitar que el formulario se envíe
+            // Limpiar el contenedor de menús antes de añadir nuevos
+            const menuContainer = document.getElementById('menus2');
+            menuContainer.innerHTML = ''; // Limpiar menús existentes
 
-        // Capturar los datos del menú del formulario
-        
-        const fechaMenu = '2024-03-11'; // Obtener la fecha del menú del formulario
-        const primerPlato = document.getElementById('primerPlato').value;
-        const segundoPlato = document.getElementById('segundoPlato').value;
-        const tipoMenu = document.getElementById('tipoMenu').value;
-        const cantidadMenus = document.getElementById('cantidadMenus').textContent;
-        let color = '#CB2A3A';
-        // Crear un nuevo elemento div para el menú
-        const nuevoMenu = document.createElement('div');
-        nuevoMenu.classList.add('pack');
+            // Procesa y muestra cada menú en el DOM
+            menus.forEach(menu => {
+                agregarMenuAlDOM(menu, menuContainer);
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener los menús del proveedor:', error);
+        });
+}
 
-        // Estructura HTML del menú
-        nuevoMenu.innerHTML = `
-            <div class="info">
-                <div class="nombre-info">
-                    <h4 class="nombre">PACK</h4>
-                    <form action="">
-                    <button type="submit" class="btn btn-danger btn-rounded" style="margin-inline: 20px; background-color: ${color}"> 
+// Función para agregar cada menú al DOM
+function agregarMenuAlDOM(menu, container) {
+    const menuElement = document.createElement('div');
+    const tipoMenu = getTipoMenu(menu.IDMenu); // Obtener el nombre del tipo de menú basado en el ID
+
+    menuElement.className = 'pack';
+    menuElement.innerHTML = `
+        <div class="info">
+            <div class="nombre-info">
+                <h4 class="nombre">PACK</h4>
+                <form action="">
+                    <button type="submit" class="btn btn-danger btn-rounded" style="margin-inline: 20px; background-color: #CB2A3A"> 
                         <i class="fa-solid fa-trash-can"></i>
                         Borrar
                     </button>
@@ -275,21 +281,34 @@ window.onclick = function(event) {
                         Editar
                     </button>
                 </form>
-                </div>
-                <div class="datos-menu">
-
-                    <p class="primero">PRIMER <br>PLATO: <span>${primerPlato}</span></p>
-                    <p class="segundo">SEGUNDO <br> PLATO: <span>${segundoPlato}</span> </p>
-                    <p class="t-menus">TIPO: <span>  ${tipoMenu} </span></p>
-                    <p class="n-menus">CANTIDAD: <span>${cantidadMenus}</span> </p>
-                </div>
             </div>
-        `;
+            <div class="datos-menu">
 
-        // Agregar el nuevo menú al contenedor de menús
-        contenedorMenus.appendChild(nuevoMenu);
-    });
-});
+                <p class="t-menus">TIPO: <span>${tipoMenu}</span></p>
+                <p class="n-menus">CANTIDAD: <span>${menu.quantity}</span></p>
+            </div>
+        </div>
+    `;
+    container.appendChild(menuElement);
+}
+function getTipoMenu(idMenu) {
+    switch (idMenu) {
+        case 1:
+            return 'Desayuno';
+        case 2:
+            return 'Merienda';
+        case 3:
+            return 'Cena';
+        default:
+            return 'Tipo Desconocido'; // En caso de un ID no esperado
+    }
+}
+
+
+// Llamar a la función con el ID real del proveedor
+getProviderMenus(16); // Sustituye '16' con el ID real del proveedor
+
+
 
 
 
