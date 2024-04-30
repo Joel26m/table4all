@@ -101,6 +101,38 @@ function setCookie(name, value, days) {
   let proveedor = obtenerProveedorPorId(1);
   console.log(proveedor);
 
+
+  function obtenerUbicacion() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(mostrarUbicacion, errorUbicacion);
+    } else {
+        console.error("La geolocalización no está soportada por este navegador.");
+    }
+}
+
+let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
+
+function mostrarUbicacion(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // Asignar las coordenadas del usuario a la variable global
+    usuarioCoordinates = [longitude, latitude];
+
+    // Crear un marcador circular en la ubicación actual del usuario
+    const userMarker = new mapboxgl.Marker({
+        element: createCustomUserMarker(),
+        anchor: 'bottom'
+    })
+        .setLngLat(usuarioCoordinates)
+        .addTo(map);
+
+    map.flyTo({
+        center: usuarioCoordinates,
+        zoom: 15
+    });
+}
+
 let primerClicBene = true;
 let primerClicProv = true;
 obtenerUbicacion();
@@ -514,36 +546,7 @@ function createCustomMarkerb() {
 }
 
 
-function obtenerUbicacion() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(mostrarUbicacion, errorUbicacion);
-    } else {
-        console.error("La geolocalización no está soportada por este navegador.");
-    }
-}
 
-let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
-
-function mostrarUbicacion(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    // Asignar las coordenadas del usuario a la variable global
-    usuarioCoordinates = [longitude, latitude];
-
-    // Crear un marcador circular en la ubicación actual del usuario
-    const userMarker = new mapboxgl.Marker({
-        element: createCustomUserMarker(),
-        anchor: 'bottom'
-    })
-        .setLngLat(usuarioCoordinates)
-        .addTo(map);
-
-    map.flyTo({
-        center: usuarioCoordinates,
-        zoom: 15
-    });
-}
 
 
 function createCustomUserMarker() {
