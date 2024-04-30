@@ -322,7 +322,10 @@
         <div class="copyright animated">
           <h5>2024 | Made with ❤️ | DAW | Team 4 </h5>
         </div>
-
+        
+<!-- Chatbot botpress -->
+<script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+<script src="https://mediafiles.botpress.cloud/66cd75cd-b9b4-4ea4-86b1-4f1bba368d3a/webchat/config.js" defer></script>
       
 </section>
 <script src="{{ asset('../resources/js/landing.js') }}"></script>
