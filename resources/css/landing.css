@@ -985,7 +985,7 @@ width: 100%;
     justify-content: center;
     font-size: 2.5rem;
     margin: 2.0rem 1.5rem;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
   }
   
   .redes-sociales i:hover {
@@ -999,7 +999,7 @@ width: 100%;
   }
   
   .copyright{
-    bottom: 30px;
+    bottom: 20px;
     }
 }
 
