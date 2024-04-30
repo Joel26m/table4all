@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+
 <body>
-<h1 class="mt-5">CRUD de Usuarios</h1>
-        
-        <!-- Formulario para crear usuario -->
-        <div class="card mt-4">
-            <div class="card-header">Crear Usuario</div>
-            <div class="card-body">
-                <form action="{{ action([App\Http\Controllers\UsersController::class, 'store']) }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="nombreUsuario" name="userName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="contrasenya" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="contrasenya" name="password">
-                    </div>
-        </label>
+    <h1 class="mt-5">CRUD de Usuarios</h1>
+
+    <!-- Formulario para crear usuario -->
+    <div class="card mt-4">
+        <div class="card-header">Crear Usuario</div>
+        <div class="card-body">
+            <form action="{{ action([App\Http\Controllers\UsersController::class, 'store']) }}" method="POST">
+                @csrf
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+                    <input type="text" class="form-control" id="nombreUsuario" name="userName">
+                </div>
+                <div class="mb-3">
+                    <label for="contrasenya" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasenya" name="password">
+                </div>
+                </label>
+        </div>
     </div>
-</div>
-                    <div class="mb-3">
-                        <label for="tipoUsuario" class="form-label">Rol</label>
-                        <select class="form-select" id="tipoUsuario" name="rol">
-                            <option value="rider">rider</option>
-                            <option value="provider">provider</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                    <a href="{{ url('admin') }}" " class="btn btn-danger">Salir</a>
+    <div class="mb-3">
+        <label for="tipoUsuario" class="form-label">Rol</label>
+        <select class="form-select" id="tipoUsuario" name="rol">
+            <option value="rider">rider</option>
+            <option value="provider">provider</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+    <a href="{{ url('admin') }}" " class="btn btn-danger">Salir</a>
 
                 </form>
             </div>

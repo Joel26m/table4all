@@ -69,7 +69,6 @@
             <div class="logobene"></div> <!-- Div que contiene la imagen de los beneficiarios -->
             <div class="text-center">
                 <p class="subtext">Beneficiarios</p>
-                <input type="hidden" id="beneficiarioid">
 
             </div>
         </button>
@@ -83,6 +82,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modificar Estado</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <input type="hidden" id="beneficiaryId" value="">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -91,12 +91,13 @@
                         <div class="form-group">
                             <label for="nuevoEstado">Nuevo estado:</label>
                             <input type="text" class="form-control" id="nuevoEstado" placeholder="Ingrese el nuevo estado">
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                    <button type="button" class="btn btn-primary" id="guardarEstado">Guardar</button>
+                    <button type="button" class="btn btn-primary" id="guardarEstado" data-id="id_beneficiario">Guardar</button>
                 </div>
             </div>
         </div>
@@ -141,10 +142,12 @@
       <div class="modal-body">
         <p>Local: <span id="localNameModal"></span></p>
         <p>Cantidad de menús disponibles: <span id="cantidadMenusModal"></span></p>
-        <div class="form-group">
-          <label for="cantidadReserva">Cantidad a reservar:</label>
-          <input type="number" class="form-control" id="cantidadReserva" min="1">
-        </div>
+                <form id="reservaForm">
+                    <div class="form-group">
+                        <label for="cantidadReserva">Cantidad a reservar:</label>
+                        <input type="number" class="form-control" id="cantidadReserva" name="cantidadMenus" min="1" value="1">
+                    </div>
+                </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="salirreservar" data-dismiss="modal">Cerrar</button>

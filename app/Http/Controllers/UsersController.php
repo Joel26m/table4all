@@ -34,9 +34,9 @@ class UsersController extends Controller
            Auth::login($user);
         // Verificar el rol del usuario
         if ($user->rol == 'provider') {
-            $response = redirect('/home_provider');
+            $response = redirect('/home_provider'. $user->ID);
         } elseif ($user->rol == 'rider') {
-            $response = redirect('/nav');
+            $response = redirect('/');
         } else {
             $response = redirect('/homeAdmin');
         }
