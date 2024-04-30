@@ -488,7 +488,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Ahora, actualizar la cantidad de menús del proveedor
             return axios.patch(`/table4all/public/api/provider/${providerId}`, {
-                quantityMenus: +quantityReserve  
+                quantityMenus: quantityReserve  
             });
         })
         .then(function(response) {
