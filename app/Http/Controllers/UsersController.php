@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Rider;
+use App\Models\Provider;
 use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -70,22 +72,24 @@ class UsersController extends Controller
 
         switch ($rol) {
             case 'rider':
-                $rider = new Riders();
-                $rider->user_id = $user->id;
+                $rider = new Rider();
+                $rider->IDuser = $user->ID;
                 $rider->save();
+                error_log('Guardado correctamente');
                 break;
             case 'provider':
-                $provider = new Providers();
-                $provider->user_id = $user->id;
+                $provider = new Provider();
+                $provider->IDuser = $user->ID;
                 $provider->save();
+                error_log('Guardado correctamente');
                 break;
             case 'admin':
-                $admin = new Admins();
-                $admin->user_id = $user->id;
+                $admin = new Admin();
+                $admin->IDuser = $user->ID;
                 $admin->save();
+                error_log('Guardado correctamente');
                 break;
             default:
-                // Manejar un rol no reconocido
                 break;
         }
 
