@@ -57,6 +57,7 @@
           <select class="form-select" id="rol" name="rol">
               <option value="provider">Provider</option>
               <option value="rider">Rider</option>
+              <option value="admin">Admin</option>
           </select>
         </div>
 
