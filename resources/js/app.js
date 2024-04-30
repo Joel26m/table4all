@@ -325,6 +325,21 @@ map.on('click', (event) => {
     }
 });
 
+
+            // Evento para confirmar inicio de ruta
+            document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.querySelector(".content-wrapper").style.display = "block";
+                console.log("Iniciando ruta...");
+                crearRuta(usuarioCoordinates, destinationCoordinates);
+                obtenerDireccion(destinationCoordinates);
+
+                // Ocultar el modal de confirmación
+                $('#confirmarModal').modal('hide');
+            });
+
+
+
 function obtenerDireccion(coordinates) {
     const latitude = coordinates[1];    
     const longitude = coordinates[0];    
