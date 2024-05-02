@@ -31,11 +31,7 @@ function setCookie(name, value, days) {
     return window   .matchMedia("(min-width: 768px)").matches;
   }
   
-  // Ocultar elementos si no es una pantalla de escritorio
-//   if (esPantallaDeEscritorio()) {
-//     divGenially.style.display = "none";
-//     btnDesaparecer.style.display = "none";
-//   }
+
 
   document.addEventListener("DOMContentLoaded", function() {
     var btnDesaparecer = document.getElementById("btnDesaparecer");
@@ -51,7 +47,7 @@ function setCookie(name, value, days) {
       var divGenially = document.querySelector(".container-wrapper-genially");
       var btnDesaparecer = document.getElementById("btnDesaparecer");
       divGenially.style.display = "none";
-      btnDesaparecer.style.display = "none"; // Oculta el botón si se ha visitado antes
+      btnDesaparecer.style.display = "none"; 
     }
   });
 (function(d) {
@@ -110,16 +106,14 @@ function setCookie(name, value, days) {
     }
 }
 
-let usuarioCoordinates; // Variable global para almacenar las coordenadas del usuario
-
+let usuarioCoordinates; // Variable global 
 function mostrarUbicacion(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    // Asignar las coordenadas del usuario a la variable global
+    // Asignar las coordenada
     usuarioCoordinates = [longitude, latitude];
 
-    // Crear un marcador circular en la ubicación actual del usuario
     const userMarker = new mapboxgl.Marker({
         element: createCustomUserMarker(),
         anchor: 'bottom'
@@ -139,7 +133,6 @@ obtenerUbicacion();
 
 
 
-  
 
 
   
@@ -233,9 +226,9 @@ let clickEnabled = true;
 
 document.addEventListener('DOMContentLoaded', function() {
 
-let destinationCoordinates; // Variable para almacenar las coordenadas del destino
+let destinationCoordinates; 
 
-let currentPopup = null; // Variable para almacenar el popup actualmente abierto
+let currentPopup = null; //popup actualmente abierto
 let clickEnabled = true; 
 let beneficiaryMarker;
 
@@ -316,7 +309,7 @@ map.on('click', (event) => {
 });
 
 
-            // Evento para confirmar inicio de ruta
+            // Evento inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
                 document.querySelector(".content-wrapper").style.display = "block";
@@ -324,7 +317,6 @@ map.on('click', (event) => {
                 crearRuta(usuarioCoordinates, destinationCoordinates);
                 obtenerDireccion(destinationCoordinates);
 
-                // Ocultar el modal de confirmación
                 $('#confirmarModal').modal('hide');
             });
 
@@ -425,7 +417,6 @@ function crearMarcadoresDeProveedores(proveedores, map) {
 
 obtenerDatosProveedores().then(proveedores => {
     crearMarcadoresDeProveedores(proveedores, map);
-    // Aquí también podrías hacer otras cosas con los datos de proveedores
 });
 
 
@@ -533,7 +524,7 @@ function obtenerDatosBeneficiarios() {
 
 function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
     beneficiarios.forEach(beneficiario => {
-        let el = createCustomMarkerb();  // Crear el elemento de marcador personalizado
+        let el = createCustomMarkerb();  
 
         new mapboxgl.Marker({ element: el })
             .setLngLat([beneficiario.lon, beneficiario.lat])
@@ -559,7 +550,6 @@ function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
     
     obtenerDatosBeneficiarios().then(beneficiarios => {
         crearMarcadoresDeBeneficiarios(beneficiarios, map);
-        // Aquí también podrías hacer otras cosas con los datos de beneficiarios
     });
     
 const markerElementb = beneficiaryMarker.getElement();
@@ -599,7 +589,6 @@ function crearRuta(origen, destino) {
             const geometry = route.geometry;
             const duration = route.duration;
 
-            // Convertir la duración a minutos
             const durationMinutes = Math.round(duration / 60);
 
             map.addLayer({
