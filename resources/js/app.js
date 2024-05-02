@@ -31,11 +31,6 @@ function setCookie(name, value, days) {
     return window   .matchMedia("(min-width: 768px)").matches;
   }
   
-  // Ocultar elementos si no es una pantalla de escritorio
-//   if (esPantallaDeEscritorio()) {
-//     divGenially.style.display = "none";
-//     btnDesaparecer.style.display = "none";
-//   }
 
   document.addEventListener("DOMContentLoaded", function() {
     var btnDesaparecer = document.getElementById("btnDesaparecer");
@@ -51,7 +46,7 @@ function setCookie(name, value, days) {
       var divGenially = document.querySelector(".container-wrapper-genially");
       var btnDesaparecer = document.getElementById("btnDesaparecer");
       divGenially.style.display = "none";
-      btnDesaparecer.style.display = "none"; // Oculta el botón si se ha visitado antes
+      btnDesaparecer.style.display = "none"; 
     }
   });
 (function(d) {
@@ -116,7 +111,6 @@ function mostrarUbicacion(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    // Asignar las coordenadas del usuario a la variable global
     usuarioCoordinates = [longitude, latitude];
 
     // Crear un marcador circular en la ubicación actual del usuario
@@ -233,9 +227,9 @@ let clickEnabled = true;
 
 document.addEventListener('DOMContentLoaded', function() {
 
-let destinationCoordinates; // Variable para almacenar las coordenadas del destino
+let destinationCoordinates; 
 
-let currentPopup = null; // Variable para almacenar el popup actualmente abierto
+let currentPopup = null; 
 let clickEnabled = true; 
 let beneficiaryMarker;
 
@@ -310,7 +304,6 @@ map.on('click', (event) => {
             });
             popup.remove();
 
-            // Evento para confirmar inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
                 document.querySelector(".content-wrapper").style.display = "block";
@@ -326,7 +319,6 @@ map.on('click', (event) => {
 });
 
 
-            // Evento para confirmar inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
                 document.querySelector(".content-wrapper").style.display = "block";
@@ -334,7 +326,6 @@ map.on('click', (event) => {
                 crearRuta(usuarioCoordinates, destinationCoordinates);
                 obtenerDireccion(destinationCoordinates);
 
-                // Ocultar el modal de confirmación
                 $('#confirmarModal').modal('hide');
             });
 
@@ -357,11 +348,28 @@ function obtenerDireccion(coordinates) {
 }
 
 
-$(document).on('click', '.btn-primary-modifyButton', function() {
-    var beneficiarioId = $(this).data('beneficiario-id'); // Captura el ID desde el botón que abre el modal
-    $('#beneficiaryId').val(beneficiarioId); // Establece el ID en el input oculto dentro del modal
-    $('#exampleModal').modal('show');
+// Obtener todos los elementos con la clase 'btn-primary-modifyButton'
+var modifyButtons = document.querySelectorAll('.btn-primary-modifyButton');
+
+// Iterar sobre cada botón y agregar un event listener para el clic
+modifyButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Capturar el ID desde el atributo 'data-beneficiario-id' del botón
+        var beneficiarioId = button.getAttribute('data-beneficiario-id');
+        
+        // Establecer el ID en el input oculto dentro del modal
+        document.getElementById('beneficiaryId').value = beneficiarioId;
+        
+        // Mostrar el modal con el ID 'exampleModal'
+        var modal = document.getElementById('exampleModal');
+        if (modal) {
+            modal.classList.add('show'); // Agregar la clase 'show' para mostrar el modal
+            modal.style.display = 'block'; // Cambiar el estilo 'display' a 'block'
+            modal.setAttribute('aria-hidden', 'false'); // Actualizar el atributo 'aria-hidden' a 'false'
+        }
+    });
 });
+
 
 
 // Manejador para el estado del beneficiario
@@ -432,7 +440,6 @@ function crearMarcadoresDeProveedores(proveedores, map) {
 
 obtenerDatosProveedores().then(proveedores => {
     crearMarcadoresDeProveedores(proveedores, map);
-    // Aquí también podrías hacer otras cosas con los datos de proveedores
 });
 
 
@@ -444,7 +451,8 @@ function createCustomMarker() {
 }
 
 
-// Adjuntar el evento de clic utilizando delegación de eventos
+
+//solo me funciona con jquerys, los modales me petan en js puro
 $(document).ready(function() {
     $(document).on('click', '.verButton', function(event) {
         event.preventDefault();
@@ -534,13 +542,13 @@ function obtenerDatosBeneficiarios() {
         })))
         .catch(error => {
             console.error('Error al obtener los datos de los beneficiarios:', error);
-            throw error;  // Propaga el error para que los consumidores de la función lo manejen.
+            throw error;  
         });
 }
 
 function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
     beneficiarios.forEach(beneficiario => {
-        let el = createCustomMarkerb();  // Crear el elemento de marcador personalizado
+        let el = createCustomMarkerb();  
 
         new mapboxgl.Marker({ element: el })
             .setLngLat([beneficiario.lon, beneficiario.lat])
@@ -566,7 +574,6 @@ function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
     
     obtenerDatosBeneficiarios().then(beneficiarios => {
         crearMarcadoresDeBeneficiarios(beneficiarios, map);
-        // Aquí también podrías hacer otras cosas con los datos de beneficiarios
     });
     
 const markerElementb = beneficiaryMarker.getElement();
@@ -606,7 +613,6 @@ function crearRuta(origen, destino) {
             const geometry = route.geometry;
             const duration = route.duration;
 
-            // Convertir la duración a minutos
             const durationMinutes = Math.round(duration / 60);
 
             map.addLayer({
