@@ -28,7 +28,7 @@ Route::get('/plantilla', function () {
 Route::get('/', function () {
     
     
-    return view('nav/index');
+    return view('landing');
 });
 
 Route::get('/admin', function () {
