@@ -67,10 +67,7 @@
   <!-- Contenido del navbar -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Home</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Features</a>
+      <a class="nav-link" href="{{url('/logout')}}">Logout</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Pricing</a>
