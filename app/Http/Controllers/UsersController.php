@@ -38,7 +38,7 @@ class UsersController extends Controller
         if ($user->rol == 'provider') {
             $response = redirect('/home_provider'. $user->ID);
         } elseif ($user->rol == 'rider') {
-            $response = redirect('/');
+            $response = redirect('/nav');
         } else {
             $response = redirect('/admin');
         }
@@ -74,6 +74,7 @@ class UsersController extends Controller
             case 'rider':
                 $rider = new Rider();
                 $rider->IDuser = $user->ID;
+                $rider->rol = $user->rol;
                 $rider->save();
                 break;
             case 'provider':
@@ -84,6 +85,7 @@ class UsersController extends Controller
             case 'admin':
                 $admin = new Admin();
                 $admin->IDuser = $user->ID;
+                $admin->rol = $user->rol;
                 $admin->save();
                 break;
             default:
