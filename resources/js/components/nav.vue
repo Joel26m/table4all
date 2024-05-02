@@ -72,17 +72,37 @@ export default {
   data() {
    return {
     ruta: true, 
-   
-
+   nuevoEstado: null,
+mostrado: false,
+beneficiarioId: null,
+nuevoEstado: null,
     };
   },
   methods: {
   completar() {
     const completeBtn = document.getElementById('complete');
+    const collectionID = localStorage.getItem('lastCollectionID'); // Obtener el ID del almacenamiento local
+    
+
     if (completeBtn.innerText === 'Añadir estado') {
-      $('#exampleModal').modal('show');
-    } else {
-      if (confirm('¿Estás seguro de completar?')) {
+
+            $('#exampleModal').modal('show');
+
+            } else {
+            if (confirm('¿Estás seguro de completar?')) {
+              axios.patch(`/table4all/public/api/collection/${collectionID}`, {
+                completed: 1
+              })
+              .then(response => {
+                console.log('Colección completada con éxito:', response.data);
+                alert('Colección completada exitosamente.');
+              })
+              .catch(error => {
+                console.error('Error al completar la colección:', error);
+                alert('Error al completar la colección: ' + error.message);
+              });
+            }
+       
     completeBtn.innerText = 'Añadir estado';
     completeBtn.style.backgroundColor = '#FF691F'; 
     completeBtn.style.width = '335px'; 
@@ -90,11 +110,41 @@ export default {
     completeBtn.style.marginRight = '80px';
     completeBtn.style.transition = 'background-color 0.5s, width 0.5s, margin 0.5s'; 
     document.getElementById('direcciongo').style.display = 'none'; 
+    console.log("esto lo quiero yo::" + this.mostrado);
+    // this.guardarEstado();
 }
+      
+  },
+  guardarEstado() {
+    
+     this.beneficiarioId = localStorage.getItem('BeneficiaryID');
+    console.log(this.beneficiarioId);
+    
+     this.nuevoEstado = localStorage.getItem('nuevoEstado');
+    let clase = document.querySelector('.modal-backdrop');
 
 
+    console.log("nuevo estado:: " + this.nuevoEstado);
+      if (!this.beneficiarioId || !this.nuevoEstado) {
+        alert('Por favor, complete todos los campos necesarios.');
+        return;
+      }
+
+      axios.patch(`/table4all/public/api/beneficiary/${this.beneficiarioId}`, {
+        state: this.nuevoEstado
+      })
+      .then(() => {
+        document.getElementById('beneficiary-state').innerText = this.nuevoEstado;
+        $('#exampleModal').modal('hide');
+        clase.style.display= 'none';
+
+       
+      })
+      .catch(error => {
+        console.error('Error al actualizar el estado del beneficiario:', error);
+        alert('Error al actualizar el estado: ' + error.message);
+      });
     }
-  }
 }
 ,
  
