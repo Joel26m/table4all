@@ -28,7 +28,7 @@
 
 <div class="animate__animated animate__bounceInUp submenu container fixed-bottom mb-3">
     <div class="row justify-content-center">
-        <button id="prov" class=" subop col bg-white p-3" ">
+        <button id="prov" class=" subop col bg-white p-3" >
             <div class="logoprov"></div> <!-- Div que contiene la imagen de los proveedores -->
             <div class="text-center">
                 <p class="subtext">Proveedores</p>
@@ -128,24 +128,9 @@
   </div>
 </div>
 
+<!-- Chatbot -->
 <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-<script>
-  window.botpressWebChat.init({
-      "composerPlaceholder": "Chat with bot",
-      "botConversationDescription": "This chatbot was built surprisingly fast with Botpress",
-      "botId": "66cd75cd-b9b4-4ea4-86b1-4f1bba368d3a",
-      "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
-      "messagingUrl": "https://messaging.botpress.cloud",
-      "clientId": "66cd75cd-b9b4-4ea4-86b1-4f1bba368d3a",
-      "webhookId": "2d1121b4-f399-4616-9c32-f4af03ba4e76",
-      "lazySocket": true,
-      "themeName": "prism",
-      "frontendVersion": "v1",
-      "showPoweredBy": true,
-      "theme": "prism",
-      "themeColor": "#2563eb"
-  });
-</script>
+<script src="https://mediafiles.botpress.cloud/66cd75cd-b9b4-4ea4-86b1-4f1bba368d3a/webchat/config.js" defer></script>
 
 
 <!-- Bootstrap JS -->

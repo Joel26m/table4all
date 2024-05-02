@@ -40,7 +40,7 @@ class UsersController extends Controller
         } elseif ($user->rol == 'rider') {
             $response = redirect('/');
         } else {
-            $response = redirect('/homeAdmin');
+            $response = redirect('/admin');
         }
         }else {
             $request->session()->flash('error', 'Usuario o contraseña incorrectos');
@@ -75,19 +75,16 @@ class UsersController extends Controller
                 $rider = new Rider();
                 $rider->IDuser = $user->ID;
                 $rider->save();
-                error_log('Guardado correctamente');
                 break;
             case 'provider':
                 $provider = new Provider();
                 $provider->IDuser = $user->ID;
                 $provider->save();
-                error_log('Guardado correctamente');
                 break;
             case 'admin':
                 $admin = new Admin();
                 $admin->IDuser = $user->ID;
                 $admin->save();
-                error_log('Guardado correctamente');
                 break;
             default:
                 break;

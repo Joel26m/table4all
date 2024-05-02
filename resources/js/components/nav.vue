@@ -40,7 +40,10 @@
     <!-- Contenido del navbar -->
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <div  @click="cambiarRuta()">
+          <a  class="nav-link active" aria-current="page">AA logout</a>
+        </div>
+       
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Features</a>
@@ -50,7 +53,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown link
+          Dropdown Link
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Action</a></li>
@@ -70,39 +73,43 @@
 
 export default {
   data() {
-   return {
-    ruta: true, 
-   
-
+    return {
+      ruta: true,
     };
   },
   methods: {
-  completar() {
-    const completeBtn = document.getElementById('complete');
-    if (completeBtn.innerText === 'Añadir estado') {
-      $('#exampleModal').modal('show');
-    } else {
-      if (confirm('¿Estás seguro de completar?')) {
-    completeBtn.innerText = 'Añadir estado';
-    completeBtn.style.backgroundColor = '#FF691F'; 
-    completeBtn.style.width = '335px'; 
-    completeBtn.style.marginLeft = '60px'; 
-    completeBtn.style.marginRight = '80px';
-    completeBtn.style.transition = 'background-color 0.5s, width 0.5s, margin 0.5s'; 
-    document.getElementById('direcciongo').style.display = 'none'; 
-}
-
-
+    cambiarRuta(){
+      window.location.href = '/logout';
+      console.log("logout");
+    },
+    completar() {
+      const completeBtn = document.getElementById('complete');
+      if (completeBtn.innerText === 'Añadir estado') {
+        $('#exampleModal').modal('show');
+      } else {
+        if (confirm('¿Estás seguro de completar?')) {
+          completeBtn.innerText = 'Añadir estado';
+          completeBtn.style.backgroundColor = '#FF691F';
+          completeBtn.style.width = '335px';
+          completeBtn.style.marginLeft = '60px';
+          completeBtn.style.marginRight = '80px';
+          completeBtn.style.transition = 'background-color 0.5s, width 0.5s, margin 0.5s';
+          document.getElementById('direcciongo').style.display = 'none';
+        }
+      }
     }
+  },
+
+  created(){
+
+   
+  },
+
+  mounted() {
+
   }
 }
-,
- 
-   mounted() {
 
-
-   }
-  }
 </script>
 <style>
 
