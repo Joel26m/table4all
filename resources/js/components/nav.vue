@@ -41,9 +41,8 @@
     <ul class="navbar-nav">
       <li class="nav-item">
         <div  @click="cambiarRuta()">
-          <a  class="nav-link active" aria-current="page">AA logout</a>
+          <a  class="nav-link active" aria-current="page" cursor="pointer">Logout</a>
         </div>
-       
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Features</a>
@@ -79,8 +78,13 @@ export default {
   },
   methods: {
     cambiarRuta(){
-      window.location.href = '/logout';
-      console.log("logout");
+
+      const protocol = window.location.protocol;
+      const host = window.location.host;
+      const pathname = '/logout';
+      const logoutUrl = `${protocol}//${host}/table4all/public${pathname}${window.location.hash}`;
+
+      window.location.href = logoutUrl;
     },
     completar() {
       const completeBtn = document.getElementById('complete');

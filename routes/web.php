@@ -51,7 +51,7 @@ Route::get('provider/{provider}', [ProviderController::class, 'show']);
 //------------------------- Logica login ---------------------------------
 Route::get('/login',[UsersController::class, 'showLogin'])->name('login');
 Route::post('/login',[UsersController::class, 'login']);
-Route::get('/logout',[UsersController::class, 'logout']);
+Route::get('/logout',[UsersController::class, 'logout']) ->name('logout');
 
 
 Route::middleware(['auth'])->group(function(){
