@@ -310,6 +310,12 @@ map.on('click', (event) => {
             });
             popup.remove();
 
+
+        });
+    }
+});
+
+
             // Evento para confirmar inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 event.preventDefault();
@@ -321,9 +327,6 @@ map.on('click', (event) => {
                 // Ocultar el modal de confirmación
                 $('#confirmarModal').modal('hide');
             });
-        });
-    }
-});
 
 function obtenerDireccion(coordinates) {
     const latitude = coordinates[1];    
