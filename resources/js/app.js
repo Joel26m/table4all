@@ -342,11 +342,16 @@ function obtenerDireccion(coordinates) {
 }
 
 
-$(document).on('click', '.btn-primary-modifyButton', function() {
-    var beneficiarioId = $(this).data('beneficiario-id'); // Captura el ID desde el botón que abre el modal
-    $('#beneficiaryId').val(beneficiarioId); // Establece el ID en el input oculto dentro del modal
-    $('#exampleModal').modal('show');
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('btn-primary-modifyButton')) {
+        var beneficiarioId = event.target.getAttribute('data-beneficiario-id');
+        document.getElementById('beneficiaryId').value = beneficiarioId;
+        var modal = document.getElementById('exampleModal');
+        var modalInstance = new bootstrap.Modal(modal);
+        modalInstance.show();
+    }
 });
+
 
 
 // Manejador para el estado del beneficiario
