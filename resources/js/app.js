@@ -225,6 +225,7 @@ let clickEnabled = true;
 
 
 document.addEventListener('DOMContentLoaded', function() {
+var beneficiarioId;
 
 let destinationCoordinates; 
 
@@ -318,13 +319,25 @@ map.on('click', (event) => {
             // Evento inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
                 nav.ruta = true;
-
+        
                 event.preventDefault();
                 document.querySelector(".content-wrapper").style.display = "block";
                 console.log("Iniciando ruta...");
                 crearRuta(usuarioCoordinates, destinationCoordinates);
                 obtenerDireccion(destinationCoordinates);
                 console.log(beneficiarioId);
+
+
+
+
+                let beneficiarios = document.querySelectorAll('.beneciciary-marker');
+
+        
+                    beneficiarios.forEach(function(beneficiario) {
+                        beneficiario.style.display = 'none';
+                        
+                        
+                    });
 
                 $('#confirmarModal').modal('hide');
             });
@@ -348,7 +361,6 @@ function obtenerDireccion(coordinates) {
 }
 
 
-var beneficiarioId;
 
 
 document.addEventListener('click', function(event) {
@@ -379,6 +391,15 @@ document.addEventListener('click', function(event) {
 // Manejador para el estado del beneficiario
 // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
 document.getElementById('guardarEstado').addEventListener('click', function(event) {
+
+    let beneficiarios = document.querySelectorAll('.beneciciary-marker');
+
+        
+    beneficiarios.forEach(function(beneficiario) {
+        beneficiario.style.display = 'block';
+        
+        
+    });
     nav.ruta = false;
     event.preventDefault();
     localStorage.setItem("guardado" , false);
