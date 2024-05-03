@@ -236,6 +236,17 @@ window.onclick = function(event) {
       return Math.floor(Math.random() * 10) + 1;
   }
 
+// formulario de añadir menu
+
+document.getElementById('formAgregarMenu').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const IDProvider = 'elIDDelProveedor';  // Deberás obtener este ID de algún lado, quizás del usuario o de la sesión
+    const IDMenu = document.getElementById('tipoMenu').value;
+    const quantity = document.getElementById('cantidadMenus').textContent;
+
+    guardarMenu(IDProvider, IDMenu, quantity);
+});
 
 
 
