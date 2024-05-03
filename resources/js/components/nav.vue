@@ -72,44 +72,36 @@
 
 export default {
   data() {
-    return {
-      ruta: true,
+   return {
+    ruta: true, 
+   
+
     };
   },
   methods: {
-    cambiarRuta(){
+  completar() {
+    const completeBtn = document.getElementById('complete');
+    if (completeBtn.innerText === 'Añadir estado') {
+      $('#exampleModal').modal('show');
+    } else {
+      if (confirm('¿Estás seguro de completar?')) {
+    completeBtn.innerText = 'Añadir estado';
+    completeBtn.style.backgroundColor = '#FF691F'; 
+    completeBtn.style.width = '335px'; 
+    completeBtn.style.marginLeft = '60px'; 
+    completeBtn.style.marginRight = '80px';
+    completeBtn.style.transition = 'background-color 0.5s, width 0.5s, margin 0.5s'; 
+    document.getElementById('direcciongo').style.display = 'none'; 
+}
 
-      const protocol = window.location.protocol;
-      const host = window.location.host;
-      const pathname = '/logout';
-      const logoutUrl = `${protocol}//${host}/table4all/public${pathname}${window.location.hash}`;
 
-      window.location.href = logoutUrl;
-    },
-    completar() {
-      const completeBtn = document.getElementById('complete');
-      if (completeBtn.innerText === 'Añadir estado') {
-
-      } else {
-        if (confirm('¿Estás seguro de completar?')) {
-          completeBtn.innerText = 'Añadir estado';
-          completeBtn.style.backgroundColor = '#FF691F';
-          completeBtn.style.width = '335px';
-          completeBtn.style.marginLeft = '60px';
-          completeBtn.style.marginRight = '80px';
-          completeBtn.style.transition = 'background-color 0.5s, width 0.5s, margin 0.5s';
-          document.getElementById('direcciongo').style.display = 'none';
-        }
-      }
     }
-  },
+  }
+}
+,
+ 
+   mounted() {
 
-  created(){
-
-   
-  },
-
-  mounted() {
 
   }
 }

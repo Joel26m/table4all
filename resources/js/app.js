@@ -278,7 +278,11 @@ map.on('click', (event) => {
                 state: 'No se ha añadido ningún estado'
             })
             .then(response => {
+                console.log(response);
                 const beneficiary = response.data;
+                const beneficiaryID = response.data.ID;
+                localStorage.setItem('BeneficiaryID', beneficiaryID); // Almacenar el ID en el almacenamiento local
+
                 const beneficiaryMarker = new mapboxgl.Marker({ element: createCustomMarkerb(), className: 'beneficiary-marker' })
                     .setLngLat([longitude, latitude])
                     .setPopup(new mapboxgl.Popup().setHTML(`
@@ -360,8 +364,12 @@ document.addEventListener('click', function(event) {
 // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
 document.getElementById('guardarEstado').addEventListener('click', function(event) {
     event.preventDefault();
+    localStorage.setItem("guardado" , false);
     let clase = document.querySelector('.modal-backdrop');
     const nuevoEstado = document.getElementById('nuevoEstado').value;
+    localStorage.setItem('nuevoEstado', nuevoEstado); // Almacenar el ID en el almacenamiento local
+
+    localStorage.setItem("guardado" , true);
     const beneficiarioId = document.getElementById('beneficiaryId').value; // Asegúrate de que este input existe y tiene el valor correcto
     console.log(beneficiarioId);
     
@@ -466,7 +474,6 @@ $(document).ready(function() {
 
 
 
-
 // Manejar el evento de clic en el botón "Reservar" dentro del modal
 document.addEventListener('DOMContentLoaded', function() {
     // Event listener para el botón reservar
@@ -489,6 +496,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(function(response) {
             console.log('Reserva realizada con éxito:', response.data);
+            const collectionID = response.data.data.ID;  // Asegúrate de que la ruta es correcta según tu API
+            console.log('ID de la colección creada:', collectionID);
+            localStorage.setItem('lastCollectionID', collectionID); // Almacenar el ID en el almacenamiento local
             $('#exampleModal2').modal('hide');  // Cerrar el modal tras la reserva
             document.getElementById('cantidadReserva').value = ''; // Limpiar el campo de cantidad
 
@@ -509,6 +519,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('#salirreservar').on('click', function() {
         $('#exampleModal2').modal('hide');  // Cerrar el modal después de realizar la reserva
     });
+    const collectionID = localStorage.getItem('lastCollectionID'); // Obtener el ID del almacenamiento local
 });
 
 
@@ -629,5 +640,10 @@ function crearRuta(origen, destino) {
                 .setHTML(popupContent)
                 .addTo(map);
         });
+
 }
+
+const collectionID = localStorage.getItem('lastCollectionID'); // Obtener el ID del almacenamiento local
+console.log(collectionID);
+
 

@@ -58,32 +58,20 @@ class CollectionController extends Controller
      * @param  \App\Models\Collection  $collection
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Provider $Provider)
+    public function update(Request $request, $id)
     {
-
-        $collection->Rider = $request->input('rider');
-        $collection->Provider = $request->input('provider');
-        $collection->QuantityMenus = $request->input('quantityMenus');
-        $collection->Date = $request->input('date');
-        $collection->Completed = $request->input('completed');
-
-
-
-        try 
-        {
-            $Collection->save();
-            $response = (new CollectionResource($Collection))
-                        ->response()
-                        ->setStatusCode(201);
-        } 
-        catch (QueryException $ex) 
-        {
+        $collection = Collection::findOrFail($id);
+        $collection->Completed = $request->input('completed', 1); // Suponemos que 'completed' viene en el request, o por defecto es 1
+    
+        try {
+            $collection->save();
+            return response()->json(['message' => 'Colección actualizada con éxito', 'data' => $collection], 200);
+        } catch (QueryException $ex) {
             $mensaje = Utilitat::errorMessage($ex);
-            $response = \response()
-                        ->json(['error' => $mensaje], 400);
+            return response()->json(['error' => $mensaje], 400);
         }
-        return $response;
     }
+    
 
     /**
      * Remove the specified resource from storage.
