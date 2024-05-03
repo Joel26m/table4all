@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use Utilitat;
+use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use App\Models\ProviderMenus;
 use App\Http\Controllers\Controller;
@@ -79,10 +79,37 @@ class ProviderMenusController extends Controller
      * @param  \App\Models\ProviderMenus  $providerMenus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProviderMenus $providerMenus)
+    public function update(Request $request, $providerId, $menuId)
     {
-        //
+        \Log::info('inicio', ['IDMenu' => $menuId, 'Cantidad' => $request->input('quantity')]);
+
+        try {
+            // Asegurar que el menú pertenece al proveedor
+            $providerMenu = ProviderMenus::where('IDProvider', $providerId)
+                                         ->where('IDMenu', $menuId)
+                                         ->firstOrFail();
+    
+            // Incrementar la cantidad del menú con la cantidad proporcionada en el formulario
+            $quantityToAdd = (int) $request->input('quantity');
+            $currentQuantity = (int) $providerMenu->quantity;
+            \Log::info('Actualizando cantidad de menú', ['IDMenu' => $menuId, 'Cantidad' => $request->input('quantity')]);
+
+            $providerMenu->quantity = $currentQuantity + $quantityToAdd;
+            $providerMenu->save(); // Guardar los cambios
+            \Log::info('Actualizando cantidad de menú', ['IDMenu' => $menuId, 'Cantidad' => $request->input('quantity')]);
+
+    
+            return new ProviderMenusResource($providerMenu);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
+            return response()->json(['error' => 'Menú no encontrado o no pertenece al proveedor'], 404);
+        } catch (QueryException $ex) {
+            $mensaje = Utilitat::errorMessage($ex);
+            return response()->json(['error' => $mensaje], 400);
+        }
+
     }
+    
+    
 
     /**
      * Remove the specified resource from storage.

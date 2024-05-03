@@ -241,12 +241,36 @@ window.onclick = function(event) {
 document.getElementById('formAgregarMenu').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const IDProvider = 'elIDDelProveedor';  // Deberás obtener este ID de algún lado, quizás del usuario o de la sesión
-    const IDMenu = document.getElementById('tipoMenu').value;
+    const IDProvider = 16;  // Cambiar por providerId
+    let IDMenu;
+    const tipoMenu = document.getElementById('tipoMenu').value;
     const quantity = document.getElementById('cantidadMenus').textContent;
 
-    guardarMenu(IDProvider, IDMenu, quantity);
+    if (tipoMenu === 'desayuno') {
+        IDMenu = 1;
+    } else if (tipoMenu === 'merienda') {
+        IDMenu = 2;
+    } else if (tipoMenu === 'cena') {
+        IDMenu = 3;
+    }
+
+    actualizarMenu(IDProvider, IDMenu, quantity);
 });
+
+function actualizarMenu(providerId, menuId, quantity) {
+    axios.put(`/table4all/public/api/providerMenus/${providerId}/${menuId}`, {
+        quantity: quantity
+    })
+    .then(function (response) {
+        console.log(response.data);
+        alert('Cantidad del menú actualizada con éxito!');
+    })
+    .catch(function (error) {
+        console.error(error);
+        alert('Error al actualizar la cantidad del menú.');
+    });
+}
+
 
 
 

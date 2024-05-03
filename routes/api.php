@@ -33,6 +33,7 @@ Route::apiResource('collection', CollectionController::class);
 Route::apiResource('delivery', DeliveriesController::class);
 Route::apiResource('beneficiary', BeneficiaryController::class);
 Route::apiResource('providerMenus', ProviderMenusController::class);
+Route::put('providerMenus/{providerId}/{menuId}', [ProviderMenusController::class, 'update']);
 
 
 
