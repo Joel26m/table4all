@@ -24,7 +24,7 @@ use App\Http\Controllers\Api\BeneficiaryController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::put('providerMenus/{providerId}/{menuId}', [ProviderMenusController::class, 'update']);
 Route::apiResource('provider', ProviderController::class);
 Route::get('provider/{provider}/collections', [ProviderController::class, 'Collections']);
 Route::apiResource('user', UsersController::class);
@@ -33,6 +33,8 @@ Route::apiResource('collection', CollectionController::class);
 Route::apiResource('delivery', DeliveriesController::class);
 Route::apiResource('beneficiary', BeneficiaryController::class);
 Route::apiResource('providerMenus', ProviderMenusController::class);
+
+
 
 
 

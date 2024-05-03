@@ -20,7 +20,7 @@ function getProviderCollections(providerId) {
         });
 }
 // Llamar a la función con el ID del proveedor que desees
-let recogidas = getProviderCollections(16); // Sustituye '1' con el ID real del proveedor
+let recogidas = getProviderCollections(providerId); // Sustituye '1' con el ID real del proveedor
 
 // Obtener el contenedor de los registros
 const registrosContainer = document.querySelector('.registros');
@@ -101,7 +101,7 @@ function getProviderMenus(providerId) {
             console.error('Error al obtener los menús del proveedor:', error);
         });
 }
-let menus = getProviderMenus(16);
+let menus = getProviderMenus(providerId);
 console.log(menus);
 
 let desayunos = 0;
@@ -236,6 +236,47 @@ window.onclick = function(event) {
       return Math.floor(Math.random() * 10) + 1;
   }
 
+// formulario de añadir menu
+function anyadirMenus(providerId) {
+    
+
+
+document.getElementById('formAgregarMenu').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const IDProvider = providerId;  // Cambiar por providerId
+    let IDMenu;
+    const tipoMenu = document.getElementById('tipoMenu').value;
+    const quantity = document.getElementById('cantidadMenus').textContent;
+
+    if (tipoMenu === 'desayuno') {
+        IDMenu = 1;
+    } else if (tipoMenu === 'merienda') {
+        IDMenu = 2;
+    } else if (tipoMenu === 'cena') {
+        IDMenu = 3;
+    }
+
+    actualizarMenu(IDProvider, IDMenu, quantity);
+});
+}
+anyadirMenus(providerId);
+
+
+function actualizarMenu(providerId, menuId, quantity2) {
+    axios.put(`/table4all/public/api/providerMenus/${providerId}/${menuId}`, {
+        quantity: quantity2
+    })
+    .then(function (response) {
+        console.log(response.data);
+        alert('Cantidad del menú actualizada con éxito!');
+    })
+    .catch(function (error) {
+        console.error(error);
+        alert('Error al actualizar la cantidad del menú.');
+    });
+}
+
 
 
 
@@ -284,7 +325,7 @@ function agregarMenuAlDOM(menu, container) {
             </div>
             <div class="datos-menu">
 
-                <p class="t-menus">TIPO: <span>${tipoMenu}</span></p>
+                <p class="t-menus" data-id-menu="${menu.IDMenu}">TIPO: <span>${tipoMenu}</span></p>
                 <p class="n-menus">CANTIDAD: <span>${menu.quantity}</span></p>
             </div>
         </div>
@@ -306,7 +347,7 @@ function getTipoMenu(idMenu) {
 
 
 // Llamar a la función con el ID real del proveedor
-getProviderMenus(16); // Sustituye '16' con el ID real del proveedor
+getProviderMenus(providerId); // Sustituye '16' con el ID real del proveedor
 
 
 

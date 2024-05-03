@@ -104,7 +104,7 @@ class ProviderController extends Controller
     public function update(Request $request, Provider $provider)
     {
         try {
-            // Actualizar solo la cantidad de menús, suponiendo que 'quantityMenus' es un campo en tu modelo Provider
+            // Actualizar solo la cantidad de menús
             if ($request->has('quantityMenus')) {
                 $quantityToDeduct = (int) $request->input('quantityMenus');
                 $currentQuantity = (int) $provider->quantityMenus;
