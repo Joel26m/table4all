@@ -106,7 +106,7 @@ function setCookie(name, value, days) {
     }
 }
 
-let usuarioCoordinates; // Variable global 
+let usuarioCoordinates; // la global 
 function mostrarUbicacion(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
@@ -379,8 +379,6 @@ document.addEventListener('click', function(event) {
          beneficiarioId = event.target.getAttribute('data-beneficiario-id');
         document.getElementById('beneficiaryId').value = beneficiarioId;
         var modal = document.getElementById('exampleModal');
-        // var modalInstance = new bootstrap.Modal(modal);
-        // modalInstance.show();
         console.log(beneficiarioId);
     }
 });
@@ -389,7 +387,6 @@ document.addEventListener('click', function(event) {
 
 
 // Manejador para el estado del beneficiario
-// Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
 document.getElementById('guardarEstado').addEventListener('click', function(event) {
 
     let beneficiarios = document.querySelectorAll('.beneciciary-marker');
@@ -483,15 +480,18 @@ function createCustomMarker() {
 
 
 // Adjuntar el evento de clic utilizando delegación de eventos
-$(document).ready(function() {
-    $(document).on('click', '.verButton', function(event) {
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function(event) {
+        // Verificar si el elemento clicado tiene la clase '.verButton'
+        if (event.target.classList.contains('verButton')) {
         event.preventDefault();
         console.log('Ver button clicado');
 
        // Recuperar la información desde los atributos data del botón que fue clicado
-    const proveedorId = $(this).data('id');
-    const localName = $(this).data('name');
-    const cantidadMenus = $(this).data('menus');
+       const proveedorId = event.target.getAttribute('data-id');
+       const localName = event.target.getAttribute('data-name');
+       const cantidadMenus = event.target.getAttribute('data-menus');
+       
 
     // Asignar la información a los elementos del modal
     $('#exampleModal2').find('#proveedorId').val(proveedorId); 
@@ -500,15 +500,18 @@ $(document).ready(function() {
 
     console.log(proveedorId, localName, cantidadMenus); 
 // Asignar los datos al modal
-    $('#localNameModal').text(localName);
-    $('#cantidadMenusModal').text(cantidadMenus);
+document.getElementById('localNameModal').textContent = localName;
+document.getElementById('cantidadMenusModal').textContent = cantidadMenus;
 
 // Guardar el ID del proveedor en un input oculto para su uso posterior
-    $('#proveedorId').val(proveedorId);
+document.getElementById('proveedorId').value = proveedorId;
+
 
     // Mostrar el modal
     $('#exampleModal2').modal('show');
-    });
+    }
+   });
+
 });
 
 
@@ -555,9 +558,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    $('#salirreservar').on('click', function() {
-        $('#exampleModal2').modal('hide');  // Cerrar el modal después de realizar la reserva
+    document.getElementById('salirreservar').addEventListener('click', function() {
+        $('#exampleModal2').modal('hide');
     });
+    
+    
+
     const collectionID = localStorage.getItem('lastCollectionID'); // Obtener el ID del almacenamiento local
 });
 
