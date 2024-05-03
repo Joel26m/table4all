@@ -15,7 +15,7 @@
 </nav>
 <div class="animate__animated animate__fadeInDown content-wrapper" id="content-wrapper">
 
-  <div class="sticky-div" v-if="ruta">
+  <div class="sticky-div" id="sticky-div" v-if="ruta">
   <div class="row contsticky">
     <div class="col">
       <p id="direcciongo">{{ direccion }}</p>
@@ -83,6 +83,7 @@ export default {
     const completeBtn = document.getElementById('complete');
     if (completeBtn.innerText === 'Añadir estado') {
       $('#exampleModal').modal('show');
+      document.getElementById('sticky-div').style.display = 'none'; 
     } else {
       if (confirm('¿Estás seguro de completar?')) {
     completeBtn.innerText = 'Añadir estado';

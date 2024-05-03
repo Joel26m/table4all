@@ -317,7 +317,8 @@ map.on('click', (event) => {
 
             // Evento inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
-                
+                nav.ruta = true;
+
                 event.preventDefault();
                 document.querySelector(".content-wrapper").style.display = "block";
                 console.log("Iniciando ruta...");
@@ -378,6 +379,7 @@ document.addEventListener('click', function(event) {
 // Manejador para el estado del beneficiario
 // Agregar evento de clic al botón de guardar fuera de DOMContentLoaded
 document.getElementById('guardarEstado').addEventListener('click', function(event) {
+    nav.ruta = false;
     event.preventDefault();
     localStorage.setItem("guardado" , false);
     let clase = document.querySelector('.modal-backdrop');
@@ -402,6 +404,7 @@ document.getElementById('guardarEstado').addEventListener('click', function(even
     .catch(error => {
         console.error('Error al actualizar el estado del beneficiario:', error);
     });
+
 
 });
 
