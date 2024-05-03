@@ -20,7 +20,7 @@ function getProviderCollections(providerId) {
         });
 }
 // Llamar a la función con el ID del proveedor que desees
-let recogidas = getProviderCollections(16); // Sustituye '1' con el ID real del proveedor
+let recogidas = getProviderCollections(providerId); // Sustituye '1' con el ID real del proveedor
 
 // Obtener el contenedor de los registros
 const registrosContainer = document.querySelector('.registros');
@@ -101,7 +101,7 @@ function getProviderMenus(providerId) {
             console.error('Error al obtener los menús del proveedor:', error);
         });
 }
-let menus = getProviderMenus(16);
+let menus = getProviderMenus(providerId);
 console.log(menus);
 
 let desayunos = 0;
@@ -237,11 +237,14 @@ window.onclick = function(event) {
   }
 
 // formulario de añadir menu
+function anyadirMenus(providerId) {
+    
+
 
 document.getElementById('formAgregarMenu').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const IDProvider = 16;  // Cambiar por providerId
+    const IDProvider = providerId;  // Cambiar por providerId
     let IDMenu;
     const tipoMenu = document.getElementById('tipoMenu').value;
     const quantity = document.getElementById('cantidadMenus').textContent;
@@ -256,10 +259,13 @@ document.getElementById('formAgregarMenu').addEventListener('submit', function(e
 
     actualizarMenu(IDProvider, IDMenu, quantity);
 });
+}
+anyadirMenus(providerId);
 
-function actualizarMenu(providerId, menuId, quantity) {
+
+function actualizarMenu(providerId, menuId, quantity2) {
     axios.put(`/table4all/public/api/providerMenus/${providerId}/${menuId}`, {
-        quantity: quantity
+        quantity: quantity2
     })
     .then(function (response) {
         console.log(response.data);
@@ -341,7 +347,7 @@ function getTipoMenu(idMenu) {
 
 
 // Llamar a la función con el ID real del proveedor
-getProviderMenus(16); // Sustituye '16' con el ID real del proveedor
+getProviderMenus(providerId); // Sustituye '16' con el ID real del proveedor
 
 
 

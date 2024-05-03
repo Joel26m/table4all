@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Clases\Utilitat;
+use App\Models\Provider;
 use Illuminate\Http\Request;
 use App\Models\ProviderMenus;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use App\Http\Resources\ProviderMenusResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
 class ProviderMenusController extends Controller
@@ -58,19 +60,19 @@ class ProviderMenusController extends Controller
      * @param  \App\Models\ProviderMenus  $providerMenus
      * @return \Illuminate\Http\Response
      */
-    public function show($providerId)
-    {
-        // Busca todos los registros de ProviderMenus que pertenecen a un proveedor específico.
-        $providerMenus = ProviderMenus::where('IDProvider', $providerId)->get();
-    
-        // Verifica si la colección está vacía
-        if ($providerMenus->isEmpty()) {
-            return response()->json(['message' => 'No menus found for this provider'], 404);
+    public function show($providerId) {
+        try {
+            $providerMenus = ProviderMenus::where('IDProvider', $providerId)->get();
+            if ($providerMenus->isEmpty()) {
+                return response()->json(['message' => 'No menus found for this provider'], 404);
+            }
+            return ProviderMenusResource::collection($providerMenus);
+        } catch (\Exception $e) {
+            \Log::error('Error fetching provider menus', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Server error'], 500);
         }
-    
-        // Usando el Resource para formatear la salida
-        return ProviderMenusResource::collection($providerMenus);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -79,35 +81,27 @@ class ProviderMenusController extends Controller
      * @param  \App\Models\ProviderMenus  $providerMenus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $providerId, $menuId)
-    {
-        \Log::info('inicio', ['IDMenu' => $menuId, 'Cantidad' => $request->input('quantity')]);
+   public function update(Request $request, $providerId, $menuId)
+{
+    try {
+        $provider = Provider::findOrFail($providerId);
+        $menu = $provider->menus()->findOrFail($menuId);
 
-        try {
-            // Asegurar que el menú pertenece al proveedor
-            $providerMenu = ProviderMenus::where('IDProvider', $providerId)
-                                         ->where('IDMenu', $menuId)
-                                         ->firstOrFail();
-    
-            // Incrementar la cantidad del menú con la cantidad proporcionada en el formulario
-            $quantityToAdd = (int) $request->input('quantity');
-            $currentQuantity = (int) $providerMenu->quantity;
-            \Log::info('Actualizando cantidad de menú', ['IDMenu' => $menuId, 'Cantidad' => $request->input('quantity')]);
+        // Actualizar la cantidad en la tabla pivot
+        $quantityToAdd = (int) $request->input('quantity');
+        $currentQuantity = (int) $menu->pivot->quantity;
+        $newQuantity = $currentQuantity + $quantityToAdd;
 
-            $providerMenu->quantity = $currentQuantity + $quantityToAdd;
-            $providerMenu->save(); // Guardar los cambios
-            \Log::info('Actualizando cantidad de menú', ['IDMenu' => $menuId, 'Cantidad' => $request->input('quantity')]);
+        $provider->menus()->updateExistingPivot($menuId, ['quantity' => $newQuantity]);
 
-    
-            return new ProviderMenusResource($providerMenu);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
-            return response()->json(['error' => 'Menú no encontrado o no pertenece al proveedor'], 404);
-        } catch (QueryException $ex) {
-            $mensaje = Utilitat::errorMessage($ex);
-            return response()->json(['error' => $mensaje], 400);
-        }
-
+        return response()->json(['message' => 'Cantidad actualizada correctamente'], 200);
+    } catch (ModelNotFoundException $ex) {
+        return response()->json(['error' => 'Menú o proveedor no encontrado'], 404);
+    } catch (QueryException $ex) {
+        return response()->json(['error' => $ex->getMessage()], 400);
     }
+}
+
     
     
 

@@ -36,9 +36,12 @@ class Provider extends Model
     public function users() {
         return $this->belongsTo(Users::class, 'IDuser');
     }
-    public function menus(): HasMany
-    {
-        return $this->hasMany(ProviderMenus::class, 'IDProvider');
+
+
+    public function menus() {
+        // Asegúrate de usar Menu::class y especificar correctamente los campos de la tabla pivot
+        return $this->belongsToMany(Menu::class, 'ProviderMenus', 'IDProvider', 'IDMenu')
+                    ->withPivot('quantity');
     }
 }
 
