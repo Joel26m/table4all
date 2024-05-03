@@ -117,8 +117,17 @@ class ProviderMenusController extends Controller
      * @param  \App\Models\ProviderMenus  $providerMenus
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProviderMenus $providerMenus)
-    {
-        //
+    public function destroy($menuId)
+{
+    try {
+        $providerMenu = ProviderMenus::findOrFail($menuId);
+        $providerMenu->delete();
+
+        return response()->json(['message' => 'Menú eliminado correctamente'], 200);
+    } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
+        return response()->json(['error' => 'Menú no encontrado'], 404);
+    } catch (\Exception $ex) {
+        return response()->json(['error' => $ex->getMessage()], 500);
     }
+}
 }

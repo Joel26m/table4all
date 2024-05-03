@@ -319,7 +319,7 @@ function agregarMenuAlDOM(menu, container) {
             </div>
             <div class="datos-menu">
 
-                <p class="t-menus">TIPO: <span>${tipoMenu}</span></p>
+                <p class="t-menus" data-id-menu="${menu.IDMenu}">TIPO: <span>${tipoMenu}</span></p>
                 <p class="n-menus">CANTIDAD: <span>${menu.quantity}</span></p>
             </div>
         </div>
