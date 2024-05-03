@@ -323,9 +323,12 @@ map.on('click', (event) => {
                 console.log("Iniciando ruta...");
                 crearRuta(usuarioCoordinates, destinationCoordinates);
                 obtenerDireccion(destinationCoordinates);
+                console.log(beneficiarioId);
 
                 $('#confirmarModal').modal('hide');
             });
+
+
 
 function obtenerDireccion(coordinates) {
     const latitude = coordinates[1];    
@@ -344,10 +347,12 @@ function obtenerDireccion(coordinates) {
 }
 
 
+var beneficiarioId;
+
 
 document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('btn-primary-modifyButton') || event.target.classList.contains('completarb')) {
-        var beneficiarioId = event.target.getAttribute('data-beneficiario-id');
+    if (event.target.classList.contains('btn-primary-modifyButton')) {
+         beneficiarioId = event.target.getAttribute('data-beneficiario-id');
         document.getElementById('beneficiaryId').value = beneficiarioId;
         var modal = document.getElementById('exampleModal');
         var modalInstance = new bootstrap.Modal(modal);
@@ -356,6 +361,16 @@ document.addEventListener('click', function(event) {
     }
 });
 
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('takefood')) {
+         beneficiarioId = event.target.getAttribute('data-beneficiario-id');
+        document.getElementById('beneficiaryId').value = beneficiarioId;
+        var modal = document.getElementById('exampleModal');
+        // var modalInstance = new bootstrap.Modal(modal);
+        // modalInstance.show();
+        console.log(beneficiarioId);
+    }
+});
 
 
 
