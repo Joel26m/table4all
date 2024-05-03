@@ -290,7 +290,7 @@ map.on('click', (event) => {
                         <button type="button"  class="btn-primary-modifyButton" data-toggle="modal" data-target="#exampleModal" data-beneficiario-id="${beneficiary.ID}">
                         <div class="image"></div>
                         </button>
-                        <button type="button" class="btn-with-image" id="takeFoodButton" data-toggle="modal" data-target="#confirmarModal">
+                        <button type="button" class="btn-with-image takefood" id="takeFoodButton" data-toggle="modal" data-beneficiario-id="${beneficiary.ID}" data-target="#confirmarModal">
                             <div class="image"></div>
                         </button>
                     </div>                    
@@ -306,11 +306,14 @@ map.on('click', (event) => {
 
         });
     }
+
+    
 });
 
 
             // Evento inicio de ruta
             document.getElementById('iniciarRutaBtn').addEventListener('click', function(event) {
+                
                 event.preventDefault();
                 document.querySelector(".content-wrapper").style.display = "block";
                 console.log("Iniciando ruta...");
@@ -337,15 +340,19 @@ function obtenerDireccion(coordinates) {
 }
 
 
+
 document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('btn-primary-modifyButton')) {
+    if (event.target.classList.contains('btn-primary-modifyButton') || event.target.classList.contains('completarb')) {
         var beneficiarioId = event.target.getAttribute('data-beneficiario-id');
         document.getElementById('beneficiaryId').value = beneficiarioId;
         var modal = document.getElementById('exampleModal');
         var modalInstance = new bootstrap.Modal(modal);
         modalInstance.show();
+        console.log(beneficiarioId);
     }
 });
+
+
 
 
 
@@ -538,7 +545,7 @@ function crearMarcadoresDeBeneficiarios(beneficiarios, map) {
                     <input type="hidden" id="beneficiaryId">
                         <div class="image"></div>
                     </button>
-                    <button type="button" class="btn-with-image" data-toggle="modal" data-target="#confirmarModal">
+                    <button type="button" class="btn-with-image takefood" data-toggle="modal" data-target="#confirmarModal" data-beneficiario-id="${beneficiario.ID}">
                         <div class="image"></div>
                     </button>
                 </div>

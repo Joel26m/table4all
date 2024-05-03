@@ -21,7 +21,7 @@
       <p id="direcciongo">{{ direccion }}</p>
     </div>
     <div class="col">
-      <button id="complete" class="full-width-button" @click="completar">COMPLETAR</button>
+      <button id="complete" class="full-width-button completarb" @click="completar" >COMPLETAR</button>
     </div>
   </div>
 </div>
@@ -89,7 +89,7 @@ export default {
     completar() {
       const completeBtn = document.getElementById('complete');
       if (completeBtn.innerText === 'Añadir estado') {
-        $('#exampleModal').modal('show');
+
       } else {
         if (confirm('¿Estás seguro de completar?')) {
           completeBtn.innerText = 'Añadir estado';

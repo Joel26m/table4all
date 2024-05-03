@@ -84,7 +84,7 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <p>Al iniciar la ruta se aplicarán los estilos necesarios.</p>
+                <p>Al iniciar la ruta verás el camino mas cercano hacia tu Beneficiario.</p>
             </div>
             <!-- Modal footer -->
             <div class="modal-footer">
