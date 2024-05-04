@@ -31,7 +31,10 @@ function setCookie(name, value, days) {
     return window   .matchMedia("(min-width: 768px)").matches;
   }
   
-
+  if (esPantallaDeEscritorio()) {
+    divGenially.style.display = "none";
+    btnDesaparecer.style.display = "none";
+  }
 
   document.addEventListener("DOMContentLoaded", function() {
     var btnDesaparecer = document.getElementById("btnDesaparecer");
@@ -47,7 +50,7 @@ function setCookie(name, value, days) {
       var divGenially = document.querySelector(".container-wrapper-genially");
       var btnDesaparecer = document.getElementById("btnDesaparecer");
       divGenially.style.display = "none";
-      btnDesaparecer.style.display = "none"; 
+      btnDesaparecer.style.display = "none"; // Oculta si se ha visitado antes
     }
   });
 (function(d) {
